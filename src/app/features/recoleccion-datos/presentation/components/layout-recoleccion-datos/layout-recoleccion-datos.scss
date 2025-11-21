@@ -1,15 +1,15 @@
 .container {
-  padding-top: var(--header-height-1);
+  padding-top: 110px;
 
   .header {
     padding: 32px 24px 0 24px;
-    background-color: #ffffff;
+    background-color: var(--backgroud-outlet-color);
     position: fixed;
     z-index: 10;
     top: 0;
     right: 0px;
     left: var(--sidebar-width);
-    height: var(--header-height-1);
+    height: 120px;
 
     display: flex;
     flex-direction: column;

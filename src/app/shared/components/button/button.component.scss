@@ -82,17 +82,17 @@ button {
 
   &.secondary {
     background-color: transparent;
-    color: #01a6bd;
-    border: 1px solid #01a6bd;
+    color: var(--primary);
+    border: 1px solid var(--primary);
 
     .icon {
-      background-color: #01a6bd;
+      background-color: var(--primary);
     }
 
     &:hover {
-      background-color: #ebfafc;
+      background-color: var(--primary-light);
       color: var(--primary-dark);
-      border: 1px solid #019ab0;
+      border: 1px solid var(--primary);
 
       .icon {
         background-color: var(--primary-dark);
@@ -100,7 +100,7 @@ button {
     }
 
     &:focus {
-      outline: 2px solid #019ab0;
+      outline: 2px solid var(--primary);
     }
 
     &:disabled {
@@ -114,7 +114,7 @@ button {
     }
 
     .spinner {
-      border-top-color: #01a6bd;
+      border-top-color: var(--primary);
       animation: spin 1s linear infinite;
     }
   }
@@ -136,7 +136,7 @@ button {
     }
 
     &:focus {
-      outline: 2px solid #019ab0;
+      outline: 2px solid var(--primary);
     }
 
     &:disabled {
@@ -189,7 +189,7 @@ button {
     }
 
     .spinner {
-      border-top-color: #01a6bd;
+      border-top-color: var(--primary);
       animation: spin 1s linear infinite;
     }
   }
