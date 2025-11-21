@@ -3,6 +3,10 @@
   flex-direction: column;
   height: 100%;
 
+  box-shadow: 5px 5px 5px 0px #00000040;
+  border-radius: 20px;
+  padding: 10px;
+
   .header__formulario {
     display: flex;
     align-items: center;
