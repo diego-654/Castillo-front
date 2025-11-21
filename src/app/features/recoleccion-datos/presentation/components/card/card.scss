@@ -1,0 +1,22 @@
+.card-container {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  max-width: 347px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ffffff;
+  border: 1px solid #6A3717;
+  box-shadow: 4px 4px 4px 4px #6A371759;
+
+  cursor: pointer;
+
+  .label {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #6A3717;
+  }
+}
