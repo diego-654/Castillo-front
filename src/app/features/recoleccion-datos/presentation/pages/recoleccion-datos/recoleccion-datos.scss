@@ -1,0 +1,10 @@
+.container {
+  padding-top: 56px;
+  
+  .container__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+}

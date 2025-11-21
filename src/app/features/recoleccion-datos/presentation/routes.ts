@@ -11,6 +11,17 @@ export const RECOLECCION_DATOS_ROUTES = {
         import(
           '@features/recoleccion-datos/presentation/pages/recoleccion-datos/recoleccion-datos'
         ),
+    },
+    {
+      path: 'formulario',
+      loadComponent: () =>
+        import(
+          '@features/recoleccion-datos/presentation/pages/formulario-registro-cliente/formulario-registro-cliente'
+        ),
+    },
+    {
+      path: '**',
+      redirectTo: '',
     }
   ]
 };
