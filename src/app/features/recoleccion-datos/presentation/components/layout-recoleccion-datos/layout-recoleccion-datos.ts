@@ -4,7 +4,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/rou
 
 @Component({
   selector: 'app-layout-recoleccion-datos',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './layout-recoleccion-datos.html',
   styleUrl: './layout-recoleccion-datos.scss',
 })
