@@ -1,8 +1,9 @@
+import { LayoutRecoleccionDatos } from './components/layout-recoleccion-datos/layout-recoleccion-datos';
 
 
 export const RECOLECCION_DATOS_ROUTES = {
   path: 'recoleccion-datos',
-  // component: RecoleccionDatos,
+  component: LayoutRecoleccionDatos,
   children: [
     {
       path: '',
