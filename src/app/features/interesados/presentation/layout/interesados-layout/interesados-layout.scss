@@ -3,7 +3,7 @@
 
   .header {
     padding: 32px 24px 0 24px;
-    background-color: #ffffff;
+    background-color: var();
     position: fixed;
     z-index: 10;
     top: 0;
@@ -68,5 +68,5 @@
 }
 
 .router-outlet {
-  padding: 24px;
+  padding: 40px;
 }

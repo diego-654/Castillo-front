@@ -64,6 +64,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
   label = input<string | null>(null);
   errors = input<{ [key: string]: string }>({});
 
+  type = input<'primary' | 'secondary'>('primary');
+
   formControlName = input<string | null>(null);
   formControl = input<FormControl<T | null> | null>(null);
 
