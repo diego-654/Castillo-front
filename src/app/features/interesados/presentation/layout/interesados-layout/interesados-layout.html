@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="header">
+    <span class="title">Clientes</span>
+
+    <div class="tabs">
+      <a
+        *ngFor="let tab of tabs(); let $index"
+        [routerLink]="[tab.route]"
+        class="tab-link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ tab.label }}
+      </a>
+    </div>
+  </div>
+
+  <div class="router-outlet">
+    <router-outlet />
+  </div>
+</div>
