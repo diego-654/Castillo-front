@@ -34,7 +34,7 @@
           }@else if (inputs.type == typeInput.DATE) {
           <app-date-picker
             size="small"
-            [placeholder]="' Ingrese su ' + inputs.nombre.toLowerCase()"
+            placeholder="dd/mm/aaa"
             [formControlName]="inputs.nombre.toLowerCase()"
           ></app-date-picker>
           }
@@ -68,7 +68,7 @@
       </div>
 
       <div class="accion">
-        <app-button size="large"  type="secondary" text="Cancelar"></app-button>
+        <app-button size="large" type="secondary" text="Cancelar"></app-button>
         <app-button size="large" text="Guardar"></app-button>
       </div>
     </div>

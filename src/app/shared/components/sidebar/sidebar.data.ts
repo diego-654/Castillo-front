@@ -6,6 +6,10 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
     url: '/dashboard',
   },
   {
+    label: 'Eventos',
+    url: '/eventos',
+  },
+  {
     label: 'Recolección de datos',
     url: '/recoleccion-datos',
   },

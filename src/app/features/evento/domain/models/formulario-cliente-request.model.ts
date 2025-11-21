@@ -1,6 +1,6 @@
 
 
-export interface FormularioClienteResponse {
+export interface FormularioEventoRequest {
   readonly id: number;
   readonly lista: FormularioClienteResponseInputs[];
 }
