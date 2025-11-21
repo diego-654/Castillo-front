@@ -1,3 +1,10 @@
-<app-search-input
-  placeholder="Buscar por nombre, teléfono o email"
-[(value)]="searchInputCheck"></app-search-input>
+<div class="container">
+  <div class="header">
+    <app-search-input
+      placeholder="Buscar por nombre, teléfono o email"
+      [(value)]="searchInputCheck"
+    ></app-search-input>
+    <app-select placeholder="Seleccione Encuesta"></app-select>
+    <app-select placeholder="Seleccione Empleado"></app-select>
+  </div>
+</div>
