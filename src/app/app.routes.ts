@@ -9,14 +9,9 @@ export const routes: Routes = [
     component: InternalLayout,
     children: [
       RECOLECCION_DATOS_ROUTES,
-    ],
-  },
-  {
-    path: '',
-    component: InternalLayout,
-    children: [
       INTERESADOS_ROUTES,
     ],
-  }
+  },
+
 ];
 

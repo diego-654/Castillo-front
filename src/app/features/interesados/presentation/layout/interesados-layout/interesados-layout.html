@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
-    <span class="title">Clientes</span>
-
+    <span class="title">Interesados</span>
+    <div class="subtitle">Datos completos de clientes potenciales capturados</div>
     <div class="tabs">
       <a
         *ngFor="let tab of tabs(); let $index"
@@ -10,6 +10,7 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
+        <img class="tab-icon" [src]="'assets/icons/' + tab.icon" alt="" />
         {{ tab.label }}
       </a>
     </div>
