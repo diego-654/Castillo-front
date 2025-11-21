@@ -22,15 +22,8 @@ export interface TipoInput {
 
 export type TipoInputType =
   'text' |
-  'email' |
-  'tel' |
   'number' |
-  'date' |
-  'password' |
-  'select' |
-  'checkbox' |
-  'radio' |
-  'stars';
+  'date';
 
 
 export interface OptionSelect {

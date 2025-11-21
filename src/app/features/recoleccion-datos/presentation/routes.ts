@@ -13,7 +13,7 @@ export const RECOLECCION_DATOS_ROUTES = {
         ),
     },
     {
-      path: 'formulario',
+      path: 'formulario/:id',
       loadComponent: () =>
         import(
           '@features/recoleccion-datos/presentation/pages/formulario-registro-cliente/formulario-registro-cliente'

@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Card } from '../../components/card/card';
-import { CARD_DATA } from '../../data/card-data';
+import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
+import { EventosFormulario } from '@features/recoleccion-datos/domain/models/evento-formulario-response.model';
+import { firstValueFrom } from 'rxjs';
+import { UtilService } from '@shared/components/services/util/util.service';
+
 
 
 @Component({
@@ -10,6 +14,27 @@ import { CARD_DATA } from '../../data/card-data';
   styleUrl: './recoleccion-datos.scss',
 })
 export default class RecoleccionDatos {
-  cards = CARD_DATA;
 
+  readonly recoleccionDatosRepository = inject(RecoleccionDatosRepository);
+  readonly utilService = inject(UtilService);
+
+  eventosFormulario: EventosFormulario[] = [];
+
+  ngOnInit() {
+    this.listarEventosFormulario();
+  }
+
+  async listarEventosFormulario() {
+    this.utilService.showLoader();
+    try {
+      const res = await firstValueFrom(
+        this.recoleccionDatosRepository.getEventoFormulario()
+      );
+      this.eventosFormulario = res.listaEventos;
+      this.utilService.dismissLoader();
+    } catch (error) {
+      this.utilService.dismissLoader();
+    }
+
+  }
 }

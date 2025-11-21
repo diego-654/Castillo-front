@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { RecoleccionDatosDatasource } from "@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources";
+import { EventoFormularioResponse } from "@features/recoleccion-datos/domain/models/evento-formulario-response.model";
 import { FormularioClienteResponse } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
 import { map, Observable, timer } from "rxjs";
 
@@ -9,7 +10,7 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
 
 
   getFormularioCliente(): Observable<FormularioClienteResponse> {
-    return timer(1000).pipe(
+    return timer(200).pipe(
       map(() => ({
         id: 1,
         lista: [
@@ -46,38 +47,41 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
               lista: [
                 {
                   nombre: 'Correo electrónico',
-                  type: 'email',
+                  type: 'text',
                 },
                 {
                   nombre: 'Número de celular',
-                  type: 'tel',
+                  type: 'number',
                 },
               ],
             },
           },
+
+        ],
+      }))
+    );
+  }
+
+
+  getEventoFormulario(): Observable<EventoFormularioResponse> {
+    return timer(200).pipe(
+      map(() => ({
+        listaEventos: [
           {
-            typeFormulario: 'Interés de Membresía',
-            campos: {
-              lista: [
-                {
-                  nombre: '¿Estás interesad@ en una membresía?',
-                  type: 'select',
-                  optionsSelect: [
-                    {
-                      id: 1,
-                      nombre: 'Si',
-                    },
-                    {
-                      id: 2,
-                      nombre: 'No',
-                    },
-                  ],
-                }
-              ]
-            }
+            id: 1,
+            nombre: 'Feria Congreso 2025 -Noviembre',
+          },
+          {
+            id: 2,
+            nombre: 'Feria Costa Verde 2025 -Noviembre',
+          },
+          {
+            id: 3,
+            nombre: 'Feria Hotel R & R 2025-Noviembre',
           },
         ],
       }))
     );
   }
+
 }
