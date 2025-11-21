@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioClienteResponse, TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
 import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
+import { ButtonComponent } from '@shared/components/button/button.component';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '@shared/components/date-picker/date-picker.component';
 import { InputNumberComponent } from '@shared/components/input-number/input-number.component';
@@ -22,7 +23,8 @@ import { firstValueFrom } from 'rxjs';
     OptionComponent,
     FormsModule,
     ReactiveFormsModule,
-    CheckboxComponent
+    CheckboxComponent,
+    ButtonComponent,
   ],
   templateUrl: './formulario-registro-cliente.html',
   styleUrl: './formulario-registro-cliente.scss',

@@ -53,6 +53,8 @@ export class InputComponent implements ControlValueAccessor {
   size = input<'small' | 'medium' | 'large'>('medium');
   soloLetrasYNumeros = input<boolean>(false);
 
+  type = input<'primary' | 'secondary'>('primary');
+
   maxLength = input<number>();
   leftIcon = input<string>();
   rightIcon = input<string>();
@@ -89,13 +91,13 @@ export class InputComponent implements ControlValueAccessor {
 
   constructor(
     @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
-  ) {}
+  ) { }
 
   // Function to call when the value changes
-  onChange: Function = () => {};
+  onChange: Function = () => { };
 
   // Function to call when the input is touched
-  onTouched: Function = () => {};
+  onTouched: Function = () => { };
 
   get control(): FormControl<string> {
     if (this.formControl()) {

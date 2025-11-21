@@ -8,7 +8,7 @@
 }
 <div
   class="input-wrapper"
-  [ngClass]="[size()]"
+  [ngClass]="[size(), type()]"
   [class.disabled]="disabled()"
   [class.readonly]="readonly()"
   (click)="handleWrapperClick()"

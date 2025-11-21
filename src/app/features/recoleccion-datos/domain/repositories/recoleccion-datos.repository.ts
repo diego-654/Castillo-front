@@ -7,5 +7,5 @@ export abstract class RecoleccionDatosRepository {
 
   abstract getFormularioCliente(): Observable<FormularioClienteResponse>
   abstract getEventoFormulario(): Observable<EventoFormularioResponse>
-
+  
 }
