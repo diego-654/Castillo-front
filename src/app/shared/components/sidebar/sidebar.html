@@ -1,0 +1,9 @@
+<div class="sidebar">
+  <div class="sidebar__header">
+    <img src="assets/images/logo-castillo.png" alt="logo" />
+  </div>
+
+  @for (item of menuItems; track $index) {
+  <app-sidebar-item [item]="item"></app-sidebar-item>
+  }
+</div>

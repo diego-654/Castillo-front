@@ -1,0 +1,28 @@
+.sidebar__item {
+  color: #6A3717;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding-left: 30px;
+  width: 100%;
+
+  height: 40px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+
+
+  user-select: none;
+
+  &.active {
+
+    background-color: #6A371780;
+  }
+
+  &:hover {
+    background-color: #6A371780;
+  }
+
+}
