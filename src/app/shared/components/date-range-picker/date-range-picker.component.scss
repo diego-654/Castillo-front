@@ -1,0 +1,135 @@
+.dropdown {
+  position: relative;
+
+  .calendar-icon {
+    cursor: pointer;
+  }
+
+  &.open {
+    .dropdown__menu {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+
+
+}
+
+.dropdown__menu {
+  width: 100%;
+  border-radius: 12px;
+  overflow-y: auto;
+
+  box-shadow: 1px 0px 3px 0px #0000004d;
+
+  box-shadow: 0px 6px 10px 4px #00000026;
+
+  background-color: #fff;
+
+  &.show {
+    animation: fadeInUp 0.25s ease forwards;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cfcece;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #CFCECE;
+  }
+
+  .calendars {
+    display: flex;
+
+    .border {
+      border-right: 1px solid #e6e6e7;
+    }
+
+    app-calendar {
+      flex: 1;
+    }
+  }
+
+  .acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    gap: 130px;
+    border: 1px solid #e6e6e7;
+
+    .inputs {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      app-input {
+        width: 100%;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      app-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.input-calendar {
+  display: flex;
+  align-items: center;
+  cursor: text;
+
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  border: var(--form-border);
+  padding-left: 12px;
+  padding-right: 8px;
+  transition: outline-color 0.2s ease;
+  outline: 2px solid transparent;
+
+  &.disabled,
+  &.readonly {
+    background-color: #f8f7f7;
+    border: var(--form-border);
+  }
+
+  &.small {
+    height: 32px;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    color: #504f4e;
+
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s ease;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #b6b5b4;
+    }
+
+    &:disabled,
+    &[readonly] {
+      cursor: pointer;
+    }
+  }
+}

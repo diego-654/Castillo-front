@@ -1,0 +1,19 @@
+@if(mode() == 'day'){
+<app-day-picker
+  [value]="internalValue()"
+  (valueChange)="handleChangeDayPicker($event)"
+  (onMonthClick)="handleChangeMode('month')"
+  [(month)]="month"
+  [(year)]="year"
+></app-day-picker>
+} @if(mode() == 'month'){
+<app-month-picker
+  [value]="{
+    month: month(),
+    year: year()
+  }"
+  [month]="month()"
+  [year]="year()"
+  (valueChange)="handleChangeMonthPicker($event)"
+></app-month-picker>
+}

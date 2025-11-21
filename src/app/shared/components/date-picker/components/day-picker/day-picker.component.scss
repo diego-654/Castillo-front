@@ -1,0 +1,145 @@
+.calendar {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .calendar-headline-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .calendar-headline-month {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 24px;
+      color: #0e0e0f;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      app-svg-icon {
+        width: 15px;
+        height: 15px;
+        min-width: 15px;
+        background-color: var(--primary);
+        margin-left: 2px;
+      }
+    }
+
+    .control {
+      button {
+        width: 24px;
+        height: 24px;
+        border: transparent;
+        border-radius: 8px;
+
+        background: #ffffff;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          background-color: #f8f7f7;
+        }
+
+        app-svg-icon {
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          background-color: var(--primary);
+        }
+      }
+
+      &.right button {
+        transform: rotate(180deg);
+        margin-left: 14px;
+      }
+
+      &.left button {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  .calendar-body {
+    .week-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+
+      .day-header {
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #45454a;
+        height: 42px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      row-gap: 8.4px;
+      column-gap: 4px;
+
+      .day {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        color: #45454a;
+        overflow: hidden;
+        cursor: pointer;
+        height: 34px;
+
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          background-color: var(--primary);
+          color: #ffffff;
+
+          &:hover {
+            background-color: var(--primary);
+          }
+        }
+
+        &.prev,
+        &.next {
+          color: #e8e9f1;
+        }
+
+        &:hover {
+          position: relative;
+          z-index: 0;
+
+          &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--primary);
+            opacity: 0.1;
+            z-index: -1;
+          }
+        }
+
+        &.today {
+          color: var(--primary);
+
+          &.selected {
+            color: #ffffff;
+            background-color: var(--primary);
+          }
+        }
+      }
+    }
+  }
+}

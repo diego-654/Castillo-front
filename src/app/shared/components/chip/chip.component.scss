@@ -1,0 +1,69 @@
+.chip-container {
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  z-index: 0;
+  position: relative;
+
+  .icon-close {
+    cursor: pointer;
+  }
+
+  //** Colors **//
+
+  &.primary {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--primary);
+      opacity: 0.05;
+      z-index: -1;
+      border-radius: 12px;
+    }
+  }
+
+  &.blue {
+    background-color: #e4efff;
+    color: #00468c;
+    border: 1px solid transparent;
+  }
+
+  &.gray {
+    background-color: #f8f9fa;
+    color: #000;
+    border: 1px solid #eaeaea;
+  }
+
+  &.green {
+    background-color: #e6f3e0;
+    color: #2c6b24;
+    border: 1px solid transparent;
+  }
+
+  &.red {
+    background-color: #ffd7d7;
+    color: #eb0029;
+    border: 1px solid transparent;
+  }
+
+  //** Sizes **//
+
+  &.medium {
+    height: 22px;
+    font-size: 12px;
+    font-weight: 400;
+
+    .icon-close {
+      width: 12px;
+      height: 12px;
+    }
+  }
+}

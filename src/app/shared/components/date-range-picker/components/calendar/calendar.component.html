@@ -1,0 +1,46 @@
+<section class="left">
+  <div class="calendar-headline-controls">
+    <div class="control left">
+      <button (click)="goToPreviusMonth()">
+        <img src="assets/icons/chevron-down.svg" alt="" />
+      </button>
+    </div>
+    <div class="calendar-headline-month">
+      {{ mesYanio() }}
+    </div>
+    <div class="control right">
+      <button (click)="goToNextMonth()">
+        <img src="assets/icons/chevron-down.svg" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <div class="calendar">
+    <div class="week-header">
+      <div class="day-header" *ngFor="let day of weekDays">{{ day }}</div>
+    </div>
+
+    <div class="grid">
+      <div
+        class="day"
+        *ngFor="let day of days"
+        (click)="toggleDay(day)"
+        [ngClass]="{
+          selected:
+            diaSeleccionado()?.toDateString() === day.date.toDateString(),
+          prev: day.prevOrNext === 'prev',
+          next: day.prevOrNext === 'next',
+          firstNext: day.firstNext,
+          today: day.isToday
+        }"
+      >
+        {{ day.date.getDate() | twoDigit }}
+
+        @if(day.prevOrNext){
+        <div class="opacity"></div>
+
+        }
+      </div>
+    </div>
+  </div>
+</section>

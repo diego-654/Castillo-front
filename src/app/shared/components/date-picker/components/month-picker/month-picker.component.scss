@@ -1,0 +1,104 @@
+.calendar {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .calendar-headline-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .calendar-headline-month {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 24px;
+      color: #0e0e0f;
+      display: flex;
+      align-items: center;
+    }
+
+    .control {
+      button {
+        width: 24px;
+        height: 24px;
+        border: transparent;
+        border-radius: 8px;
+
+        background: #ffffff;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          background-color: #f8f7f7;
+        }
+
+        app-svg-icon {
+          width: 24px;
+          height: 24px;
+          min-width: 24px;
+          background-color: var(--primary);
+        }
+      }
+
+      &.right button {
+        transform: rotate(180deg);
+      }
+
+      &.left button {
+        transform: rotate(0deg);
+      }
+    }
+  }
+
+  .calendar-body {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 6.5px;
+      column-gap: 4px;
+
+      .day {
+        height: 52px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #4a4761;
+        cursor: pointer;
+
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          font-weight: 600;
+          background-color: var(--primary);
+          color: #ffffff;
+
+          &:hover {
+            background-color: var(--primary);
+          }
+        }
+
+        &:hover {
+          position: relative;
+          z-index: 0;
+
+          &::before {
+            border-radius: 8px;
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: var(--primary);
+            opacity: 0.1;
+            z-index: -1;
+          }
+        }
+      }
+    }
+  }
+}

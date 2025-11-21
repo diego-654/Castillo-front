@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RecoleccionDatosDatasource } from "@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources";
 import { EventoFormularioResponse } from "@features/recoleccion-datos/domain/models/evento-formulario-response.model";
-import { FormularioClienteResponse } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
+import { FormularioClienteResponse, TipoInputType } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
 import { map, Observable, timer } from "rxjs";
 
 
@@ -20,24 +20,28 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
               lista: [
                 {
                   nombre: 'Nombres',
-                  type: 'text',
+                  type: TipoInputType.TEXT,
                 },
                 {
                   nombre: 'Apellidos',
-                  type: 'text',
+                  type: TipoInputType.TEXT,
                 },
                 {
                   nombre: 'Edad',
-                  type: 'number',
+                  type: TipoInputType.NUMBER,
                 },
                 {
                   nombre: 'Fecha de nacimiento',
-                  type: 'date',
+                  type: TipoInputType.DATE,
                 },
                 {
                   nombre: 'Ciudad',
-                  type: 'text',
-                }
+                  type: TipoInputType.TEXT,
+                },
+                {
+                  nombre: 'Fecha de finalizacion',
+                  type: TipoInputType.DATE,
+                },
               ],
             },
           },
@@ -47,11 +51,11 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
               lista: [
                 {
                   nombre: 'Correo electrónico',
-                  type: 'text',
+                  type: TipoInputType.TEXT,
                 },
                 {
                   nombre: 'Número de celular',
-                  type: 'number',
+                  type: TipoInputType.NUMBER,
                 },
               ],
             },

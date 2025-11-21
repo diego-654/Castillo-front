@@ -1,0 +1,34 @@
+<div class="calendar">
+  <div class="calendar-headline-controls">
+    <div class="control left">
+      <button (click)="goToPreviusYear()">
+        <app-svg-icon path="assets/icons/calendar/arrow-2.svg" />
+      </button>
+    </div>
+
+    <div class="calendar-headline-month">
+      {{ internalYear() }}
+    </div>
+
+    <div class="control right">
+      <button (click)="goToNextYear()">
+        <app-svg-icon path="assets/icons/calendar/arrow-2.svg" />
+      </button>
+    </div>
+  </div>
+  <div class="calendar-body">
+    <div class="grid">
+      @for(monthName of monthNames(); track $index){
+      <div
+        class="day"
+        (click)="selectMonth($index + 1)"
+        [ngClass]="{
+          selected: internalMonth() === $index + 1 && internalYear() === year(),
+        }"
+      >
+        {{ monthName }}
+      </div>
+      }
+    </div>
+  </div>
+</div>

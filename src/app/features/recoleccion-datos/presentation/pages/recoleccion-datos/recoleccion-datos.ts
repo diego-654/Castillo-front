@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Card } from '../../components/card/card';
 import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
 import { EventosFormulario } from '@features/recoleccion-datos/domain/models/evento-formulario-response.model';
@@ -18,7 +18,7 @@ export default class RecoleccionDatos {
   readonly recoleccionDatosRepository = inject(RecoleccionDatosRepository);
   readonly utilService = inject(UtilService);
 
-  eventosFormulario: EventosFormulario[] = [];
+  eventosFormulario = signal<EventosFormulario[]>([]);
 
   ngOnInit() {
     this.listarEventosFormulario();
@@ -30,7 +30,7 @@ export default class RecoleccionDatos {
       const res = await firstValueFrom(
         this.recoleccionDatosRepository.getEventoFormulario()
       );
-      this.eventosFormulario = res.listaEventos;
+      this.eventosFormulario.set(res.listaEventos);
       this.utilService.dismissLoader();
     } catch (error) {
       this.utilService.dismissLoader();

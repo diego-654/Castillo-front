@@ -20,10 +20,11 @@ export interface TipoInput {
   readonly optionsSelect?: OptionSelect[];
 }
 
-export type TipoInputType =
-  'text' |
-  'number' |
-  'date';
+export enum TipoInputType {
+  TEXT,
+  NUMBER,
+  DATE,
+}
 
 
 export interface OptionSelect {
