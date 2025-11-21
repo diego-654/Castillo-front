@@ -21,7 +21,13 @@
   padding-left: var(--form-padding-inline);
   padding-right: var(--form-padding-inline);
   transition: all 0.25s ease;
-  background-color: var(--form-background-color);
+
+  &.primary {
+    background-color: var(--form-background-color);
+  }
+  &.secondary {
+    background-color: var(--form-background-color-white);
+  }
 
   &.disabled,
   &.readonly {
