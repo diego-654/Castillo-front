@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
-import { CardData } from '../../data/card-data';
 import { Router } from '@angular/router';
+import { EventosFormulario } from '@features/recoleccion-datos/domain/models/evento-formulario-response.model';
 
 @Component({
   selector: 'app-card',
@@ -11,11 +11,10 @@ import { Router } from '@angular/router';
 export class Card {
   router = inject(Router);
 
+  eventoFormulario = input.required<EventosFormulario>();
 
-  card = input.required<CardData>();
-
-  toggleCard(card: CardData) {
-    this.router.navigate([card.url]);
+  toggleCard(card: EventosFormulario) {
+    this.router.navigate(['recoleccion-datos/formulario', card.id]);
   }
 }
 

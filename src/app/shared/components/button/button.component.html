@@ -1,0 +1,31 @@
+<button [class]="[size(), type()]" [disabled]="disabled()">
+  @if(loading()){
+  <span class="spinner" aria-label="Cargando..."></span>
+  }
+  <!--  -->
+  @else {
+
+  <!--  -->
+  @if(leftIcon()){
+  <app-svg-icon [path]="leftIcon()!" class="icon"></app-svg-icon>
+  }
+
+  <!--  -->
+
+  @if(text() != ''){
+
+  <div class="text">
+    {{ text() }}
+  </div>
+
+  }
+
+  <!--  -->
+  @if(iconRight()){
+  <app-svg-icon [path]="iconRight()!" class="icon"></app-svg-icon>
+
+  }
+
+  <!--  -->
+  }
+</button>

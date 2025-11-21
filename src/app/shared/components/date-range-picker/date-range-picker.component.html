@@ -1,0 +1,56 @@
+<div
+  class="dropdown"
+  [ngClass]="{ open: overlayRef?.hasAttached() }"
+  (click)="openOptions()"
+>
+  <div class="input-calendar" [ngClass]="{ small: type() === 'small' }">
+    <input
+      #calendarInput
+      type="text"
+      class="filter__search-input"
+      placeholder="Seleccionar"
+      readonly
+      [value]="valueFormateado()"
+    />
+    <img src="assets/icons/calendar.svg" alt="" class="calendar-icon" />
+  </div>
+</div>
+
+<ng-template #optionsTemplate>
+  <div
+    class="dropdown__menu"
+    [ngClass]="{
+      show: overlayRef?.hasAttached(),
+    }"
+  >
+    <div class="calendars">
+      <app-calendar
+        [value]="fechaSeleccionada1()"
+        (valueChange)="onFecha1Change($event)"
+        class="border"
+      ></app-calendar>
+
+      <app-calendar
+        [value]="fechaSeleccionada2()"
+        (valueChange)="onFecha2Change($event)"
+      ></app-calendar>
+    </div>
+    <div class="acciones">
+      <div class="inputs">
+        <app-input [readonly]="true" [value]="fechaFormateada1()" >
+        </app-input>
+
+        <app-input [readonly]="true" [value]="fechaFormateada2()" >
+        </app-input>
+      </div>
+      <div class="buttons">
+        <app-button
+          text="Cancelar"
+          (click)="cancelar()"
+          type="tertiary"
+        ></app-button>
+        <app-button text="Aceptar" (click)="aceptar()"></app-button>
+      </div>
+    </div>
+  </div>
+</ng-template>

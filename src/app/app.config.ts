@@ -7,6 +7,10 @@ import {
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
+import { RecoleccionDatosRepositoryImpl } from '@features/recoleccion-datos/data/repositories/recoleccion-datos.repository.impl';
+import { RecoleccionDatosDatasource } from '@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources';
+import { RecoleccionDatosDatasourceImpl } from '@features/recoleccion-datos/data/datasources/recoleccion-datos.datasource.impl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay())
+    provideRouter(routes), provideClientHydration(withEventReplay()),
+
+    {provide: RecoleccionDatosRepository, useClass: RecoleccionDatosRepositoryImpl},
+    {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},
   ]
 };
 

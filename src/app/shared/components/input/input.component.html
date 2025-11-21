@@ -1,6 +1,11 @@
-<div class="input-label" *ngIf="label()">
-  {{ label() }} <span *ngIf="isRequired">*</span>
+@if (label()) {
+<div class="input-label">
+  {{ label() }}
+  @if(isRequired){
+  <span class="required">*</span>
+  }
 </div>
+}
 <div
   class="input-wrapper"
   [ngClass]="[size()]"

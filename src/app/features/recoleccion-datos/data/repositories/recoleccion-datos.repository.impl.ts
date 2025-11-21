@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { RecoleccionDatosDatasource } from "@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources";
+import { EventoFormularioResponse } from "@features/recoleccion-datos/domain/models/evento-formulario-response.model";
 import { FormularioClienteResponse } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
 import { RecoleccionDatosRepository } from "@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository";
 import { Observable } from "rxjs";
@@ -13,5 +14,9 @@ export class RecoleccionDatosRepositoryImpl implements RecoleccionDatosRepositor
 
   getFormularioCliente(): Observable<FormularioClienteResponse> {
     return this.dataSource.getFormularioCliente();
+  }
+
+  getEventoFormulario(): Observable<EventoFormularioResponse> {
+    return this.dataSource.getEventoFormulario();
   }
 }

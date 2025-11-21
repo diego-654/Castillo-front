@@ -1,0 +1,137 @@
+section.left {
+  padding: 24px 24px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .calendar-headline-month {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #252525;
+    width: max-content;
+  }
+
+  .calendar-headline-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .control {
+      button {
+        width: 30px;
+        height: 30px;
+        border: transparent;
+        border-radius: 8px;
+
+        background: #ffffff;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          background-color: #f8f7f7;
+        }
+      }
+
+      &.right button {
+        transform: rotate(270deg);
+      }
+
+      &.left button {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .calendar {
+    .week-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+
+
+
+      .day-header {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        color: #252525;
+        height: 40px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      row-gap: 4px;
+
+      .day {
+        padding: 9px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #252525;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        height: 40px;
+
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.selected {
+          background-color: #D55002;
+          color: #FFFFFF;
+
+          &:hover {
+            background-color: #D55002;
+          }
+        }
+
+        &:hover {
+          background-color: #FAF0EA;
+        }
+
+        &.today {
+          color: #d55002;
+
+          &.selected {
+            color: #FFFFFF;
+            background-color: #D55002;
+          }
+        }
+
+
+
+        .opacity {
+          opacity: 0.7;
+          background-color: #ffffff;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+
+          color: #A6A7AB;
+        }
+      }
+
+
+    }
+
+  }
+
+
+}

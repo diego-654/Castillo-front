@@ -1,0 +1,44 @@
+@if(label()){
+<div class="input-label">
+  {{ label() }}
+  @if(isRequired){
+  <span class="required">*</span>
+  }
+</div>
+}
+
+<div
+  #trigger
+  class="trigger"
+  (click)="openOverlay()"
+  [ngClass]="[size()]"
+  [class.opened]="overlayRef?.hasAttached()"
+  [class.disabled]="disabled()"
+  [class.readonly]="readonly()"
+>
+  <app-svg-icon path="assets/icons/calendar.svg" class="calendar-icon" />
+
+  <input type="text" [placeholder]="placeholder()" readonly [value]="formatedValue()" />
+</div>
+
+<ng-template #overlayTemplate>
+  <div
+    class="dropdown__menu"
+    [ngClass]="{
+      show: overlayRef?.hasAttached(),
+    }"
+    (clickOutside)="closeOverlay()"
+    (click)="handleClickOverlay($event)"
+  >
+    <app-calendar
+      [value]="internalValue()"
+      (valueChange)="handleValueChange($event)"
+    ></app-calendar>
+  </div>
+</ng-template>
+
+@if(errorMessage) {
+<div class="error">
+  {{ errorMessage }}
+</div>
+}

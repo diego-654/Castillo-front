@@ -1,0 +1,18 @@
+<div class="checkbox-container" (click)="handleClick()">
+  <div
+    class="checkbox"
+    [ngClass]="{
+      checked: internalValue(),
+      disabled: disabled(),
+      readonly: readonly()
+    }"
+  >
+    @if(internalValue()){
+    <app-svg-icon color="white" path="assets/icons/check.svg" class="icon" />
+    }
+  </div>
+
+  @if(label()){
+  <span>{{ label() }}</span>
+  }
+</div>
