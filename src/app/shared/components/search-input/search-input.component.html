@@ -2,7 +2,7 @@
   <input
     type="text"
     class="filter__search-input"
-    placeholder="Buscar"
+    [placeholder]="placeholder"
     (value)="value()"
     (input)="handleInput($event)"
   />

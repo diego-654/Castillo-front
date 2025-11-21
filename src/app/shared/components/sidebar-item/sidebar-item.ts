@@ -5,7 +5,7 @@ import { MenuItem } from '../sidebar/sidebar.interfaces';
 
 @Component({
   selector: 'app-sidebar-item',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './sidebar-item.html',
   styleUrl: './sidebar-item.scss',
 })

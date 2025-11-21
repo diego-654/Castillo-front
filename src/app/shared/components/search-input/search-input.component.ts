@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, Input, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class SearchInputComponent {
   value = input<string>('');
   valueChange = output<string>();
+  @Input() placeholder: string = '';
 
   handleInput(event: any) {
     this.valueChange.emit(event.target.value);
