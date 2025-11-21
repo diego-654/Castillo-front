@@ -1,0 +1,71 @@
+:root {
+  --min-height: 48px;
+  --max-height: 48px;
+}
+
+.input-label {
+  font-size: var(--form-label-font-size);
+  color: var(--form-label-color);
+  font-weight: var(--form-label-font-weight);
+  line-height: var(--form-label-line-height);
+  margin-bottom: var(--form-label-margin-bottom);
+
+  span {
+    color: var(--form-error-color);
+  }
+}
+
+textarea {
+  width: 100%;
+  min-height: var(--min-height);
+  max-height: var(--max-height);
+  border-radius: var(--form-border-radius);
+  border: var(--form-border);
+
+  padding: 8px var(--form-padding-inline);
+
+  font-size: var(--form-font-size);
+  font-weight: var(--form-font-weight);
+  line-height: var(--form-line-height);
+  color: var(--form-color);
+
+  resize: none;
+  outline: none;
+  transition: all 0.25s ease;
+
+  &.primary {
+    background-color: var(--form-background-color);
+
+  }
+
+  &.secondary {
+    background-color: var(--form-background-color-white);
+  }
+
+  &:focus-within:not([readonly]):not([disabled]) {
+    border: var(--form-focus-border);
+    box-shadow: var(--form-focus-box-shadow);
+  }
+
+  &::placeholder {
+    color: var(--form-placeholder-color);
+    font-size: var(--form-placeholder-font-size);
+    font-weight: var(--form-placeholder-font-weight);
+    line-height: var(--form-placeholder-line-height);
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: var(--form-background-color-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.error {
+  margin-top: var(--form-error-margin-top);
+  padding-left: var(--form-error-padding-left);
+  font-size: var(--form-error-font-size);
+  line-height: var(--form-error-line-height);
+  font-weight: var(--form-error-font-weight);
+  color: var(--form-error-color);
+}

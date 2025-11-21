@@ -7,10 +7,15 @@
   </div>
 
   <div class="content__formulario">
-    @for (item of formulario.lista; track $index) {
+    @for (item of formulario().lista; track $index) {
     <div class="formulario_title_actions">
       <div class="formulario__title">{{ item.typeFormulario }}</div>
-      <app-button size="small" type="tertiary" iconRight="assets/icons/edit.svg"></app-button>
+      <app-button
+        size="small"
+        type="tertiary"
+        iconRight="assets/icons/edit.svg"
+        (click)="openAgregarFormulario($index)"
+      ></app-button>
     </div>
 
     <div class="formulario__inputs">
@@ -42,7 +47,11 @@
     <!--  -->
     }
     <!--  -->
-    <div class="formulario__title">Interés en Membresía</div>
+    <div class="formulario_title_actions">
+      <div class="formulario__title">Interés en Membresía</div>
+      <app-button size="small" type="tertiary" iconRight="assets/icons/edit.svg"></app-button>
+    </div>
+
     <div class="formulario__inputs">
       <app-select [readonly]="true" placeholder="Seleccionar" size="small">
         @for (option of options(); track $index) {

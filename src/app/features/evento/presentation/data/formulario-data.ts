@@ -1,4 +1,4 @@
-import { FormularioEventoRequest, TipoInputType } from "@features/evento/domain/models/formulario-cliente-request.model";
+import { FormularioEventoRequest, TipoInputType } from "@features/evento/domain/models/formulario-evento-request.model";
 
 
 export const formularioData: FormularioEventoRequest = {

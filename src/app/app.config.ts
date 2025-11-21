@@ -11,6 +11,10 @@ import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/r
 import { RecoleccionDatosRepositoryImpl } from '@features/recoleccion-datos/data/repositories/recoleccion-datos.repository.impl';
 import { RecoleccionDatosDatasource } from '@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources';
 import { RecoleccionDatosDatasourceImpl } from '@features/recoleccion-datos/data/datasources/recoleccion-datos.datasource.impl';
+import { EventoDatasourceImpl } from '@features/evento/data/datasources/evento.datasource.impl';
+import { EventoRepositoryImpl } from '@features/evento/data/repositories/evento.repository.impl';
+import { EventoDatasource } from '@features/evento/domain/datasources/evento.datasource';
+import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +27,8 @@ export const appConfig: ApplicationConfig = {
 
     {provide: RecoleccionDatosRepository, useClass: RecoleccionDatosRepositoryImpl},
     {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},
+    {provide: EventoRepository, useClass: EventoRepositoryImpl},
+    {provide: EventoDatasource, useClass: EventoDatasourceImpl},
   ]
 };
 

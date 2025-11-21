@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-panel {
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 1001;
+  animation: dialogFadeIn 0.2s ease-out;
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* El overlay backdrop (ya lo pone el CDK, pero puedes personalizarlo así si usas panelClass o backdropClass) */
+::ng-deep .cdk-overlay-dark-backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Si usas panelClass: 'custom-dialog-panel' puedes agregar ajustes aquí también */
+::ng-deep .cdk-overlay-pane.custom-dialog-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
