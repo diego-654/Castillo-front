@@ -17,15 +17,5 @@ export class InteresadosLayout {
       route: '/interesados/datos-obtenidos',
       icon: 'credit-card.svg',
     },
-    {
-      label: 'Formulario',
-      route: '/interesados/formulario',
-      icon: 'credit-card.svg',
-    },
-    {
-      label: 'Historial de Formulario',
-      route: '/interesados/historial-formulario',
-      icon: 'credit-card.svg',
-    },
   ]);
 }

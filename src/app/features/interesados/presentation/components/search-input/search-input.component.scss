@@ -1,0 +1,39 @@
+.filter__input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  width: 100%;
+
+  .filter__search-input {
+    height: 40px;
+    width: 100%;
+
+    border-radius: 8px;
+    border: 1px solid #b6b5b4;
+
+    padding-left: 44px;
+    background-color: transparent;
+    z-index: 1;
+
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -2%;
+
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s ease;
+
+    &::placeholder {
+      color: #b6b5b4;
+    }
+
+    
+  }
+
+  .icon-search {
+    position: absolute;
+    left: 12px;
+    width: 24px;
+    height: 24px;
+  }
+}
