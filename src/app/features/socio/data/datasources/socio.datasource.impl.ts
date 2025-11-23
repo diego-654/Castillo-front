@@ -5,6 +5,7 @@ import { SocioDatasource } from "@features/socio/domain/datasources/socio.dataso
 import { CrearMiembroRequest } from "@features/socio/domain/models/crear-miembro.request.model";
 import { ListaMiembrosActivosRequest } from "@features/socio/domain/models/lista-miembros-activos-request.model";
 import { ListaMiembrosActivos, ListaMiembrosActivosResponse } from "@features/socio/domain/models/lista-miembros-activos-response.model";
+import { ListarMembresiasResponse } from "@features/socio/domain/models/listar-membresias-response.model";
 import { map, Observable, timer } from "rxjs";
 
 
@@ -39,6 +40,27 @@ export class SocioDatasourceImpl implements SocioDatasource {
       map(() => {
         console.log("crear miembro", request);
       })
+    );
+  }
+
+  listarMembresias(): Observable<ListarMembresiasResponse> {
+    return timer(200).pipe(
+      map(() => ({
+        lista: [
+          {
+            id: 1,
+            nombre: 'Premium',
+          },
+          {
+            id: 2,
+            nombre: 'Basic',
+          },
+          {
+            id: 3,
+            nombre: 'VIP',
+          },
+        ],
+      }))
     );
   }
 

@@ -4,23 +4,45 @@
     <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
   </div>
 
-  <div class="model-body">
+  <div class="modal-body" [formGroup]="formulario">
     <div class="form">
-      <app-input formControlName="cliente" placeholder="Nombres"></app-input>
-    </div>
-    <div class="form form-1">
-      <app-input formControlName="celular" placeholder="Celular"></app-input>
-      <app-date-picker formControlName="fechaNacimiento" placeholder="dd/mm/aaaa"></app-date-picker>
-    </div>
-    <div class="form">
-      <app-input formControlName="email" placeholder="Email"></app-input>
-    </div>
-    <div class="form">
-      <app-select formControlName="membresia" placeholder="Membresia"></app-select>
-    </div>
-    <div class="form form-1">
-      <app-date-picker formControlName="fechaInicio" placeholder="dd/mm/aaaa"></app-date-picker>
-      <app-select formControlName="estado" placeholder="Estado"></app-select>
+      <div class="form form-1">
+        <app-input formControlName="cliente" label="Cliente" placeholder="Nombres"></app-input>
+      </div>
+      <div class="form form-2">
+        <app-input formControlName="celular" label="Celular" placeholder="Celular"></app-input>
+        <app-date-picker
+          formControlName="fechaNacimiento"
+          placeholder="dd/mm/aaaa"
+          label="Fecha de Nacimiento"
+        ></app-date-picker>
+      </div>
+      <div class="form form-1">
+        <app-input formControlName="email" label="Email" placeholder="Email"></app-input>
+      </div>
+      <div class="form form-1">
+        <app-select formControlName="membresia" label="Membresia" placeholder="Membresia">
+          @for (membresia of membresias(); track $index) {
+          <app-option [value]="membresia.id">
+            {{ membresia.nombre }}
+          </app-option>
+          }
+        </app-select>
+      </div>
+      <div class="form form-2">
+        <app-date-picker
+          formControlName="fechaInicio"
+          placeholder="dd/mm/aaaa"
+          label="Fecha de Inicio"
+        ></app-date-picker>
+        <app-select placeholder="Seleccionar" label="Estado" formControlName="estado" size="small">
+          @for (estado of estados(); track $index) {
+          <app-option [value]="estado.value">
+            {{ estado.label }}
+          </app-option>
+          }
+        </app-select>
+      </div>
     </div>
   </div>
 
@@ -32,6 +54,12 @@
       type="secondary"
       size="small"
     ></app-button>
-    <app-button class="btn-popup" text="Agregar" type="primary" size="small"></app-button>
+    <app-button
+      class="btn-popup"
+      text="Agregar"
+      type="primary"
+      size="small"
+      (click)="agregar()"
+    ></app-button>
   </div>
 </div>
