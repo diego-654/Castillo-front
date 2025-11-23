@@ -53,6 +53,7 @@ export class AgregarFormulario {
 
     this.dialogRef.close({
       pregunta: raw.pregunta,
+      formControlName: this.tipo().toString().toLowerCase(),
       tipo: this.tipo(),
     });
   }
@@ -66,6 +67,7 @@ export type PopupAgregarFormulario = DialogRef<
 
 export interface Pregunta {
   pregunta: string;
+  formControlName: string;
   tipo: TipoInputType;
 }
 

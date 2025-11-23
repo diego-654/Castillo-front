@@ -58,7 +58,8 @@ export default class Formulario {
       const clone = structuredClone(prev);
 
       clone.lista[indexGrupo].campos.lista.push({
-        nombre: nuevaPregunta.pregunta,
+        label: nuevaPregunta.pregunta,
+        formControlName: nuevaPregunta.formControlName,
         type: nuevaPregunta.tipo,
       });
 

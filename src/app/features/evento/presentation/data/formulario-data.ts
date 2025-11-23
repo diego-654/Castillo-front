@@ -9,28 +9,34 @@ export const formularioData: FormularioEventoRequest = {
       campos: {
         lista: [
           {
-            nombre: 'Nombres',
+            label: 'Nombres',
             type: TipoInputType.TEXT,
+            formControlName: 'nombres',
           },
           {
-            nombre: 'Apellidos',
+            label: 'Apellidos',
             type: TipoInputType.TEXT,
+            formControlName: 'apellidos',
           },
           {
-            nombre: 'Edad',
+            label: 'Edad',
             type: TipoInputType.NUMBER,
+            formControlName: 'edad',
           },
           {
-            nombre: 'Fecha de nacimiento',
+            label: 'Fecha de nacimiento',
             type: TipoInputType.DATE,
+            formControlName: 'fechaNacimiento',
           },
           {
-            nombre: 'Ciudad',
+            label: 'Ciudad',
             type: TipoInputType.TEXT,
+            formControlName: 'ciudad',
           },
           {
-            nombre: 'Fecha de finalizacion',
+            label: 'Fecha de finalizacion',
             type: TipoInputType.DATE,
+            formControlName: 'fechaFinalizacion',
           },
         ],
       },
@@ -40,12 +46,14 @@ export const formularioData: FormularioEventoRequest = {
       campos: {
         lista: [
           {
-            nombre: 'Correo electrónico',
+            label: 'Correo electrónico',
             type: TipoInputType.TEXT,
+            formControlName: 'correoElectronico',
           },
           {
-            nombre: 'Número de celular',
+            label: 'Número de celular',
             type: TipoInputType.NUMBER,
+            formControlName: 'numeroCelular',
           },
         ],
       },

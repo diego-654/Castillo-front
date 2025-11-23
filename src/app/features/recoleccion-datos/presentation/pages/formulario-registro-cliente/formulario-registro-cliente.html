@@ -6,37 +6,65 @@
     <div class="header__formulario__title">Formulario de Registro al cliente</div>
   </div>
 
-  @if (formulario() && form) {
+  @if (formulario() ) {
   <ng-container>
-    <div class="content__formulario" [formGroup]="form">
-      @for (item of formulario()?.lista; track $index) {
+    <div class="content__formulario">
+      @for (item of formulario()?.lista; track $index) { @if (item.typeFormulario) {
       <div class="formulario__title">{{ item.typeFormulario }}</div>
+      }
 
       <div class="formulario__inputs">
         @for (inputs of item.campos.lista; track $index) {
         <div class="input-container">
-          <div class="formulario__inputs__title">{{ inputs.nombre }}</div>
+          <div class="formulario__inputs__title">{{ inputs.label }}</div>
           @if (inputs.type == typeInput.TEXT) {
 
           <!-- texto fijo -->
-          <app-input
-            size="small"
-            [placeholder]="' Ingrese su ' + inputs.nombre.toLowerCase()"
-            [formControlName]="inputs.nombre.toLowerCase()"
-          ></app-input>
+          <app-input size="small" [placeholder]="' Ingrese su ' + inputs.label"></app-input>
 
-          }@else if(inputs.type == typeInput.NUMBER){
+          }
+          <!--  -->
+          @else if(inputs.type == typeInput.NUMBER){
           <app-input-number
             size="small"
-            [placeholder]="' Ingrese su ' + inputs.nombre.toLowerCase()"
-            [formControlName]="inputs.nombre.toLowerCase()"
+            [placeholder]="' Ingrese su ' + inputs.label"
+            (valueChange)="guardarRespuesta(inputs.label, $event)"
           ></app-input-number>
-          }@else if (inputs.type == typeInput.DATE) {
+          }
+          <!--  -->
+          @else if (inputs.type == typeInput.DATE) {
           <app-date-picker
             size="small"
             placeholder="dd/mm/aaa"
-            [formControlName]="inputs.nombre.toLowerCase()"
+            (valueChange)="guardarRespuesta(inputs.label, $event)"
           ></app-date-picker>
+          }
+          <!--  -->
+          @else if (inputs.type == typeInput.BOOLEAN && !inputs.extras) {
+          <app-select
+            (valueChange)="guardarRespuesta(inputs.label, $event)"
+            placeholder="Seleccionar"
+            size="small"
+          >
+            @for (option of options(); track $index) {
+            <app-option [value]="option.value">
+              {{ option.label }}
+            </app-option>
+            }
+          </app-select>
+
+          }
+          <!--  -->
+          @else if (inputs.type == typeInput.BOOLEAN && inputs.extras) {
+          <div class="terminos-container">
+            <div class="terminos">
+              <app-checkbox (valueChange)="guardarRespuesta(inputs.label, $event)"></app-checkbox>
+              <span class="termino-text">{{ inputs.label }}</span>
+            </div>
+            <div class="termino-text2">
+              {{ inputs.extras }}
+            </div>
+          </div>
           }
         </div>
         <!--  -->
@@ -44,28 +72,6 @@
       </div>
       <!--  -->
       }
-      <!--  -->
-      <div class="formulario__title">Interés en Membresía</div>
-      <div class="formulario__inputs">
-        <app-select formControlName="membresia" placeholder="Seleccionar" size="small">
-          @for (option of options(); track $index) {
-          <app-option [value]="option.value">
-            {{ option.label }}
-          </app-option>
-          }
-        </app-select>
-      </div>
-
-      <div class="terminos">
-        <app-checkbox formControlName="terminos"></app-checkbox>
-        <span class="termino-text">Acepto que me contacten por Whatsapp y Correo Electronico</span>
-      </div>
-
-      <div class="termino-text2">
-        Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir
-        información, promociones, contenido educativo y beneficios relacionados con sus servicios, y
-        autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.
-      </div>
 
       <div class="accion">
         <app-button size="large" type="secondary" text="Cancelar"></app-button>

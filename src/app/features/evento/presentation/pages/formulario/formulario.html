@@ -21,20 +21,20 @@
     <div class="formulario__inputs">
       @for (inputs of item.campos.lista; track $index) {
       <div class="input-container">
-        <div class="formulario__inputs__title">{{ inputs.nombre }}</div>
+        <div class="formulario__inputs__title">{{ inputs.label }}</div>
         @if (inputs.type == typeInput.TEXT) {
 
         <!-- texto fijo -->
         <app-input
           size="small"
-          [placeholder]="' Ingrese su ' + inputs.nombre.toLowerCase()"
+          [placeholder]="' Ingrese su ' + inputs.label"
           [readonly]="true"
         ></app-input>
 
         }@else if(inputs.type == typeInput.NUMBER){
         <app-input-number
           size="small"
-          [placeholder]="' Ingrese su ' + inputs.nombre.toLowerCase()"
+          [placeholder]="' Ingrese su ' + inputs.label"
           [readonly]="true"
         ></app-input-number>
         }@else if (inputs.type == typeInput.DATE) {

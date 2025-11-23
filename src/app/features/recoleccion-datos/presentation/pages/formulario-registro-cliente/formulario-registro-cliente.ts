@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, signal, input } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormularioClienteResponse, TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
 import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -41,7 +41,6 @@ export default class FormularioRegistroCliente {
   options = signal<Option[]>(optionsData);
   option = signal<boolean | null>(null);
 
-  form: FormGroup = new FormGroup({});
 
   ngOnInit() {
     this.obtenerFormularioCliente();
@@ -57,7 +56,6 @@ export default class FormularioRegistroCliente {
 
       this.formulario.set(res);
 
-      this.crearFormularioDinamico();
 
       this.utilService.dismissLoader();
     } catch (error) {
@@ -70,41 +68,38 @@ export default class FormularioRegistroCliente {
     this.option.set(option.value);
   }
 
-  crearFormularioDinamico(): void {
-    const controls: Record<string, FormControl<any>> = {};
+  respuestas = signal<{ [key: string]: any }>({});
 
-    const lista = this.formulario()?.lista;
-    if (!lista) return;
 
-    lista.forEach((item) => {
-      item.campos.lista.forEach((input) => {
+  guardarRespuesta(label: string, valor: any) {
+    const key = this.formatoNombre(label);
 
-        const key = input.nombre.toLowerCase().trim();
+    this.respuestas.update((prev) => ({
+      ...prev,
+      [key]: valor,
+    }));
+  }
 
-        switch (input.type) {
 
-          case this.typeInput.TEXT:
-            controls[key] = new FormControl<string | null>(null);
-            break;
-
-          case this.typeInput.NUMBER:
-            controls[key] = new FormControl<number | null>(null);
-            break;
-
-          case this.typeInput.DATE:
-            controls[key] = new FormControl<Date | null>(null);
-            break;
-
-          default:
-            controls[key] = new FormControl<string | null>(null);
+  guardarFormulario() {
+    const request = {
+      id: this.formulario()?.id,
+      lista: this.formulario()?.lista.map((seccion) => ({
+        ...seccion,
+        campos: {
+          lista: seccion.campos.lista.map((campo) => ({
+            ...campo,
+            respuesta: this.respuestas()[this.formatoNombre(campo.label)] ?? null
+          }))
         }
-      });
-    });
+      }))
+    };
 
-    controls['membresia'] = new FormControl<boolean | null>(null);
-    controls['terminos'] = new FormControl<boolean | null>(null);
+    console.log("JSON FINAL", request);
+  }
 
-    this.form = new FormGroup(controls);
+  formatoNombre(label: string): string {
+    return label.toLowerCase().trim();
   }
 
 }
@@ -118,3 +113,4 @@ export interface Option {
   value: boolean | null;
   label: string;
 }
+

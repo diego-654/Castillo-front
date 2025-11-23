@@ -6,7 +6,7 @@ export interface FormularioEventoRequest {
 }
 
 export interface FormularioClienteResponseInputs {
-  readonly typeFormulario: string;
+  readonly typeFormulario?: string;
   readonly campos: ListTypeInputs;
 }
 
@@ -15,7 +15,9 @@ export interface ListTypeInputs {
 }
 
 export interface TipoInput {
-  readonly nombre: string;
+  readonly label?: string;
+  readonly labelExtra?: string;
+  readonly formControlName?: string;
   readonly type: TipoInputType;
 }
 
@@ -23,6 +25,7 @@ export enum TipoInputType {
   TEXT,
   NUMBER,
   DATE,
+  BOOLEAN,
 }
 
 
