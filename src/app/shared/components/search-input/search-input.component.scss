@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: transparent;
+  background-color: var(--form-background-color-white);
   width: 100%;
 
   .filter__search-input {
@@ -27,7 +27,7 @@
       color: #b6b5b4;
     }
 
-    
+
   }
 
   .icon-search {

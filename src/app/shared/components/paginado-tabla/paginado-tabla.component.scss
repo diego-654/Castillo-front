@@ -1,0 +1,95 @@
+.pagination {
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+.pagination-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  gap: 8px;
+  background-color: #fff;
+  border: 1px solid #e9e8e8;
+  color: #504f4e;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  &:disabled {
+    background-color: #f8f7f7;
+    color: #b6b5b4;
+    cursor: not-allowed;
+  }
+}
+
+.pagination-btn:disabled svg path {
+  stroke: #b6b5b4;
+}
+
+.prev-btn {
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 16px;
+}
+
+.next-btn {
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 8px;
+}
+
+.pagination-btn:hover {
+  background-color: #f8f7f7;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 2px;
+  width: min-content;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.page-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #817f7e;
+  border-radius: 8px;
+}
+
+.page-number.active {
+  color: #ffffff;
+  background-color: var(--primary);
+}
+
+.page-number:not(.no-hover):not(.active):hover {
+  background-color: #f8f7f7;
+}
+
+.page-number.no-hover {
+  pointer-events: none;
+  background-color: transparent !important;
+  color: inherit;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}

@@ -30,8 +30,9 @@
     }
 
     .tabs {
-      display: flex;
+      display: grid;
       grid-template-columns: 1fr;
+      justify-items: center;
       margin-top: auto;
       background-color: #f3f3f5;
       padding: 5px 10px;
@@ -55,7 +56,6 @@
           background-color: #ffffff;
           border-radius: 10px;
           border: none;
-          height: 50px;
           width: 360px;
         }
 

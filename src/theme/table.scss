@@ -1,0 +1,233 @@
+.table-scroll-container {
+  overflow-x: auto;
+  max-width: 100%;
+  flex-grow: 1;
+  min-height: 0;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid var(--table-border-color);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 7.5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &.resize {
+    table {
+      table-layout: fixed !important;
+      width: fit-content !important;
+      min-width: 100%;
+
+      thead {
+        tr {
+          th {
+            position: relative;
+
+            .resizer {
+              position: absolute;
+              right: -9px;
+              top: 0;
+              width: 16px;
+              height: 100%;
+              cursor: col-resize;
+              z-index: 100;
+            }
+
+            &:last-child {
+              overflow: hidden;
+            }
+          }
+        }
+      }
+
+      tbody {
+        td {
+          white-space: nowrap;
+          /* Evita que el texto se divida en varias líneas */
+          overflow: hidden;
+          /* Oculta el contenido que se desborda */
+          text-overflow: ellipsis;
+          /* Muestra "..." si el texto es demasiado largo */
+        }
+      }
+    }
+  }
+
+  &.small {
+    table {
+      thead {
+        th {
+          padding: 4px;
+          font-size: 12px !important;
+        }
+      }
+
+      tbody {
+        td {
+          font-size: 12px !important;
+          padding: 4px;
+          line-height: normal;
+        }
+      }
+
+      // Para la fila de buscadores
+      td {
+        font-size: 12px !important;
+        padding: 4px;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    th {
+      height: 36px !important;
+      padding: 0 8px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0%;
+      color: #4b4b4b;
+      user-select: none;
+
+      .cabecera-column {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 4px;
+
+        white-space: nowrap;
+        /* Evita que el texto se divida en varias líneas */
+        overflow: hidden;
+        /* Oculta el contenido que se desborda */
+        text-overflow: ellipsis;
+        /* Muestra "..." si el texto es demasiado largo */
+      }
+    }
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+  }
+
+  tbody {
+    z-index: 2;
+
+    tr {
+      td {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0%;
+        color: #504f4e;
+        box-shadow: none !important;
+      }
+
+      &:nth-child(even):not(.row-selected):not(:hover):not(.no-data):not(
+          .no-item
+        ) {
+        td {
+          // background-color: #e0e0e033;
+          background-color: #f9f9f9;
+        }
+      }
+    }
+
+    tr:hover:not(.no-data):not(.no-item) {
+      td {
+        background-color: #fff8f1;
+      }
+    }
+
+    tr.row-selected td {
+      background-color: #ffeee5 !important;
+    }
+
+    tr.no-data {
+      height: 100px !important;
+
+      &.small {
+        height: 50px !important;
+      }
+
+      td {
+        text-align: center;
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 20px;
+        color: #495057;
+        box-shadow: none !important; // también eliminar sombra aquí
+      }
+    }
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    background-color: #ffffff;
+  }
+
+  // Solo bordes arriba y abajo para los <th> del thead
+  thead th {
+    background-color: #f8f9fa;
+    box-shadow: inset 0 1px 0 var(--table-border-color),
+      /* sombra arriba */ inset 0 -1px 0 var(--table-border-color),
+      /* sombra abajo */ inset 1px 0 0 transparent,
+      /* sin sombra derecha */ inset -1px 0 0 transparent;
+    /* sin sombra izquierda */
+  }
+
+  // /* Quitar borde izquierdo de la primera columna */
+  // th:first-child,
+  // td:first-child {
+  //   box-shadow: inset 0 0.5px 0 #cfcece,
+  //     /* sombra arriba */
+  //     inset 0 -0.5px 0 #cfcece,
+  //     /* sombra abajo */
+  //     inset 0.5px 0 0 transparent,
+  //     /* sombra derecha */
+  //     inset -0.5px 0 0 #cfcece;
+  //   /* sombra izquierda */
+  // }
+
+  // // /* Quitar borde derecho de la última columna */
+  // th:last-child,
+  // td:last-child {
+  //   box-shadow: inset 0 0.5px 0 #cfcece,
+  //     /* sombra arriba */
+  //     inset 0 -0.5px 0 #cfcece,
+  //     /* sombra abajo */
+  //     inset 0.5px 0 0 #cfcece,
+  //     /* sombra derecha */
+  //     inset -0.5px 0 0 transparent;
+  //   /* sombra izquierda */
+  // }
+
+  th:first-child:last-child,
+  td:first-child:last-child {
+    box-shadow: inset 0 1px 0 var(--table-border-color),
+      inset 0 -1px 0 var(--table-border-color), inset 1px 0 0 transparent,
+      inset -1px 0 0 transparent;
+  }
+}

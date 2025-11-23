@@ -12,7 +12,61 @@
     </div>
 
     <div class="item">
-      <app-select type ="secondary" placeholder="Seleccione Empleado"></app-select>
+      <app-select type="secondary" placeholder="Seleccione Empleado"></app-select>
     </div>
+  </div>
+  <div class="accion">
+    <app-button leftIcon="assets/icons/import-data.svg" text="Importar datos"></app-button>
+    <app-button leftIcon="assets/icons/download.svg" text="Exportar datos"></app-button>
+  </div>
+  <div class="table-scroll-container resize" id="tableContainer">
+    <table >
+      <thead>
+        <tr>
+          @for (column of columns(); track $index) {
+          <th [class]="column.name"
+              [ngStyle]="{'width.px': column.minWidth }">
+            <div class="cabecera-column">
+              {{ column.label }}
+            </div>
+            <!-- -->
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of data(); track $index; let index1 =$index){
+        <tr>
+          @for (column of columns(); track $index) {
+          <td [class]="column.name">
+            @switch (column.name) { @case ('nombre') {
+            {{ row.nombre }}
+            } @case ('telefono') {
+            {{ row.telefono }}
+            } @case ('trabajador') {
+            {{ row.trabajador }}
+            } @case ('fecharegistro') {
+            {{ row.fecharegistro }}
+            } @case ('evento') {
+            {{ row.evento }}
+            } @case ('acciones') {
+            <app-button size="small" text="Editar"></app-button>
+            <app-button size="small" text="Eliminar"></app-button>
+            } }
+          </td>
+
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="paginacion-container">
+    <paginado-tabla
+      [currentPage]="page()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    >
+    </paginado-tabla>
   </div>
 </div>
