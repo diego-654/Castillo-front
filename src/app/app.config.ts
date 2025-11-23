@@ -15,6 +15,10 @@ import { EventoDatasourceImpl } from '@features/evento/data/datasources/evento.d
 import { EventoRepositoryImpl } from '@features/evento/data/repositories/evento.repository.impl';
 import { EventoDatasource } from '@features/evento/domain/datasources/evento.datasource';
 import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
+import { InteresadosRepositoryImpl } from '@features/interesados/data/repositories/interesados.repository.impl';
+import { InteresadosRepository } from '@features/interesados/domain/repositories/interesados.repository';
+import { InteresadosDataSource } from '@features/interesados/domain/datasources/interesados.datasource';
+import { InteresadosDataSourcesImp } from '@features/interesados/data/datasources/interesados.datasources.imp';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +33,8 @@ export const appConfig: ApplicationConfig = {
     {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},
     {provide: EventoRepository, useClass: EventoRepositoryImpl},
     {provide: EventoDatasource, useClass: EventoDatasourceImpl},
+    {provide: InteresadosRepository, useClass: InteresadosRepositoryImpl},
+    {provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp},
   ]
 };
 

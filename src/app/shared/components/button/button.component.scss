@@ -34,7 +34,7 @@ button {
     height: var(--form-height-small);
     font-size: 16px;
     font-weight: 500;
-    padding: 0 20px;
+    //padding: 0 20px;
   }
 
   &.medium {
@@ -120,7 +120,7 @@ button {
   }
 
   &.tertiary {
-    background-color: #ffffff;
+    background-color: transparent;
     color: #222222;
 
     .icon {
@@ -128,7 +128,7 @@ button {
     }
 
     &:hover {
-      background-color: #d6d6d6;
+      background-color: transparent;
 
       .icon {
         background-color: #817f7e;

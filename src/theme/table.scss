@@ -7,6 +7,7 @@
   position: relative;
   border: 1px solid var(--table-border-color);
 
+
   &::-webkit-scrollbar {
     width: 6px;
     height: 7.5px;
@@ -88,6 +89,7 @@
         font-size: 12px !important;
         padding: 4px;
         line-height: normal;
+
       }
     }
   }
@@ -105,7 +107,7 @@ table {
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0%;
-      color: #4b4b4b;
+      color: #6B7280;
       user-select: none;
 
       .cabecera-column {
@@ -139,7 +141,7 @@ table {
         font-size: 14px;
         line-height: 20px;
         letter-spacing: 0%;
-        color: #504f4e;
+        color: #000000;
         box-shadow: none !important;
       }
 
@@ -148,7 +150,7 @@ table {
         ) {
         td {
           // background-color: #e0e0e033;
-          background-color: #f9f9f9;
+          background-color: #f3f3f5;
         }
       }
     }
@@ -183,9 +185,8 @@ table {
 
   th,
   td {
-    padding: 8px;
     text-align: left;
-    background-color: #ffffff;
+    background-color: #f9fafb;
   }
 
   // Solo bordes arriba y abajo para los <th> del thead
@@ -230,4 +231,7 @@ table {
       inset 0 -1px 0 var(--table-border-color), inset 1px 0 0 transparent,
       inset -1px 0 0 transparent;
   }
+}
+table td {
+  border-bottom: 1px solid #000000;
 }
