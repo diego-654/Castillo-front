@@ -2,6 +2,7 @@
 
 import { Injectable } from "@angular/core";
 import { SocioDatasource } from "@features/socio/domain/datasources/socio.datasource";
+import { CrearMiembroRequest } from "@features/socio/domain/models/crear-miembro.request.model";
 import { ListaMiembrosActivosRequest } from "@features/socio/domain/models/lista-miembros-activos-request.model";
 import { ListaMiembrosActivos, ListaMiembrosActivosResponse } from "@features/socio/domain/models/lista-miembros-activos-response.model";
 import { map, Observable, timer } from "rxjs";
@@ -29,6 +30,14 @@ export class SocioDatasourceImpl implements SocioDatasource {
           });
         }
         return { lista };
+      })
+    );
+  }
+
+  crearMiembro(request: CrearMiembroRequest): Observable<void> {
+    return timer(200).pipe(
+      map(() => {
+        console.log("crear miembro", request);
       })
     );
   }

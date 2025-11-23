@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { celularValidator } from '@core/validators/celular.validator';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
@@ -9,8 +9,8 @@ import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component
   imports: [
     SvgIconComponent,
     ButtonComponent,
-
-  ],
+    ɵInternalFormsSharedModule
+],
   templateUrl: './formulario-socio.html',
   styleUrl: './formulario-socio.scss',
 })

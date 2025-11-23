@@ -4,6 +4,26 @@
     <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
   </div>
 
+  <div class="model-body">
+    <div class="form">
+      <app-input formControlName="cliente" placeholder="Nombres"></app-input>
+    </div>
+    <div class="form form-1">
+      <app-input formControlName="celular" placeholder="Celular"></app-input>
+      <app-date-picker formControlName="fechaNacimiento" placeholder="dd/mm/aaaa"></app-date-picker>
+    </div>
+    <div class="form">
+      <app-input formControlName="email" placeholder="Email"></app-input>
+    </div>
+    <div class="form">
+      <app-select formControlName="membresia" placeholder="Membresia"></app-select>
+    </div>
+    <div class="form form-1">
+      <app-date-picker formControlName="fechaInicio" placeholder="dd/mm/aaaa"></app-date-picker>
+      <app-select formControlName="estado" placeholder="Estado"></app-select>
+    </div>
+  </div>
+
   <div class="acciones">
     <app-button
       class="btn-popup"

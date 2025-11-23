@@ -30,6 +30,17 @@
     flex-direction: column;
     width: 400px;
 
+    .form {
+
+      display: grid;
+      grid-template-columns: 1fr;
+
+      &.form-1 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
   }
 
 
