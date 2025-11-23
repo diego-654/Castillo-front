@@ -10,17 +10,6 @@ export const INTERESADOS_ROUTES = {
         import('@features/interesados/presentation/pages/datos-obtenidos/datos-obtenidos'),
     },
     {
-      path: 'formulario',
-      loadComponent: () => import('@features/interesados/presentation/pages/formulario/formulario'),
-    },
-    {
-      path: 'historial-formulario',
-      loadComponent: () =>
-        import(
-          '@features/interesados/presentation/pages/historial-formulario/historial-formulario'
-        ),
-    },
-    {
       path: '**',
       redirectTo: 'datos-obtenidos',
     },

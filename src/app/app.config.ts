@@ -23,6 +23,10 @@ import { InteresadosRepositoryImpl } from '@features/interesados/data/repositori
 import { InteresadosRepository } from '@features/interesados/domain/repositories/interesados.repository';
 import { InteresadosDataSource } from '@features/interesados/domain/datasources/interesados.datasource';
 import { InteresadosDataSourcesImp } from '@features/interesados/data/datasources/interesados.datasources.imp';
+import { FinanzasDatasourceImpl } from '@features/finanzas/data/datasources/finanza.datasource.impl';
+import { FinanzasRepositoryImpl } from '@features/finanzas/data/repositories/finanza.repository.impl';
+import { FinanzasDatasource } from '@features/finanzas/domain/datasources/finanzas.datasource';
+import { FinanzasRepository } from '@features/finanzas/domain/repositories/finanzas.repository';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -41,6 +45,8 @@ export const appConfig: ApplicationConfig = {
     {provide: SocioDatasource, useClass: SocioDatasourceImpl},
     {provide: InteresadosRepository, useClass: InteresadosRepositoryImpl},
     {provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp},
+    {provide: FinanzasRepository, useClass: FinanzasRepositoryImpl},
+    {provide: FinanzasDatasource, useClass: FinanzasDatasourceImpl},
   ]
 };
 

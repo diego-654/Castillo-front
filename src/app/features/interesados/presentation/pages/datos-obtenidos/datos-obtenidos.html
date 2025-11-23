@@ -52,8 +52,14 @@
             <div class="action">
               <app-button size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
               <app-button
+                (click)="eliminarDatoObtenido(row)"
                 size="small"
                 leftIcon="assets/icons/trash.svg"
+                type="tertiary"
+              ></app-button>
+              <app-button
+                size="small"
+                leftIcon="assets/icons/manos.svg"
                 type="tertiary"
               ></app-button>
             </div>

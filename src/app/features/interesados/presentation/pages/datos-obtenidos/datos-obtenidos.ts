@@ -58,13 +58,28 @@ export default class DatosObtenidos {
         next: (response) => {
           this.data.set(response.lista);
           this.totalItems.set(response.paginacion.total);
-    //      this.totalPages.set(response.paginacion.paginasTotal);
+          this.totalPages.set(response.paginacion.paginasTotal);
           this.utilService.dismissLoader();
         },
         error: (error) => {
           this.utilService.dismissLoader();
         },
       })
+  }
+    async eliminarDatoObtenido(row: InteresadoData) {
+        this.interesadosRepository.eliminarInteresado(row.id).subscribe({
+          next: (response) => {
+            this.resetListar();
+          },
+          error: (error) => {
+            this.utilService.dismissLoader();
+          },
+        })
+    }
+
+        resetListar() {
+    this.page.set(1);
+    this.listar();
   }
 
   onPageChange(newPage: number) {

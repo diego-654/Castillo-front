@@ -1,0 +1,71 @@
+.container {
+  padding-top: var(--header-height-1);
+
+  .header {
+    padding: 32px 24px 0 24px;
+    background-color: var(--backgroud-outlet-color);
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0px;
+    left: var(--sidebar-width);
+    height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .title {
+      font-size: 31px;
+      font-weight: 400;
+      line-height: 120%;
+      color: #6A3717;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 120%;
+      color: #000000;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: auto;
+      background-color: #f3f3f5;
+      padding: 5px 10px;
+      border-radius: 10px;
+      justify-content: center;
+
+      .tab-link {
+        height: 50px;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 120%;
+        color: #000000;
+        text-decoration: none;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        &.active {
+          background-color: #ffffff;
+          border-radius: 10px;
+          border: none;
+        }
+
+        .tab-icon {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+.router-outlet {
+  padding: 24px;
+}

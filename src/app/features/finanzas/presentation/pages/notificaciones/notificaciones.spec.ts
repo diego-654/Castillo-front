@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistorialFormulario } from './historial-formulario';
+import { Notificaciones } from './notificaciones';
 
-describe('HistorialFormulario', () => {
-  let component: HistorialFormulario;
-  let fixture: ComponentFixture<HistorialFormulario>;
+describe('Notificaciones', () => {
+  let component: Notificaciones;
+  let fixture: ComponentFixture<Notificaciones>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HistorialFormulario]
+      imports: [Notificaciones]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HistorialFormulario);
+    fixture = TestBed.createComponent(Notificaciones);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

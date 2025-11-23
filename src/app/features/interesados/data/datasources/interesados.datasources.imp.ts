@@ -42,4 +42,11 @@ export class InteresadosDataSourcesImp implements InteresadosDataSource {
       })
     );
   }
+  eliminarInteresado(id: number): Observable<void> {
+    return timer(1000).pipe(
+      map(() => {
+        console.log('eliminar interesado');
+      })
+    );
+  }
 }

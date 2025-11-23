@@ -5,6 +5,8 @@ import { EventoDatasource } from "@features/evento/domain/datasources/evento.dat
 import { EventoRepository } from "@features/evento/domain/repositories/evento.repository";
 import { Observable } from "rxjs";
 import { FormularioEventoRequest } from "@features/evento/domain/models/formulario-evento-request.model";
+import { ListarHistorialFormularioRequest } from "@features/evento/domain/models/listar-historial-formulario-request.model";
+import { ListarHistorialFormularioResponse } from "@features/evento/domain/models/listar-historial-formulario-response.model";
 
 @Injectable({ providedIn: 'root' })
 export class EventoRepositoryImpl implements EventoRepository {
@@ -15,5 +17,10 @@ export class EventoRepositoryImpl implements EventoRepository {
   guardarFormulario(formulario: FormularioEventoRequest): Observable<void> {
     return this.dataSource.guardarFormulario(formulario);
   }
-
+  listarHistorialFormulario(request: ListarHistorialFormularioRequest): Observable<ListarHistorialFormularioResponse> {
+    return this.dataSource.listarHistorialFormulario(request);
+  }
+  eliminarHistorialFormulario(id: number): Observable<void> {
+    return this.dataSource.eliminarHistorialFormulario(id);
+  }
 }

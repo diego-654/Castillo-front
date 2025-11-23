@@ -7,7 +7,6 @@
   position: relative;
   border: 1px solid var(--table-border-color);
 
-
   &::-webkit-scrollbar {
     width: 6px;
     height: 7.5px;
@@ -89,7 +88,6 @@
         font-size: 12px !important;
         padding: 4px;
         line-height: normal;
-
       }
     }
   }
@@ -102,13 +100,14 @@ table {
   thead {
     th {
       height: 36px !important;
-      padding: 0 8px;
+      //padding: 0 8px;
       font-weight: 500;
       font-size: 14px;
       line-height: 20px;
       letter-spacing: 0%;
-      color: #6B7280;
+      color: #6b7280;
       user-select: none;
+      text-align: center;
 
       .cabecera-column {
         display: flex;
@@ -145,9 +144,7 @@ table {
         box-shadow: none !important;
       }
 
-      &:nth-child(even):not(.row-selected):not(:hover):not(.no-data):not(
-          .no-item
-        ) {
+      &:nth-child(even):not(.row-selected):not(:hover):not(.no-data):not(.no-item) {
         td {
           // background-color: #e0e0e033;
           background-color: #f3f3f5;
@@ -191,14 +188,13 @@ table {
 
   // Solo bordes arriba y abajo para los <th> del thead
   thead th {
-    background-color: #f8f9fa;
+    background-color: #F3F3F5;
     box-shadow: inset 0 1px 0 var(--table-border-color),
       /* sombra arriba */ inset 0 -1px 0 var(--table-border-color),
       /* sombra abajo */ inset 1px 0 0 transparent,
       /* sin sombra derecha */ inset -1px 0 0 transparent;
     /* sin sombra izquierda */
   }
-
   // /* Quitar borde izquierdo de la primera columna */
   // th:first-child,
   // td:first-child {
@@ -227,9 +223,8 @@ table {
 
   th:first-child:last-child,
   td:first-child:last-child {
-    box-shadow: inset 0 1px 0 var(--table-border-color),
-      inset 0 -1px 0 var(--table-border-color), inset 1px 0 0 transparent,
-      inset -1px 0 0 transparent;
+    box-shadow: inset 0 1px 0 var(--table-border-color), inset 0 -1px 0 var(--table-border-color),
+      inset 1px 0 0 transparent, inset -1px 0 0 transparent;
   }
 }
 table td {

@@ -8,4 +8,5 @@ export abstract class InteresadosRepository {
   abstract listarInteresados(
     request: ListarInteresadosRequest
   ): Observable<ListarInteresadosResponse>;
+  abstract eliminarInteresado(id: number): Observable<void>;
 }

@@ -12,4 +12,7 @@ export class InteresadosRepositoryImpl implements InteresadosRepository {
   listarInteresados(request: ListarInteresadosRequest): Observable<ListarInteresadosResponse> {
     return this.dataSource.listarInteresados(request);
   }
+  eliminarInteresado(id: number): Observable<void> {
+    return this.dataSource.eliminarInteresado(id);
+  }
 }

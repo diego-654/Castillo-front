@@ -1,4 +1,4 @@
-export interface ListarInteresadosRequest {
+export interface ListarFacturacionRequest {
   paginacion: {
     paginaNro: number;
     paginaTamanio: number;
