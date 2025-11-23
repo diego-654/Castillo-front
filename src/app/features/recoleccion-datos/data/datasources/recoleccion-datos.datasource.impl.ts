@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RecoleccionDatosDatasource } from "@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources";
 import { EventoFormularioResponse } from "@features/recoleccion-datos/domain/models/evento-formulario-response.model";
+import { FormularioClienteRequest } from "@features/recoleccion-datos/domain/models/formulario-cliente-request.model";
 import { FormularioClienteResponse, TipoInputType } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
 import { map, Observable, timer } from "rxjs";
 
@@ -21,6 +22,7 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                 {
                   label: 'Nombres',
                   type: TipoInputType.TEXT,
+                  isRequired: true,
                 },
                 {
                   label: 'Apellidos',
@@ -115,6 +117,15 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
           },
         ],
       }))
+    );
+  }
+
+
+  guardarFormulario(formulario: FormularioClienteRequest): Observable<void> {
+    return timer(200).pipe(
+      map(() => {
+        console.log("guardar formulario", formulario);
+      })
     );
   }
 

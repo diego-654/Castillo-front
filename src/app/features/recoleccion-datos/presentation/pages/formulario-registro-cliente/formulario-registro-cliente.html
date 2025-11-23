@@ -6,59 +6,52 @@
     <div class="header__formulario__title">Formulario de Registro al cliente</div>
   </div>
 
-  @if (formulario() ) {
+  @if (formulario() && form ) {
   <ng-container>
-    <div class="content__formulario">
+    <div class="content__formulario" [formGroup]="form">
       @for (item of formulario()?.lista; track $index) { @if (item.typeFormulario) {
       <div class="formulario__title">{{ item.typeFormulario }}</div>
       }
 
       <div class="formulario__inputs">
         @for (inputs of item.campos.lista; track $index) {
+
         <div class="input-container">
+          @if ( inputs.type != typeInput.BOOLEAN || (inputs.type == typeInput.BOOLEAN &&
+          inputs.extras == null)) {
           <div class="formulario__inputs__title">{{ inputs.label }}</div>
-          @if (inputs.type == typeInput.TEXT) {
-
-          <!-- texto fijo -->
-          <app-input size="small" [placeholder]="' Ingrese su ' + inputs.label"></app-input>
-
-          }
-          <!--  -->
-          @else if(inputs.type == typeInput.NUMBER){
+          } @if (inputs.type == typeInput.TEXT) {
+          <app-input
+            size="small"
+            [formControlName]="formatoNombre(inputs.label)"
+            [placeholder]="'Ingrese su ' + inputs.label"
+          ></app-input>
+          } @else if(inputs.type == typeInput.NUMBER) {
           <app-input-number
             size="small"
-            [placeholder]="' Ingrese su ' + inputs.label"
-            (valueChange)="guardarRespuesta(inputs.label, $event)"
+            [formControlName]="formatoNombre(inputs.label)"
+            [placeholder]="'Ingrese su ' + inputs.label"
           ></app-input-number>
-          }
-          <!--  -->
-          @else if (inputs.type == typeInput.DATE) {
+          } @else if(inputs.type == typeInput.DATE) {
           <app-date-picker
             size="small"
+            [formControlName]="formatoNombre(inputs.label)"
             placeholder="dd/mm/aaa"
-            (valueChange)="guardarRespuesta(inputs.label, $event)"
           ></app-date-picker>
-          }
-          <!--  -->
-          @else if (inputs.type == typeInput.BOOLEAN && !inputs.extras) {
+          } @else if (inputs.type == typeInput.BOOLEAN && !inputs.extras) {
           <app-select
-            (valueChange)="guardarRespuesta(inputs.label, $event)"
+            [formControlName]="formatoNombre(inputs.label)"
             placeholder="Seleccionar"
             size="small"
           >
             @for (option of options(); track $index) {
-            <app-option [value]="option.value">
-              {{ option.label }}
-            </app-option>
+            <app-option [value]="option.value">{{ option.label }}</app-option>
             }
           </app-select>
-
-          }
-          <!--  -->
-          @else if (inputs.type == typeInput.BOOLEAN && inputs.extras) {
+          } @else if (inputs.type == typeInput.BOOLEAN && inputs.extras) {
           <div class="terminos-container">
             <div class="terminos">
-              <app-checkbox (valueChange)="guardarRespuesta(inputs.label, $event)"></app-checkbox>
+              <app-checkbox [formControlName]="formatoNombre(inputs.label)"></app-checkbox>
               <span class="termino-text">{{ inputs.label }}</span>
             </div>
             <div class="termino-text2">
@@ -67,15 +60,15 @@
           </div>
           }
         </div>
-        <!--  -->
+
         }
       </div>
-      <!--  -->
+
       }
 
       <div class="accion">
-        <app-button size="large" type="secondary" text="Cancelar"></app-button>
-        <app-button size="large" text="Guardar"></app-button>
+        <app-button size="large" type="secondary" text="Cancelar" (click)="cancelar()"></app-button>
+        <app-button size="large" text="Guardar" (click)="guardarFormulario()"></app-button>
       </div>
     </div>
   </ng-container>

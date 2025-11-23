@@ -1,5 +1,7 @@
 import { Component, inject, signal, input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormularioClienteRequest } from '@features/recoleccion-datos/domain/models/formulario-cliente-request.model';
 import { FormularioClienteResponse, TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
 import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -33,6 +35,7 @@ export default class FormularioRegistroCliente {
 
   readonly recoleccionDatosRepository = inject(RecoleccionDatosRepository);
   readonly utilService = inject(UtilService);
+  readonly router = inject(Router);
 
   formulario = signal<FormularioClienteResponse | null>(null);
   typeInput = TipoInputType;
@@ -40,6 +43,9 @@ export default class FormularioRegistroCliente {
   // Membresía
   options = signal<Option[]>(optionsData);
   option = signal<boolean | null>(null);
+
+  //form
+  form: FormGroup = new FormGroup({});
 
 
   ngOnInit() {
@@ -55,7 +61,7 @@ export default class FormularioRegistroCliente {
       );
 
       this.formulario.set(res);
-
+      this.crearFormulario(res);
 
       this.utilService.dismissLoader();
     } catch (error) {
@@ -68,38 +74,92 @@ export default class FormularioRegistroCliente {
     this.option.set(option.value);
   }
 
-  respuestas = signal<{ [key: string]: any }>({});
+  crearFormulario(formulario: FormularioClienteResponse) {
+    this.form = new FormGroup({});
 
+    formulario.lista.forEach((seccion) => {
+      seccion.campos.lista.forEach((campo) => {
+        const nombreControl = this.formatoNombre(campo.label);
 
-  guardarRespuesta(label: string, valor: any) {
-    const key = this.formatoNombre(label);
+        let control: FormControl;
 
-    this.respuestas.update((prev) => ({
-      ...prev,
-      [key]: valor,
-    }));
+        switch (campo.type) {
+          case TipoInputType.DATE:
+            control = new FormControl<Date | null>(null, {
+              validators: campo.isRequired ? [Validators.required] : [],
+            });
+            break;
+
+          case TipoInputType.NUMBER:
+            control = new FormControl<number | null>(null, {
+              validators: campo.isRequired ? [Validators.required] : [],
+            });
+            break;
+
+          case TipoInputType.BOOLEAN:
+            control = new FormControl<boolean>(false, {
+              validators: campo.isRequired ? [Validators.required] : [],
+            });
+            break;
+
+          default: // TEXT
+            control = new FormControl<string | null>(null, {
+              validators: campo.isRequired ? [Validators.required] : [],
+            });
+        }
+
+        this.form.addControl(nombreControl, control);
+      });
+    });
   }
+
 
 
   guardarFormulario() {
-    const request = {
-      id: this.formulario()?.id,
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const request: FormularioClienteRequest = {
+      id: this.formulario()?.id ?? 0,
       lista: this.formulario()?.lista.map((seccion) => ({
-        ...seccion,
+        typeFormulario: seccion.typeFormulario,
         campos: {
           lista: seccion.campos.lista.map((campo) => ({
-            ...campo,
-            respuesta: this.respuestas()[this.formatoNombre(campo.label)] ?? null
+            label: campo.label,
+            extras: campo.extras,
+            isRequired: campo.isRequired,
+            type: campo.type,
+            respuesta: this.form.value[this.formatoNombre(campo.label)] ?? null
           }))
         }
-      }))
+      })) ?? []
     };
 
-    console.log("JSON FINAL", request);
+    this.recoleccionDatosRepository.guardarFormulario(request).subscribe({
+      next: () => {
+        // this.dialogService.showSnackBar('Formulario guardado');
+      },
+      error: (error) => {
+        // this.dialogService.showSnackBar('Error al guardar formulario');
+      }
+    });
+
+    console.log('JSON FINAL', request);
   }
 
-  formatoNombre(label: string): string {
-    return label.toLowerCase().trim();
+  cancelar() {
+    this.router.navigate(['/recoleccion-datos']);
+  }
+
+
+  formatoNombre(nombre: string | undefined): string {
+    if (!nombre) return '';
+    return nombre
+      .toLowerCase()
+      .trim()
+      .replaceAll(' ', '_'); // mucho mejor para evitar colisiones
   }
 
 }

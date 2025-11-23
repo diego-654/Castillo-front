@@ -5,6 +5,7 @@ import { TipoInputType } from '@features/recoleccion-datos/domain/models/formula
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { DialogRef } from '@shared/components/plugins/dialog/ref/dialog-ref';
 import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
+import { SwitchComponent } from '@shared/components/switch/switch.component';
 import { TextAreaComponent } from '@shared/components/text-area/text-area.component';
 
 @Component({
@@ -14,7 +15,9 @@ import { TextAreaComponent } from '@shared/components/text-area/text-area.compon
     SvgIconComponent,
     TextAreaComponent,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SwitchComponent,
+    CommonModule
   ],
   templateUrl: './agregar-formulario.html',
   styleUrl: './agregar-formulario.scss',
@@ -27,6 +30,7 @@ export class AgregarFormulario {
   tipoInput = TipoInputType;
 
   tipo = signal<TipoInputType>(TipoInputType.TEXT);
+  isRequired = signal<boolean>(false);
 
   form = new FormGroup<{
     pregunta: FormControl<string>;
@@ -37,6 +41,10 @@ export class AgregarFormulario {
 
   handleTipo(tipo: TipoInputType) {
     this.tipo.set(tipo);
+  }
+
+  handleIsRequired(isRequired: boolean) {
+    this.isRequired.set(isRequired);
   }
 
   cancelar() {
@@ -53,7 +61,7 @@ export class AgregarFormulario {
 
     this.dialogRef.close({
       pregunta: raw.pregunta,
-      formControlName: this.tipo().toString().toLowerCase(),
+      isRequired: this.isRequired(),
       tipo: this.tipo(),
     });
   }
@@ -67,10 +75,11 @@ export type PopupAgregarFormulario = DialogRef<
 
 export interface Pregunta {
   pregunta: string;
-  formControlName: string;
+  isRequired: boolean;
   tipo: TipoInputType;
 }
 
+// TIPO PREGUNTA
 
 export interface TipoPregunta {
   label: string;

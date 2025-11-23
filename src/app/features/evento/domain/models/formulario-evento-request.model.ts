@@ -1,35 +1,27 @@
 
 
 export interface FormularioEventoRequest {
-  readonly id: number;
-  readonly lista: FormularioClienteResponseInputs[];
+  id: number;
+  lista: FormularioClienteRequestItem[];
 }
 
-export interface FormularioClienteResponseInputs {
-  readonly typeFormulario?: string;
-  readonly campos: ListTypeInputs;
+export interface FormularioClienteRequestItem {
+  typeFormulario?: string;
+  campos: {
+    lista: FormularioClienteRequestCampo[];
+  };
 }
 
-export interface ListTypeInputs {
-  readonly lista: TipoInput[];
-}
-
-export interface TipoInput {
-  readonly label?: string;
-  readonly labelExtra?: string;
-  readonly formControlName?: string;
-  readonly type: TipoInputType;
+export interface FormularioClienteRequestCampo {
+  label: string;
+  extras?: string;
+  isRequired?: boolean;
+  type: TipoInputType;
 }
 
 export enum TipoInputType {
   TEXT,
   NUMBER,
   DATE,
-  BOOLEAN,
-}
-
-
-export interface OptionSelect {
-  readonly id: number;
-  readonly nombre: string;
+  BOOLEAN
 }

@@ -1,0 +1,19 @@
+<div class="container">
+  <div
+    class="switch-container"
+    [ngClass]="{
+      checked: internalValue(),
+      disabled: disabled(),
+      readonly: readonly()
+    }"
+    (click)="handleClick()"
+  >
+    <div class="circle"></div>
+  </div>
+
+  @if(label()){
+  <div class="label">
+    {{ label() }}
+  </div>
+  }
+</div>

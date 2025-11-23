@@ -1,0 +1,62 @@
+:host {
+  --width: 36px;
+  --height: 20px;
+  --circle-size: 16px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .switch-container {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: calc(var(--height) / 2);
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #d2d5da;
+    justify-content: start;
+
+    transition: all 0.25s ease;
+
+    .circle {
+      width: var(--circle-size);
+      height: var(--circle-size);
+      border-radius: 50%;
+      background-color: #fff;
+      transition: all 0.25s ease;
+
+      position: absolute;
+      left: calc((var(--height) - var(--circle-size)) / 2);
+    }
+
+    &.checked {
+      background-color: var(--primary);
+      .circle {
+        left: calc(
+          (var(--height) - var(--circle-size)) / 2 + var(--circle-size)
+        );
+      }
+    }
+
+    &.disabled,
+    &.readonly {
+      cursor: not-allowed;
+      background-color: #d2d5da !important;
+      .circle {
+        background-color: var(--form-background-color-disabled) !important;
+      }
+    }
+  }
+
+  .label {
+    font-size: var(--label-font-size);
+    color: var(--label-color);
+    font-weight: var(--label-font-weight);
+    line-height: var(--label-line-height);
+  }
+}

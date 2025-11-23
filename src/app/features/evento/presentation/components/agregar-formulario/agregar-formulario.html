@@ -28,6 +28,14 @@
       </div>
       }
     </div>
+    <div class="isRquired">
+      <app-switch
+        (valueChange)="handleIsRequired($event)"
+        [value]="isRequired()"
+        label="Pregunta obligatoria"
+        size="small"
+      ></app-switch>
+    </div>
   </div>
   <div class="acciones">
     <app-button

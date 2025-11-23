@@ -73,9 +73,18 @@
           letter-spacing: 0%;
         }
       }
+
+      .input-container:has(.terminos-container) {
+        grid-column: 1 / -1;
+      }
+
     }
 
     .terminos-container {
+
+      grid-column: 1/-1;
+      grid-row: 2/-1;
+
 
       .terminos {
         display: flex;

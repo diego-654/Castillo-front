@@ -59,7 +59,7 @@ export default class Formulario {
 
       clone.lista[indexGrupo].campos.lista.push({
         label: nuevaPregunta.pregunta,
-        formControlName: nuevaPregunta.formControlName,
+        isRequired: nuevaPregunta.isRequired,
         type: nuevaPregunta.tipo,
       });
 
@@ -72,7 +72,14 @@ export default class Formulario {
   }
 
   actualizarFormulario() {
-    this.eventoRepository.guardarFormulario(this.formulario()).subscribe();
+    this.eventoRepository.guardarFormulario(this.formulario()).subscribe({
+      next: () => {
+        // this.dialogService.showSnackBar('Formulario guardado');
+      },
+      error: (error) => {
+        // this.dialogService.showSnackBar('Error al guardar formulario');
+      }
+    });
   }
 
 }
