@@ -11,7 +11,7 @@
   <div
     class="trigger"
     #trigger
-    [ngClass]="[size()]"
+    [ngClass]="[size(),type()]"
     [class.disabled]="disabled() || readonly()"
     [class.multi]="multi()"
     [class.opened]="overlayRef?.hasAttached()"

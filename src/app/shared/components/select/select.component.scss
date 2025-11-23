@@ -21,8 +21,13 @@
 
   border-radius: var(--form-border-radius);
   border: var(--form-border);
-  background-color: var(--form-background-color);
 
+  &.primary {
+  background-color: var(--form-background-color);
+  }
+  &.secondary {
+    background-color: var(--form-background-color-white);
+  }
   cursor: pointer;
 
   display: flex;
