@@ -1,1 +1,42 @@
-<p>detalle-socio-layout works!</p>
+<div class="container">
+  <div class="header">
+    <div class="user">
+      <div class="atras">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          (click)="irAlFormulario()"
+        >
+          <path d="M10.06 12L11 11.06L7.94667 8L11 4.94L10.06 4L6.06 8L10.06 12Z" fill="black" />
+        </svg>
+      </div>
+      <div class="circle">
+        <span>JP</span>
+      </div>
+      <div class="details">
+        <div class="name">Juan Perez</div>
+        <div class="state">Activo</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <a
+        *ngFor="let tab of tabs(); let $index"
+        [routerLink]="tab.route"
+        class="tab-link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <img class="tab-icon" [src]="'assets/icons/' + tab.icon" alt="" />
+        {{ tab.label }}
+      </a>
+    </div>
+  </div>
+
+  <div class="router-outlet">
+    <router-outlet />
+  </div>
+</div>

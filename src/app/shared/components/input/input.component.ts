@@ -55,6 +55,8 @@ export class InputComponent implements ControlValueAccessor {
 
   type = input<'primary' | 'secondary'>('primary');
 
+  modePassword = input<boolean>(false);
+
   maxLength = input<number>();
   leftIcon = input<string>();
   rightIcon = input<string>();
@@ -219,4 +221,11 @@ export class InputComponent implements ControlValueAccessor {
     }
     return null;
   }
+
+  passwordVisible = signal<boolean>(false);
+
+  togglePasswordVisibility() {
+    this.passwordVisible.update(v => !v);
+  }
+
 }

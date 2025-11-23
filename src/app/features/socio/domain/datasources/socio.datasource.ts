@@ -5,6 +5,9 @@ import { ListaMiembrosActivosRequest } from "../models/lista-miembros-activos-re
 import { ListaMiembrosActivosResponse } from "../models/lista-miembros-activos-response.model";
 import { CrearMiembroRequest } from "../models/crear-miembro.request.model";
 import { ListarMembresiasResponse } from "../models/listar-membresias-response.model";
+import { ObtenerDatosMiembroResponse } from "../models/obtener-datos-miembro.response.model";
+import { ObtenerDatosMembresiaResponse } from "../models/obtener-datos-membresia.response";
+import { ObtenerDatosPagosResponse } from "../models/obtener-datos-pagos.respone";
 
 
 export abstract class SocioDatasource {
@@ -12,5 +15,8 @@ export abstract class SocioDatasource {
   abstract listaMiembrosActivos(request: ListaMiembrosActivosRequest): Observable<ListaMiembrosActivosResponse>;
   abstract crearMiembro(request: CrearMiembroRequest): Observable<void>;
   abstract listarMembresias(): Observable<ListarMembresiasResponse>;
+  abstract obtenerDatosMiembro(request: number): Observable<ObtenerDatosMiembroResponse>;
+  abstract obtenerDatosMembresia(request: number): Observable<ObtenerDatosMembresiaResponse>;
+  abstract obtenerDatosPagos(request: number): Observable<ObtenerDatosPagosResponse>;
 
 }

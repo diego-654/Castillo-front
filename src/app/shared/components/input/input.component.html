@@ -31,7 +31,7 @@
     (blur)="handleBlur()"
     [disabled]="disabled()"
     [name]="name()"
-    type="text"
+    [type]="modePassword() ? (passwordVisible() ? 'text' : 'password') : 'text'"
     [readonly]="readonly()"
     onwheel="this.blur()"
     (keydown)="keyPressed($event)"
@@ -45,9 +45,19 @@
   <div class="sufix">
     <app-svg-icon [path]="rightIcon()!" class="icon"></app-svg-icon>
   </div>
+  } @if (modePassword()) {
+  <!-- añadir cursor pointer -->
+  <div class="sufix" (click)="togglePasswordVisibility()" [style.cursor]="'pointer'">
+    <app-svg-icon
+      [path]="
+        passwordVisible() ? 'assets/icons/visibility_off.svg' : 'assets/icons/visibility_on.svg'
+      "
+      class="icon"
+    ></app-svg-icon>
+  </div>
   }
 </div>
-
+<!--  -->
 @if(errorMessage) {
 <div class="error">
   {{ errorMessage }}

@@ -101,6 +101,7 @@ export class FormularioSocio {
   }
 
   cancelar() {
+    this.dialogService.close(false);
 
   }
 

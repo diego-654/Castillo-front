@@ -6,6 +6,9 @@ import { CrearMiembroRequest } from "@features/socio/domain/models/crear-miembro
 import { ListaMiembrosActivosRequest } from "@features/socio/domain/models/lista-miembros-activos-request.model";
 import { ListaMiembrosActivosResponse } from "@features/socio/domain/models/lista-miembros-activos-response.model";
 import { ListarMembresiasResponse } from "@features/socio/domain/models/listar-membresias-response.model";
+import { ObtenerDatosMembresiaResponse } from "@features/socio/domain/models/obtener-datos-membresia.response";
+import { ObtenerDatosMiembroResponse } from "@features/socio/domain/models/obtener-datos-miembro.response.model";
+import { ObtenerDatosPagosResponse } from "@features/socio/domain/models/obtener-datos-pagos.respone";
 import { SocioRepository } from "@features/socio/domain/repositories/socio.repository";
 import { Observable } from "rxjs";
 
@@ -25,6 +28,18 @@ export class SocioRepositoryImpl implements SocioRepository {
 
   listarMembresias(): Observable<ListarMembresiasResponse> {
     return this.dataSource.listarMembresias();
+  }
+
+  obtenerDatosMiembro(request: number): Observable<ObtenerDatosMiembroResponse> {
+    return this.dataSource.obtenerDatosMiembro(request);
+  }
+
+  obtenerDatosMembresia(request: number): Observable<ObtenerDatosMembresiaResponse> {
+    return this.dataSource.obtenerDatosMembresia(request);
+  }
+
+  obtenerDatosPagos(request: number): Observable<ObtenerDatosPagosResponse> {
+    return this.dataSource.obtenerDatosPagos(request);
   }
 
 }

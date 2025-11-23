@@ -13,7 +13,7 @@ export const routes: Routes = [
       RECOLECCION_DATOS_ROUTES,
       INTERESADOS_ROUTES,
       EVENTOS_ROUTES,
-      SOCIOS_ROUTES
+      SOCIOS_ROUTES,
     ],
   },
 
