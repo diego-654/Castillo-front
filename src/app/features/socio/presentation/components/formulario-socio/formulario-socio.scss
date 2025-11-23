@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .title {
+      font-weight: 400;
+      font-style: 45 Book;
+      font-size: 20px;
+      line-height: 120%;
+      letter-spacing: 0%;
+      color: #6A3717;
+    }
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+  }
+
+
+  .popup-icon {
+    width: 48px;
+    height: 47px;
+    margin: 0 auto;
+  }
+
+  .acciones {
+    display: flex;
+    gap: 16px;
+
+    .btn-popup {
+      flex: 1;
+    }
+  }
+}

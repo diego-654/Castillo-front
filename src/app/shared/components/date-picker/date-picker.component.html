@@ -11,7 +11,7 @@
   #trigger
   class="trigger"
   (click)="openOverlay()"
-  [ngClass]="[size()]"
+  [ngClass]="[size(), type()]"
   [class.opened]="overlayRef?.hasAttached()"
   [class.disabled]="disabled()"
   [class.readonly]="readonly()"

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="modal-header">
+    <div class="title">Nuevo miembro</div>
+    <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  </div>
+
+  <div class="acciones">
+    <app-button
+      class="btn-popup"
+      (click)="cancelar()"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button class="btn-popup" text="Agregar" type="primary" size="small"></app-button>
+  </div>
+</div>

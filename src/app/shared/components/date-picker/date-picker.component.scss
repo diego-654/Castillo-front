@@ -24,7 +24,14 @@
   transition: all 0.2s ease;
   cursor: pointer;
 
-  background-color: #F3F3F5;
+  &.primary {
+    background-color: var(--form-background-color);
+  }
+
+  &.secondary {
+    background-color: var(--form-background-color-white);
+  }
+
 
   &.small {
     height: var(--form-height-small);
@@ -47,7 +54,14 @@
     color: #504f4e;
     outline: none;
 
-    background-color: #F3F3F5;
+    &.primary {
+      background-color: var(--form-background-color);
+    }
+
+    &.secondary {
+      background-color: var(--form-background-color-white);
+    }
+
     cursor: pointer;
 
     &::placeholder {

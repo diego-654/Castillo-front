@@ -1,0 +1,39 @@
+@for (miembro of listaMiembrosActivos(); track $index) {
+
+<div class="container_card">
+  <div class="header_card">
+    <div class="title">{{ miembro.nombre }}</div>
+    <div
+      class="estado"
+      [ngClass]="{
+        activo: miembro.estadoId == 1,
+        'no-activo': miembro.estadoId == 2
+      }"
+    >
+      {{ miembro.estado }}
+    </div>
+  </div>
+
+  <div class="content_card">
+    <div class="info">
+      <div class="info-item">
+        <div class="label">Email</div>
+        <div class="value">{{ miembro.email }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Celular</div>
+        <div class="value">{{ miembro.celular }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Membresia</div>
+        <div class="value">{{ miembro.membresia }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Fecha de inicio</div>
+        <div class="value">{{ miembro.fechaInicio }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+}

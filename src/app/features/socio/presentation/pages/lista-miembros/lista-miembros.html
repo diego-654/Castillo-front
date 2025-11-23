@@ -1,1 +1,39 @@
-<p>lista-miembros works!</p>
+<div class="container">
+  <div class="filtros">
+    <app-search-input
+      placeholder="Buscar por nombre, teléfono o email"
+      [(value)]="buscador"
+    ></app-search-input>
+    <app-select type="secondary" placeholder="Seleccione Evento"></app-select>
+    <app-date-picker
+      type="secondary"
+      label="Fecha inicio"
+      placeholder="dd/mm/aaaa"
+    ></app-date-picker>
+    <app-date-picker type="secondary" label="Fecha fin" placeholder="dd/mm/aaaa"></app-date-picker>
+  </div>
+
+  <div class="container_lista">
+    <div class="header_lista">
+      <span>Lista de Miembros Activos</span>
+      <div class="accciones">
+        <app-button
+          size="small"
+          (click)="formularioSocio()"
+          leftIcon="assets/icons/plus.svg"
+          text="Nuevo Socio"
+        ></app-button>
+        <app-button
+          size="small"
+          leftIcon="assets/icons/export.svg"
+          text="Exportar datos"
+        ></app-button>
+      </div>
+    </div>
+    <div class="content_lista">
+      <app-card-miembros-activos
+        [listaMiembrosActivos]="listaMiembros()"
+      ></app-card-miembros-activos>
+    </div>
+  </div>
+</div>

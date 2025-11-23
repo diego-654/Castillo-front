@@ -12,6 +12,10 @@ export const SOCIOS_ROUTES = {
           '@features/socio/presentation/pages/lista-miembros/lista-miembros'
         ),
     },
+    {
+      path: '**',
+      redirectTo: '',
+    }
   ],
 
 }

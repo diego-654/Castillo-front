@@ -56,7 +56,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     @Optional() @Host() @SkipSelf() private controlContainer: ControlContainer
-  ) {}
+  ) { }
 
   private twoDigitPipe = new TwoDigitPipe();
 
@@ -73,6 +73,8 @@ export class DatePickerComponent implements ControlValueAccessor {
   internalValue = signal<Date | null>(null);
 
   size = input<'small' | 'medium' | 'large'>('medium');
+  type = input<'primary' | 'secondary' | 'tertiary'>('primary');
+
   placeholder = input<string>('Selecciona');
 
   disabled = signal<boolean>(false);
@@ -210,9 +212,9 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.disabled.set(isDisabled);
   }
 
-  onChange: Function = () => {};
+  onChange: Function = () => { };
 
-  onTouched: Function = () => {};
+  onTouched: Function = () => { };
 
   get control(): FormControl<Date | null> {
     if (this.formControl()) {

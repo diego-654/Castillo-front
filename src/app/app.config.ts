@@ -15,6 +15,10 @@ import { EventoDatasourceImpl } from '@features/evento/data/datasources/evento.d
 import { EventoRepositoryImpl } from '@features/evento/data/repositories/evento.repository.impl';
 import { EventoDatasource } from '@features/evento/domain/datasources/evento.datasource';
 import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
+import { SocioDatasourceImpl } from '@features/socio/data/datasources/socio.datasource.impl';
+import { SocioRepositoryImpl } from '@features/socio/data/repositories/socio.repository.impl';
+import { SocioDatasource } from '@features/socio/domain/datasources/socio.datasource';
+import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +33,8 @@ export const appConfig: ApplicationConfig = {
     {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},
     {provide: EventoRepository, useClass: EventoRepositoryImpl},
     {provide: EventoDatasource, useClass: EventoDatasourceImpl},
+    {provide: SocioRepository, useClass: SocioRepositoryImpl},
+    {provide: SocioDatasource, useClass: SocioDatasourceImpl},
   ]
 };
 

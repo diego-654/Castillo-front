@@ -121,6 +121,8 @@ export default class FormularioRegistroCliente {
       return;
     }
 
+    this.utilService.showLoader();
+
     const request: FormularioClienteRequest = {
       id: this.formulario()?.id ?? 0,
       lista: this.formulario()?.lista.map((seccion) => ({
@@ -139,9 +141,11 @@ export default class FormularioRegistroCliente {
 
     this.recoleccionDatosRepository.guardarFormulario(request).subscribe({
       next: () => {
+        this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Formulario guardado');
       },
       error: (error) => {
+        this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Error al guardar formulario');
       }
     });

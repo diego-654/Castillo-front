@@ -12,6 +12,7 @@ import { DialogService } from '@shared/components/plugins/dialog';
 import { AgregarFormulario, Pregunta } from '../../components/agregar-formulario/agregar-formulario';
 import { FormularioEventoRequest } from '@features/evento/domain/models/formulario-evento-request.model';
 import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
+import { UtilService } from '@shared/components/services/util/util.service';
 
 @Component({
   selector: 'app-formulario',
@@ -31,6 +32,7 @@ export default class Formulario {
 
   dialogService = inject(DialogService);
   eventoRepository = inject(EventoRepository);
+  utilService = inject(UtilService);
 
   // Membresía
   options = signal<Option[]>(optionsData);
@@ -72,11 +74,15 @@ export default class Formulario {
   }
 
   actualizarFormulario() {
+    this.utilService.showLoader();
+
     this.eventoRepository.guardarFormulario(this.formulario()).subscribe({
       next: () => {
+        this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Formulario guardado');
       },
       error: (error) => {
+        this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Error al guardar formulario');
       }
     });

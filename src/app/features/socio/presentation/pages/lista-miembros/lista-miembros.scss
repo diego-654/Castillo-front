@@ -1,0 +1,39 @@
+.container {
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .filtros {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: end;
+    gap: 10px;
+
+    .search-input {
+      width: 300px;
+    }
+  }
+
+  .container_lista {
+
+    .header_lista {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 120%;
+        letter-spacing: 0%;
+      }
+
+      .accciones {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+
+}

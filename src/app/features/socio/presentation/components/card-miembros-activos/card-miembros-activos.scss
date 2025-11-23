@@ -1,0 +1,80 @@
+.container_card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  min-height: 102px;
+
+  .header_card {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+
+    .title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 120%;
+      letter-spacing: 0%;
+    }
+
+    .estado {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: 0%;
+      color: #6B7280;
+      height: 29px;
+      border-radius: 15px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+
+      &.activo {
+        background-color: #00A979;
+        color: #FFFFFF;
+      }
+
+      &.no-activo {
+        background-color: #EC6A64;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .content_card {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+
+      .info-item {
+
+        .label {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 120%;
+          letter-spacing: 0%;
+          color: #6B7280;
+          height: 29px;
+        }
+
+        .value {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 120%;
+          letter-spacing: 0%;
+        }
+      }
+    }
+  }
+
+}
