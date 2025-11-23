@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="modal-header">
+    <div class="title"></div>
+    <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  </div>
+  <div class="modal-body">
+    <div class="pregunta" [formGroup]="form">
+      <div class="title">Escriba la pregunta</div>
+      <app-text-area
+        [rows]="3"
+        placeholder="Escriba aquí la pregunta"
+        formControlName="pregunta"
+      ></app-text-area>
+    </div>
+    <div class="pregunta">
+      <div class="title">Seleccione el tipo de pregunta</div>
+    </div>
+    <div class="tipo-pregunta">
+      @for (item of tipoPregunta; track $index) {
+      <div
+        class="tipo__container"
+        [ngClass]="{
+          active: item.value == tipo()
+        }"
+        (click)="handleTipo(item.value)"
+      >
+        {{ item.label }}
+      </div>
+      }
+    </div>
+  </div>
+  <div class="acciones">
+    <app-button
+      class="btn-popup"
+      (click)="cancelar()"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      class="btn-popup"
+      (click)="aceptar()"
+      text="Agregar"
+      type="primary"
+      size="small"
+    ></app-button>
+  </div>
+</div>

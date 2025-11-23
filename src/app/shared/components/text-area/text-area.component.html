@@ -1,0 +1,26 @@
+@if(label()) {
+<div class="input-label">
+  {{ label() }}
+  @if(isRequired) {
+  <span>*</span>
+  }
+</div>
+}
+<textarea
+  [placeholder]="placeholder()"
+  [value]="internalValue()"
+  (input)="handleInput($event)"
+  (blur)="handleBlur()"
+  [disabled]="disabled()"
+  [name]="name()"
+  [rows]="rows()"
+  [readonly]="readonly()"
+  [ngClass]="type()"
+></textarea>
+
+@if(errorMessage) {
+<div class="error">
+  {{ errorMessage }}
+</div>
+
+}

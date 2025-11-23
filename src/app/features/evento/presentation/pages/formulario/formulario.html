@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="header__formulario">
+    <div class="header__formulario__icon">
+      <app-svg-icon path="assets/icons/user.svg" class="icon"></app-svg-icon>
+    </div>
+    <div class="header__formulario__title">Formulario de Registro al cliente</div>
+  </div>
+
+  <div class="content__formulario">
+    @for (item of formulario().lista; track $index) {
+    <div class="formulario_title_actions">
+      <div class="formulario__title">{{ item.typeFormulario }}</div>
+      <app-button
+        size="small"
+        type="tertiary"
+        iconRight="assets/icons/edit.svg"
+        (click)="openAgregarFormulario($index)"
+      ></app-button>
+    </div>
+
+    <div class="formulario__inputs">
+      @for (inputs of item.campos.lista; track $index) {
+      <div class="input-container">
+        <div class="formulario__inputs__title">{{ inputs.label }}</div>
+        @if (inputs.type == typeInput.TEXT) {
+
+        <!-- texto fijo -->
+        <app-input
+          size="small"
+          [placeholder]="' Ingrese su ' + inputs.label"
+          [readonly]="true"
+        ></app-input>
+
+        }@else if(inputs.type == typeInput.NUMBER){
+        <app-input-number
+          size="small"
+          [placeholder]="' Ingrese su ' + inputs.label"
+          [readonly]="true"
+        ></app-input-number>
+        }@else if (inputs.type == typeInput.DATE) {
+        <app-date-picker size="small" placeholder="dd/mm/aaa" [readonly]="true"></app-date-picker>
+        }
+      </div>
+      <!--  -->
+      }
+    </div>
+    <!--  -->
+    }
+    <!--  -->
+    <div class="formulario_title_actions">
+      <div class="formulario__title">Interés en Membresía</div>
+      <app-button size="small" type="tertiary" iconRight="assets/icons/edit.svg"></app-button>
+    </div>
+
+    <div class="formulario__inputs">
+      <app-select [readonly]="true" placeholder="Seleccionar" size="small">
+        @for (option of options(); track $index) {
+        <app-option [value]="option.value">
+          {{ option.label }}
+        </app-option>
+        }
+      </app-select>
+    </div>
+  </div>
+</div>
