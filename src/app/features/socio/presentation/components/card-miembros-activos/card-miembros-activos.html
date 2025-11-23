@@ -1,6 +1,6 @@
 @for (miembro of listaMiembrosActivos(); track $index) {
 
-<div class="container_card">
+<div class="container_card" (click)="irAlDetalle(miembro.id)">
   <div class="header_card">
     <div class="title">{{ miembro.nombre }}</div>
     <div

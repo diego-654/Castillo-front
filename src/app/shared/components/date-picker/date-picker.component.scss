@@ -26,10 +26,18 @@
 
   &.primary {
     background-color: var(--form-background-color);
+
+    input {
+      background-color: var(--form-background-color);
+    }
   }
 
   &.secondary {
     background-color: var(--form-background-color-white);
+
+    input {
+      background-color: var(--form-background-color-white);
+    }
   }
 
 

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="header">
+    <div class="title">Detalles de Membresia</div>
+  </div>
+  <div class="card">
+    <div class="body">
+      <div class="dato">
+        <div class="label">Tipo de Plan</div>
+        <div class="value">{{ detalleSocioMembresia()?.tipoPlan }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Monto Mensual</div>
+        <div class="value">{{ detalleSocioMembresia()?.montoMensual }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Fecha de Inicio</div>
+        <div class="value">{{ detalleSocioMembresia()?.fechaInicio }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Fecha de Vencimiento</div>
+        <div class="value">{{ detalleSocioMembresia()?.fechaVencimiento }}</div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="label">Renovación automática</div>
+      <div
+        class="value"
+        [ngClass]="{
+          active: detalleSocioMembresia()?.renovacionAutomatica,
+          'no-active': !detalleSocioMembresia()?.renovacionAutomatica
+        }"
+      >
+        {{ detalleSocioMembresia()?.renovacionAutomatica ? 'Activada' : 'Desactivada' }}
+      </div>
+    </div>
+  </div>
+  <div class="acciones">
+    <button class="btn cambiar">Cambiar Plan</button>
+    <button class="btn renovar">Renovar</button>
+    <button class="btn suspender">suspender</button>
+  </div>
+</div>

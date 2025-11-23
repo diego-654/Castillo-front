@@ -1,0 +1,37 @@
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ObtenerDatosPagosResponse } from '@features/socio/domain/models/obtener-datos-pagos.respone';
+import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
+import { firstValueFrom } from 'rxjs';
+
+@Component({
+  selector: 'app-detalle-socio-pagos',
+  imports: [],
+  templateUrl: './detalle-socio-pagos.html',
+  styleUrl: './detalle-socio-pagos.scss',
+})
+export default class DetalleSocioPagos {
+  socioRepository = inject(SocioRepository);
+  route = inject(ActivatedRoute);
+  detalleSocioPagos = signal<ObtenerDatosPagosResponse | null>(null);
+  socioId = signal<number>(0);
+
+  ngOnInit() {
+    this.obtenerIdSocio();
+  }
+
+  async obtenerIdSocio() {
+    const id = Number(this.route.snapshot.paramMap.get('id') ?? 0);
+    this.socioId.set(id);
+    this.obtenerDatosPagos();
+  }
+
+  async obtenerDatosPagos() {
+    const res = await firstValueFrom(
+      this.socioRepository.obtenerDatosPagos(this.socioId())
+    );
+    this.detalleSocioPagos.set(res);
+  }
+
+
+}
