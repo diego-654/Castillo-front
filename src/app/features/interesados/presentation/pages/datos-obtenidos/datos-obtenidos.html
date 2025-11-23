@@ -20,12 +20,11 @@
     <app-button leftIcon="assets/icons/download.svg" text="Exportar datos"></app-button>
   </div>
   <div class="table-scroll-container resize" id="tableContainer">
-    <table >
+    <table>
       <thead>
         <tr>
           @for (column of columns(); track $index) {
-          <th [class]="column.name"
-              [ngStyle]="{'width.px': column.minWidth }">
+          <th [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
             <div class="cabecera-column">
               {{ column.label }}
             </div>
@@ -50,8 +49,14 @@
             } @case ('evento') {
             {{ row.evento }}
             } @case ('acciones') {
-            <app-button size="small" text="Editar"></app-button>
-            <app-button size="small" text="Eliminar"></app-button>
+            <div class="action">
+              <app-button size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
+              <app-button
+                size="small"
+                leftIcon="assets/icons/trash.svg"
+                type="tertiary"
+              ></app-button>
+            </div>
             } }
           </td>
 

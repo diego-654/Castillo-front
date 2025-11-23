@@ -38,6 +38,11 @@ export default class DatosObtenidos {
   searchInputCheck = signal('');
   searchInputDrag = signal('');
 
+
+  ngOnInit() {
+    this.listar();
+  }
+
   listar() {
     this.data.set([]);
     this.selectedItem.set(null);
@@ -53,7 +58,8 @@ export default class DatosObtenidos {
         next: (response) => {
           this.data.set(response.lista);
           this.totalItems.set(response.paginacion.total);
-          this.totalPages.set(response.paginacion.paginasTotal);
+    //      this.totalPages.set(response.paginacion.paginasTotal);
+          this.utilService.dismissLoader();
         },
         error: (error) => {
           this.utilService.dismissLoader();

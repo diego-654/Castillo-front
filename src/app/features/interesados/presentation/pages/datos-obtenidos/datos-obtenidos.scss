@@ -51,6 +51,7 @@
 
           &.acciones {
             text-align: center;
+            gap: 10px;
           }
           .svg-container {
             display: flex;
@@ -62,6 +63,9 @@
           width: 16px;
           height: 16px;
           cursor: pointer;
+        }
+        .action {
+          display: flex;
         }
       }
     }

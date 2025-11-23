@@ -19,6 +19,10 @@ import { SocioDatasourceImpl } from '@features/socio/data/datasources/socio.data
 import { SocioRepositoryImpl } from '@features/socio/data/repositories/socio.repository.impl';
 import { SocioDatasource } from '@features/socio/domain/datasources/socio.datasource';
 import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
+import { InteresadosRepositoryImpl } from '@features/interesados/data/repositories/interesados.repository.impl';
+import { InteresadosRepository } from '@features/interesados/domain/repositories/interesados.repository';
+import { InteresadosDataSource } from '@features/interesados/domain/datasources/interesados.datasource';
+import { InteresadosDataSourcesImp } from '@features/interesados/data/datasources/interesados.datasources.imp';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +39,8 @@ export const appConfig: ApplicationConfig = {
     {provide: EventoDatasource, useClass: EventoDatasourceImpl},
     {provide: SocioRepository, useClass: SocioRepositoryImpl},
     {provide: SocioDatasource, useClass: SocioDatasourceImpl},
+    {provide: InteresadosRepository, useClass: InteresadosRepositoryImpl},
+    {provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp},
   ]
 };
 
