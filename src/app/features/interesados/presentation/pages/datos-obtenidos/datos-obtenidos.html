@@ -25,8 +25,7 @@
         <tr>
           @for (column of columns(); track $index) {
           <th [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
-
-              {{ column.label }}
+            {{ column.label }}
 
             <!-- -->
           </th>
@@ -50,7 +49,12 @@
             {{ row.evento }}
             } @case ('acciones') {
             <div class="action">
-              <app-button size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
+              <app-button
+                size="small"
+                (click)="irEditFormulario(row.id)"
+                leftIcon="assets/icons/edit.svg"
+                type="tertiary"
+              ></app-button>
               <app-button
                 (click)="eliminarDatoObtenido(row)"
                 size="small"

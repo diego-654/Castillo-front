@@ -3,7 +3,9 @@
     <div class="header__formulario__icon">
       <app-svg-icon path="assets/icons/user.svg" class="icon"></app-svg-icon>
     </div>
-    <div class="header__formulario__title">Formulario de Registro al cliente</div>
+    <div class="header__formulario__title">
+      {{ editMode() ? 'Editar' : '' }} Formulario de Registro al cliente
+    </div>
   </div>
 
   @if (formulario() && form ) {

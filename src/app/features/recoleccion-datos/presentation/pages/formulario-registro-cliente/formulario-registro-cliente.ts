@@ -1,8 +1,9 @@
 import { Component, inject, signal, input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormularioClienteRequest } from '@features/recoleccion-datos/domain/models/formulario-cliente-request.model';
 import { FormularioClienteResponse, TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
+import { ObtenerFormularioRespuestasResponse } from '@features/recoleccion-datos/domain/models/obtener-formulario-respuestas-response.molde';
 import { RecoleccionDatosRepository } from '@features/recoleccion-datos/domain/repositories/recoleccion-datos.repository';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
@@ -36,6 +37,7 @@ export default class FormularioRegistroCliente {
   readonly recoleccionDatosRepository = inject(RecoleccionDatosRepository);
   readonly utilService = inject(UtilService);
   readonly router = inject(Router);
+  readonly route = inject(ActivatedRoute);
 
   formulario = signal<FormularioClienteResponse | null>(null);
   typeInput = TipoInputType;
@@ -47,9 +49,34 @@ export default class FormularioRegistroCliente {
   //form
   form: FormGroup = new FormGroup({});
 
+  editMode = signal<boolean>(false);
+
 
   ngOnInit() {
-    this.obtenerFormularioCliente();
+    this.obtenerFormularioRespuestas();
+  }
+
+  evaluarModo() {
+    if (this.route.snapshot.paramMap.has('id') && this.route.snapshot.paramMap.get('id') != undefined) {
+      this.editMode.set(true);
+      this.obtenerFormularioRespuestas();
+    } else {
+      this.editMode.set(false);
+      this.obtenerFormularioCliente();
+    }
+  }
+
+  async obtenerFormularioRespuestas() {
+    this.utilService.showLoader();
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const res = await firstValueFrom(
+      this.recoleccionDatosRepository.obtenerFormularioRespuestas(id)
+    );
+    this.formulario.set(res);
+    this.crearFormulario(res);
+    this.valoresFormulario(res);
+    this.editMode.set(true);
+    this.utilService.dismissLoader();
   }
 
   async obtenerFormularioCliente() {
@@ -113,6 +140,14 @@ export default class FormularioRegistroCliente {
     });
   }
 
+  valoresFormulario(formulario: ObtenerFormularioRespuestasResponse) {
+    formulario.lista.forEach((seccion) => {
+      seccion.campos.lista.forEach((campo) => {
+        const nombreControl = this.formatoNombre(campo.label);
+        this.form.get(nombreControl)?.setValue(campo.respuesta);
+      });
+    });
+  }
 
 
   guardarFormulario() {

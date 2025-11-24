@@ -8,6 +8,7 @@ import { PaginadoTablaComponent } from '@shared/components/paginado-tabla/pagina
 import { CommonModule } from '@angular/common';
 import { UtilService } from '../../../../../shared/components/services/util/util.service';
 import { InteresadosRepository } from '@features/interesados/domain/repositories/interesados.repository';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,6 +22,7 @@ export default class DatosObtenidos {
 
   data = signal<InteresadoData[]>([]);
   readonly utilService = inject(UtilService);
+  router = inject(Router);
 
 
   //** paginacion */
@@ -85,5 +87,15 @@ export default class DatosObtenidos {
   onPageChange(newPage: number) {
     this.page.set(newPage);
     this.listar();
+  }
+
+  irEditFormulario(id: number) {
+
+    if (!id) {
+      console.error("No hay ID para editar");
+      return;
+    }
+
+    this.router.navigate(['/recoleccion-datos/formulario/editar', id]);
   }
 }
