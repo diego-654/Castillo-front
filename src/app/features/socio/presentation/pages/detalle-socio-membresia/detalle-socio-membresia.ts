@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ObtenerDatosMembresiaResponse } from '@features/socio/domain/models/obtener-datos-membresia.response';
 import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
+import { UtilService } from '@shared/components/services/util/util.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export default class DetalleSocioMembresia {
   socioRepository = inject(SocioRepository);
+  utilservice = inject(UtilService);
   route = inject(ActivatedRoute);
   detalleSocioMembresia = signal<ObtenerDatosMembresiaResponse | null>(null);
 
@@ -22,6 +24,7 @@ export default class DetalleSocioMembresia {
     this.obtenerIdSocio();
   }
   async obtenerIdSocio() {
+    this.utilservice.showLoader();
     const id = Number(this.route.snapshot.paramMap.get('id') ?? 0);
     this.socioId.set(id);
     this.obtenerDatosMembresia();
@@ -32,5 +35,6 @@ export default class DetalleSocioMembresia {
       this.socioRepository.obtenerDatosMembresia(this.socioId())
     );
     this.detalleSocioMembresia.set(res);
+    this.utilservice.dismissLoader();
   }
 }
