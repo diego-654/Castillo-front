@@ -3,12 +3,29 @@
     <app-week-agenda (weekChange)="onWeekChange($event)"></app-week-agenda>
   </div>
   <div class="right">
-    <app-day-picker
-      [value]="null"
-      [month]="month()"
-      [year]="year()"
-      [rangeStart]="start()"
-      [rangeEnd]="end()"
-    ></app-day-picker>
+    <div class="calendar">
+      <app-day-picker
+        [value]="null"
+        [month]="month()"
+        [year]="year()"
+        [rangeStart]="start()"
+        [rangeEnd]="end()"
+      ></app-day-picker>
+    </div>
+
+    <div class="proximos-eventos">
+      <div class="title">Proximos eventos</div>
+      <div class="event">
+        <img src=" assets/icons/calendar/agenda-1.svg" alt="" />
+        <div class="event-info">
+          <div class="event-title">Reunión de planificación</div>
+          <div class="event-time">
+            {{ start() | date : 'HH:mm' }}
+            –
+            {{ end() | date : 'HH:mm' }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -49,7 +49,15 @@ export class DayPickerComponent {
     if (changes['year']) {
       this.internalYear.set(this.year());
     }
+
+    // 👇 NUEVO: si cambia el rango inicial, muevo el mes/año del calendario
+    if (changes['rangeStart'] && this.rangeStart()) {
+      const d = this.rangeStart()!;
+      this.internalMonth.set(d.getMonth() + 1);
+      this.internalYear.set(d.getFullYear());
+    }
   }
+
 
   get days(): Day[] {
     const adjustedMonth = this.internalMonth() - 1;
