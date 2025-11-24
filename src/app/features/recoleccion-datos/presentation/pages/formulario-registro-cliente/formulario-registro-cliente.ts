@@ -53,29 +53,45 @@ export default class FormularioRegistroCliente {
 
 
   ngOnInit() {
-    this.obtenerFormularioRespuestas();
+    this.evaluarModo();
   }
 
   evaluarModo() {
-    if (this.route.snapshot.paramMap.has('id') && this.route.snapshot.paramMap.get('id') != undefined) {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const path = this.route.snapshot.routeConfig?.path ?? '';
+
+    // path será 'formulario/editar/:id' o 'formulario/:id'
+    const esEditar = path === 'formulario/editar/:id';
+
+    console.log('path actual:', path, 'esEditar:', esEditar, 'id:', id);
+
+    if (esEditar && id) {
+      // 👉 modo edición: cargar respuestas ya guardadas
       this.editMode.set(true);
-      this.obtenerFormularioRespuestas();
+      this.obtenerFormularioRespuestas(id);
+    } else if (id) {
+      // 👉 modo “ver/llenar” formulario del evento
+      this.editMode.set(false);
+      this.obtenerFormularioCliente();
     } else {
+      // (por si algún día tienes un formulario sin id)
       this.editMode.set(false);
       this.obtenerFormularioCliente();
     }
   }
 
-  async obtenerFormularioRespuestas() {
+  async obtenerFormularioRespuestas(id: number) {
     this.utilService.showLoader();
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+
     const res = await firstValueFrom(
       this.recoleccionDatosRepository.obtenerFormularioRespuestas(id)
     );
+
     this.formulario.set(res);
     this.crearFormulario(res);
     this.valoresFormulario(res);
     this.editMode.set(true);
+
     this.utilService.dismissLoader();
   }
 
@@ -89,6 +105,7 @@ export default class FormularioRegistroCliente {
 
       this.formulario.set(res);
       this.crearFormulario(res);
+      this.editMode.set(false);
 
       this.utilService.dismissLoader();
     } catch (error) {

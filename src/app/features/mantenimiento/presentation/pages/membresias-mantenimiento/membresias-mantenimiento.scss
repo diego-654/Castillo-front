@@ -1,0 +1,68 @@
+.container {
+
+  .acciones {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+  }
+
+  .beneficios-container {
+    display: flex;
+    gap: 10px;
+
+    .card {
+      background-color: #FFFFFF;
+      border-radius: 20px;
+      padding: 10px;
+      min-width: 360px;
+
+      .header {
+        display: flex;
+        justify-content: start;
+        padding: 10px;
+        gap: 5px;
+        border-bottom: 1px solid #6A3717;
+
+        app-svg-icon {
+          width: 50px;
+          height: 50px;
+        }
+
+        .name {
+
+          .nombre {
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 120%;
+            letter-spacing: 0%;
+            color: #6A3717;
+          }
+        }
+
+      }
+
+      .body {
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 30px;
+
+        .nombre {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 120%;
+          letter-spacing: 0%;
+          color: #6B7280;
+
+          padding: 5px;
+          border-bottom: 1px solid #6A3717;
+        }
+
+      }
+
+    }
+
+  }
+
+}

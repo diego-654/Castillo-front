@@ -1,1 +1,60 @@
-<p>membresias-mantenimiento works!</p>
+<div class="container">
+  <div class="acciones">
+    <app-button leftIcon="assets/icons/plus.svg" text="Nuevo Beneficio"></app-button>
+  </div>
+
+  <div class="beneficios-container">
+    @for (grupo of benficiosLista()?.datosBeneficioMembresia; track grupo.id) {
+
+    <!-- Opcional: card general del grupo (Parque Temático, etc.) -->
+    <div class="card">
+      <div class="header">
+        <app-svg-icon color="#6A3717" path="assets/icons/castillo.svg" class="icon"> </app-svg-icon>
+
+        <div class="name">
+          <div class="nombre">{{ grupo.nombreBeneficio }}</div>
+          <div class="tipo">{{ grupo.tipoBeneficio }}</div>
+        </div>
+      </div>
+
+      <div class="body">
+        <!-- si quieres listar TODOS los beneficios generales acá -->
+        @for (beneficio of benficiosLista()?.beneficios; track beneficio.id) {
+        <div class="nombre">
+          {{ beneficio.nombreBeneficio }}
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Ahora sí: UNA CARD POR MEMBRESÍA (Medieval, Real, etc.) -->
+    @for (membresia of grupo.datosMembresia; track membresia.id) {
+
+    <div class="card">
+      <div class="header">
+        <app-svg-icon color="#6A3717" path="assets/icons/castillo.svg" class="icon"> </app-svg-icon>
+
+        <div class="name">
+          <div class="nombre">{{ membresia.nombreMembresia }}</div>
+          <div class="tipo">{{ membresia.tipoMembresia }}</div>
+        </div>
+      </div>
+
+      <div class="body">
+        <!-- SOLO beneficios que aplican a esta membresía -->
+        @for (beneficio of beneficiosPorMembresia(membresia.id); track beneficio.id) {
+        <div class="nombre">
+          <!-- {{ beneficio.nombreBeneficio }} -->
+
+          <!-- si quieres también la frecuencia -->
+          <span class="frecuencia">
+            {{ frecuenciaBeneficio(beneficio, membresia.id) }}
+          </span>
+        </div>
+        }
+      </div>
+    </div>
+
+    } }
+  </div>
+</div>

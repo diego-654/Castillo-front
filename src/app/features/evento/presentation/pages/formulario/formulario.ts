@@ -175,6 +175,9 @@ export default class Formulario {
       })) ?? []
     }
 
+    console.log(FormularioEventoRequest);
+
+
   }
 
   cancelar() {

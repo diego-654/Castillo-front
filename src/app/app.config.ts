@@ -33,6 +33,10 @@ import { AgendaDatasourceImpl } from '@features/agenda/data/datasources/agenda.d
 import { AgendaRepositoryImpl } from '@features/agenda/data/repositories/agenda.repository.impl';
 import { AgendaDatasource } from '@features/agenda/domain/datasources/agenda.datasource';
 import { AgendaRepository } from '@features/agenda/domain/repositories/agenda.repository';
+import { MantenimientoRepository } from '@features/mantenimiento/domain/repositories/mantenimiento.repository';
+import { MantenimientoRepositoryImpl } from '@features/mantenimiento/data/repositories/mantenimiento.repository.impl';
+import { MantenimientoDatasourceImpl } from '@features/mantenimiento/data/datasources/mantenimiento.datasource.impl';
+import { MantenimientoDatasource } from '@features/mantenimiento/domain/datasources/mantenimiento.datasource';
 
 registerLocaleData(localeEsPe);
 
@@ -59,6 +63,8 @@ export const appConfig: ApplicationConfig = {
     {provide: FinanzasDatasource, useClass: FinanzasDatasourceImpl},
     {provide: AgendaRepository, useClass: AgendaRepositoryImpl},
     {provide: AgendaDatasource, useClass: AgendaDatasourceImpl},
+    {provide: MantenimientoRepository, useClass: MantenimientoRepositoryImpl},
+    {provide: MantenimientoDatasource, useClass: MantenimientoDatasourceImpl},
   ]
 };
 
