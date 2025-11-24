@@ -1,21 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal, computed, output } from '@angular/core';
-import { ButtonComponent } from '@shared/components/button/button.component';
+import { Component, inject, signal, output } from '@angular/core';
 import { AgendaRepository } from '@features/agenda/domain/repositories/agenda.repository';
 import { ListaAgendaResponse } from '@features/agenda/domain/model/lista-agenda-response.model';
 import { firstValueFrom } from 'rxjs';
+import { SvgIconComponent } from '@shared/components/svg-icon/svg-icon.component';
 
-type EventPos = {
-  col: number;
-  colSpan: number;
-  row: number;
-  rowSpan: number;
-} | null;
 
 @Component({
   selector: 'app-week-agenda',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, SvgIconComponent],
   templateUrl: './week-agenda.html',
   styleUrl: './week-agenda.scss',
 })

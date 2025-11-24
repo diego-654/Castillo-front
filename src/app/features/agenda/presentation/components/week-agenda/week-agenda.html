@@ -3,19 +3,13 @@
     <div class="rango">{{ weekRange }}</div>
 
     <div class="buttons">
-      <app-button
-        type="tertiary"
-        (click)="semanaAnterior()"
-        leftIcon="assets/icons/calendar/arrow-2.svg"
-      >
-      </app-button>
+      <button class="primary" (click)="semanaAnterior()">
+        <app-svg-icon color="#7D8DA6" [path]="'assets/icons/calendar/arrow-2.svg'"></app-svg-icon>
+      </button>
 
-      <app-button
-        type="tertiary"
-        (click)="semanaSiguiente()"
-        leftIcon="assets/icons/calendar/arrow-1.svg"
-      >
-      </app-button>
+      <button class="primary" (click)="semanaSiguiente()">
+        <app-svg-icon color="#7D8DA6" [path]="'assets/icons/calendar/arrow-1.svg'"></app-svg-icon>
+      </button>
     </div>
   </div>
 

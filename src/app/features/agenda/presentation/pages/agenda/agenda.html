@@ -1,6 +1,79 @@
 <div class="container">
   <div class="left">
     <app-week-agenda (weekChange)="onWeekChange($event)"></app-week-agenda>
+
+    <div class="tabs">
+      @for (tab of tabs(); track $index) {
+      <a
+        class="tab-link"
+        [ngClass]="{
+          active: $index === selectedTabIndex()
+        }"
+        (click)="selectedTabIndex.set($index)"
+      >
+        <img class="tab-icon" [src]="'assets/icons/' + tab.icon" alt="" />
+        {{ tab.label }}
+      </a>
+      }
+    </div>
+
+    @if (selectedTabIndex() === 0) {
+    <!-- pre-reserva -->
+    <div class="pre-reserva">
+      <div class="buttons">
+        <app-button leftIcon="assets/icons/plus.svg" text="Pre Reserva"></app-button>
+      </div>
+
+      @for (item of listaPreReservas(); track $index) {
+      <div class="datos-reservas">
+        <div class="header">
+          <div class="name">{{ item.nombre }}</div>
+          <div class="date">
+            <span>{{ item.fechaInicio }}</span>
+          </div>
+          <div class="date">
+            <span>{{ item.fechaFin }}</span>
+          </div>
+          <div class="acciones">
+            <app-button leftIcon="assets/icons/eye.svg" size="small" type="tertiary"></app-button>
+            <app-button leftIcon="assets/icons/trash.svg" size="small" type="tertiary"></app-button>
+          </div>
+        </div>
+        <div class="body">Confirmación: {{ item.fechaConfirmacion }}</div>
+      </div>
+      }
+    </div>
+
+    }
+    <!--  -->
+    @if (selectedTabIndex() === 1) {
+    <!-- reserva -->
+    <div class="pre-reserva">
+      <div class="buttons">
+        <app-button leftIcon="assets/icons/plus.svg" text="Reserva"></app-button>
+      </div>
+
+      @for (item of listaReservas(); track $index) {
+      <div class="datos-reservas">
+        <div class="header">
+          <div class="name">{{ item.nombre }}</div>
+          <div class="date">
+            <span>{{ item.fechaInicio }}</span>
+          </div>
+          <div class="date">
+            <span>{{ item.fechaFin }}</span>
+          </div>
+          <div class="acciones">
+            <app-button leftIcon="assets/icons/eye.svg" size="small" type="tertiary"></app-button>
+            <app-button leftIcon="assets/icons/trash.svg" size="small" type="tertiary"></app-button>
+          </div>
+        </div>
+        <div class="body">Confirmación: {{ item.fechaConfirmacion }}</div>
+      </div>
+      }
+    </div>
+
+    }
   </div>
   <div class="right">
     <div class="calendar">
@@ -15,17 +88,33 @@
 
     <div class="proximos-eventos">
       <div class="title">Proximos eventos</div>
+      @for (evento of listaProximosEventos(); track $index) {
       <div class="event">
-        <img src=" assets/icons/calendar/agenda-1.svg" alt="" />
+        <img [src]="evento.img" alt="" />
         <div class="event-info">
-          <div class="event-title">Reunión de planificación</div>
+          <div class="event-title">{{ evento.nombre }}</div>
           <div class="event-time">
-            {{ start() | date : 'HH:mm' }}
-            –
-            {{ end() | date : 'HH:mm' }}
+            <span>{{ evento.tipo }}</span>
+            <span>{{ evento.horaOrFecha }}</span>
           </div>
         </div>
       </div>
+      }
+    </div>
+    <!-- cumpleanios -->
+    <div class="proximos-eventos">
+      <div class="title">Próximos Cumpleaños</div>
+      @for (cumples of listaProximosCumpleanios(); track $index) {
+      <div class="event pastel">
+        <img [src]="cumples.img" alt="" class="pastel" />
+        <div class="event-info">
+          <div class="event-title">{{ cumples.nombre }}</div>
+          <div class="event-time">
+            <span>{{ cumples.fecha }}</span>
+          </div>
+        </div>
+      </div>
+      }
     </div>
   </div>
 </div>

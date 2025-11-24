@@ -68,18 +68,20 @@ export default class DatosObtenidos {
         },
       })
   }
-    async eliminarDatoObtenido(row: InteresadoData) {
-        this.interesadosRepository.eliminarInteresado(row.id).subscribe({
-          next: (response) => {
-            this.resetListar();
-          },
-          error: (error) => {
-            this.utilService.dismissLoader();
-          },
-        })
-    }
+  async eliminarDatoObtenido(row: InteresadoData) {
+    this.utilService.showLoader();
+    this.interesadosRepository.eliminarInteresado(row.id).subscribe({
+      next: (response) => {
+        this.resetListar();
+        this.utilService.dismissLoader();
+      },
+      error: (error) => {
+        this.utilService.dismissLoader();
+      },
+    })
+  }
 
-        resetListar() {
+  resetListar() {
     this.page.set(1);
     this.listar();
   }
