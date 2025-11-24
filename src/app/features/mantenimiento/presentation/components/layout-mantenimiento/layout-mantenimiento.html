@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="header">
+    <span class="title">Mantenimiento de Membresías</span>
+    <div class="subtitle">Administra los planes de membresía disponibles</div>
+    <div class="tabs">
+      <a
+        *ngFor="let tab of tabs(); let $index"
+        [routerLink]="[tab.route]"
+        class="tab-link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <img class="tab-icon" [src]="'assets/icons/' + tab.icon" alt="" />
+        {{ tab.label }}
+      </a>
+    </div>
+  </div>
+
+  <div class="router-outlet">
+    <router-outlet />
+  </div>
+</div>

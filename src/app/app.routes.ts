@@ -6,6 +6,7 @@ import { EVENTOS_ROUTES } from '@features/evento/presentation/routes';
 import { SOCIOS_ROUTES } from '@features/socio/presentation/routes';
 import { FINANZAS_ROUTES } from '@features/finanzas/presentation/routes';
 import { AGENDA_ROUTES } from '@features/agenda/presentation/routes';
+import { MANTENIMIENTO_ROUTES } from '@features/mantenimiento/presentation/routes';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
       SOCIOS_ROUTES,
       FINANZAS_ROUTES,
       AGENDA_ROUTES,
+      MANTENIMIENTO_ROUTES,
     ],
   },
 
