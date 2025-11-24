@@ -1,14 +1,18 @@
 <div class="container">
-  <div class="tittle">Historial de formularios</div>
+  <div class="tittle">Facturas Emitidas</div>
   <div class="subtitle">Historial completo de facturación</div>
   <div class="item">
     <app-search-input
-      placeholder="Buscar por nombre, teléfono o email"
+      placeholder="Buscar por nombre, teléfono o fecha"
       [(value)]="searchInputCheck"
     ></app-search-input>
 
     <div class="accion">
-      <app-button leftIcon="assets/icons/plus.svg" text="Nueva Factura"></app-button>
+      <app-button
+      (click)="formularioFactura()"
+      leftIcon="assets/icons/plus.svg"
+      text="Nueva Factura"
+      ></app-button>
     </div>
   </div>
   <div class="table-scroll-container resize" id="tableContainer">
@@ -17,9 +21,7 @@
         <tr>
           @for (column of columns(); track $index) {
           <th class="head2" [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
-            <div class="cabecera-column">
               {{ column.label }}
-            </div>
             <!-- -->
           </th>
           }
@@ -40,7 +42,9 @@
             {{ row.fecha }}
             } @case ('acciones') {
             <div class="action">
-              <app-button size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
+              <app-button
+              (click)="formularioFactura(row.id)"
+              size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
               <app-button
                 size="small"
                 leftIcon="assets/icons/download.svg"

@@ -15,7 +15,7 @@ export class InteresadosDataSourcesImp implements InteresadosDataSource {
       map((): ListarInteresadosResponse => {
         const lista: InteresadoData[] = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 10; i++) {
           lista.push({
             id: i,
             nombre: 'Nombre ' + i,

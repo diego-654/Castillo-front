@@ -23,7 +23,7 @@ export class FinanzasLayout {
     },
     {
       label: 'Registro de Pagos',
-      route: '/finanzas/pagos',
+      route: '/finanzas/registro-pagos',
       icon: 'credit-card.svg',
     },
   ]);

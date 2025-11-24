@@ -25,7 +25,6 @@ import { firstValueFrom } from 'rxjs';
     OptionComponent,
     InputComponent,
     DatePickerComponent,
-
   ],
   templateUrl: './formulario-socio.html',
   styleUrl: './formulario-socio.scss',

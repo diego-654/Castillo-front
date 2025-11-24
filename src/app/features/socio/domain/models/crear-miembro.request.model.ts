@@ -1,7 +1,4 @@
-
-
 export interface CrearMiembroRequest {
-
   cliente: string;
   celular: string;
   fechaNacimiento: Date;
@@ -9,6 +6,4 @@ export interface CrearMiembroRequest {
   membresia: number;
   fechaInicio: Date;
   estado: number;
-
 }
-
