@@ -1,19 +1,70 @@
-
 <div class="container">
-  <div class="acciones">
-    <app-button leftIcon="assets/icons/plus.svg" text="Nuevo Beneficio"></app-button>
+  <div class="accion">
+    <app-button
+      (click)="formularioAliado()"
+      leftIcon="assets/icons/plus.svg"
+      text="Nuevo Aliado"
+    ></app-button>
   </div>
+  <div class="tittle">Lista de Aliados</div>
+  <div class="subtitle">Aliados del negocio</div>
 
-  <div class="beneficios-container">
+  <div class="table-scroll-container resize" id="tableContainer">
+    <table>
+      <thead>
+        <tr>
+          @for (column of columns(); track $index) {
+          <th class="head2" [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
+            {{ column.label }}
+            <!-- -->
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of data(); track $index; let index1 =$index){
+        <tr>
+          @for (column of columns(); track $index) {
+          <td [class]="column.name">
+            @switch (column.name) { @case ('nombre') {
+            {{ row.nombre }}
+            } @case ('nombre') {
+            {{ row.nombre }}
+            } @case ('tipo') {
+            {{ row.tipo }}
+            } @case ('nombreEmpresa') {
+            {{ row.nombreEmpresa }}
+            } @case ('fecha') {
+            {{ row.fecha }}
+            } @case ('acciones') {
+            <div class="action">
+              <app-button
+                (click)="formularioAliado(row.id)"
+                size="small"
+                leftIcon="assets/icons/eye.svg"
+                type="tertiary"
+              ></app-button>
+              <app-button
+                size="small"
+                leftIcon="assets/icons/trash.svg"
+                type="tertiary"
+              ></app-button>
+            </div>
+            } }
+          </td>
 
-    <div class="card-beneficios">
-
-    </div>
-
-    <div class="card-membresias">
-      
-    </div>
-
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
-
+  <div class="paginacion-container">
+    <paginado-tabla
+      [currentPage]="page()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    >
+    </paginado-tabla>
+  </div>
 </div>
