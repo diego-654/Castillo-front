@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   MAT_DATE_LOCALE,
@@ -27,15 +27,21 @@ import { FinanzasDatasourceImpl } from '@features/finanzas/data/datasources/fina
 import { FinanzasRepositoryImpl } from '@features/finanzas/data/repositories/finanza.repository.impl';
 import { FinanzasDatasource } from '@features/finanzas/domain/datasources/finanzas.datasource';
 import { FinanzasRepository } from '@features/finanzas/domain/repositories/finanzas.repository';
+import { registerLocaleData } from '@angular/common';
+import localeEsPe from '@angular/common/locales/es-PE';
+
+registerLocaleData(localeEsPe);
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LOCALE_ID, useValue: 'es-PE' },  // <-- PARA PIPES DE CURRENCY
     { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
 
     provideNativeDateAdapter(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
 
     {provide: RecoleccionDatosRepository, useClass: RecoleccionDatosRepositoryImpl},
     {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},

@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ObtenerDatosPagosResponse } from '@features/socio/domain/models/obtener-datos-pagos.respone';
 import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
+import { ButtonComponent } from '@shared/components/button/button.component';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-detalle-socio-pagos',
-  imports: [],
+  imports: [ButtonComponent, CommonModule],
   templateUrl: './detalle-socio-pagos.html',
   styleUrl: './detalle-socio-pagos.scss',
 })

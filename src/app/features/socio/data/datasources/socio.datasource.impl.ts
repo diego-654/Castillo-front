@@ -67,7 +67,7 @@ export class SocioDatasourceImpl implements SocioDatasource {
     );
   }
 
-  obtenerDatosMiembro( request: number): Observable<ObtenerDatosMiembroResponse> {
+  obtenerDatosMiembro(request: number): Observable<ObtenerDatosMiembroResponse> {
     return timer(200).pipe(
       map(() => ({
         id: 1,
@@ -135,7 +135,7 @@ export class SocioDatasourceImpl implements SocioDatasource {
     );
   }
 
-  obtenerDatosMembresia( request: number): Observable<ObtenerDatosMembresiaResponse> {
+  obtenerDatosMembresia(request: number): Observable<ObtenerDatosMembresiaResponse> {
     return timer(200).pipe(
       map(() => ({
         id: 1,
@@ -148,13 +148,13 @@ export class SocioDatasourceImpl implements SocioDatasource {
     );
   }
 
-  obtenerDatosPagos( request: number): Observable<ObtenerDatosPagosResponse> {
+  obtenerDatosPagos(request: number): Observable<ObtenerDatosPagosResponse> {
     return timer(200).pipe(
       map(() => ({
         id: 1,
         plan: 'Medieval',
         monto: 1000,
-        proximoPago: '31/12/2022',
+        proximoPago: 'Tu próxima fecha de facturación es el 01 de diciembre de 2025',
         historialPagos: [
           {
             id: 1,

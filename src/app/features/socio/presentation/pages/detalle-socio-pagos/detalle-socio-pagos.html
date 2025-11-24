@@ -1,6 +1,51 @@
 <div class="container">
   <div class="card">
-    
-
+    <div class="card-line"></div>
+    <div class="zona1">
+      <div class="title">
+        {{ detalleSocioPagos()?.plan }}
+      </div>
+      <div class="value">
+        {{ detalleSocioPagos()?.monto }}
+      </div>
+    </div>
+    <div class="zona2">
+      <div class="title">
+        {{ detalleSocioPagos()?.proximoPago }}
+      </div>
+    </div>
   </div>
+  <div class="title2">Historial de Pagos</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Forma de Pago</th>
+        <th>Comprobante</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of detalleSocioPagos()?.historialPagos; track $index) {
+      <tr>
+        <td>{{ item.fecha }}</td>
+        <td>{{ item.descripcion }}</td>
+        <td>
+          <div class="acciones">
+            <app-button
+              size="small"
+              text="Ver"
+              type="tertiary"
+              leftIcon="assets/icons/eye.svg"
+            ></app-button>
+          </div>
+        </td>
+        <td>{{ item.formaPago }}</td>
+        <td>{{ item.total| currency : 'PEN' : 'symbol' : '1.2-2' }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
