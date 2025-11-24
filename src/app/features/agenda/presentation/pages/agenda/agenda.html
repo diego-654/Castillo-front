@@ -1,3 +1,14 @@
 <div class="container">
-  <app-week-agenda></app-week-agenda>
+  <div class="left">
+    <app-week-agenda (weekChange)="onWeekChange($event)"></app-week-agenda>
+  </div>
+  <div class="right">
+    <app-day-picker
+      [value]="null"
+      [month]="month()"
+      [year]="year()"
+      [rangeStart]="start()"
+      [rangeEnd]="end()"
+    ></app-day-picker>
+  </div>
 </div>

@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, inject } from '@angular/core';
+import { Component, inject, signal, computed, output } from '@angular/core';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { AgendaRepository } from '@features/agenda/domain/repositories/agenda.repository';
 import { ListaAgendaResponse } from '@features/agenda/domain/model/lista-agenda-response.model';
 import { firstValueFrom } from 'rxjs';
+
+type EventPos = {
+  col: number;
+  colSpan: number;
+  row: number;
+  rowSpan: number;
+} | null;
 
 @Component({
   selector: 'app-week-agenda',
@@ -16,7 +23,10 @@ export class WeekAgenda {
 
   agendaRepository = inject(AgendaRepository);
 
-  currentDate = signal<Date>(new Date());
+  // ❗ Para tus datos de prueba (17–19 noviembre 2025)
+  // ponemos la fecha actual en esa semana:
+  currentDate = signal<Date>(new Date(2025, 10, 17));
+  // cuando pase a real, puedes volver a new Date()
 
   dayNames = signal([
     'Lunes', 'Martes', 'Miércoles', 'Jueves',
@@ -32,37 +42,59 @@ export class WeekAgenda {
   weekDates = signal<Date[]>([]);
   eventos = signal<ListaAgendaResponse[]>([]);
 
+  // Output de la semana visible (inicio/fin)
+  weekChange = output<{ start: Date; end: Date }>();
+
   constructor() {
+
+  }
+
+  ngOnInit() {
     this.setWeekDates();
     this.cargarEventos();
   }
 
   private async cargarEventos() {
     const response = await firstValueFrom(this.agendaRepository.listarAgenda());
-    this.eventos.set(response);
+
+    // Normalizar fechas a Date (por si vienen como string)
+    const normalizados = response.map(e => ({
+      ...e,
+      fechaInicio: new Date(e.fechaInicio),
+      fechaFin: new Date(e.fechaFin),
+    }));
+
+    this.eventos.set(normalizados);
   }
 
   private getMonday(date: Date): Date {
     const d = new Date(date);
-    const day = d.getDay();
-    const diff = d.getDate() - day + (day == 0 ? -6 : 1);
+    const day = d.getDay(); // 0-dom, 1-lun, ...
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(d.setDate(diff));
   }
 
   private setWeekDates() {
     const monday = this.getMonday(this.currentDate());
     const week: Date[] = [];
+
     for (let i = 0; i < 7; i++) {
       const d = new Date(monday);
       d.setDate(monday.getDate() + i);
       week.push(d);
     }
+
     this.weekDates.set(week);
+
+    // 👇 avisar al padre que cambió la semana
+    this.emitWeekChange();
   }
 
-  /** Formato “09 – 15 Enero” */
+
+  /** Formato “09 - 15 noviembre” */
   get weekRange() {
     const w = this.weekDates();
+    if (!w.length) return '';
     const month = w[0].toLocaleString('es-ES', { month: 'long' });
     return `${w[0].getDate()} - ${w[6].getDate()} ${month}`;
   }
@@ -81,48 +113,54 @@ export class WeekAgenda {
     this.setWeekDates();
   }
 
-  /** 🔥 FILTRA LOS EVENTOS DE UNA CELDA */
-  eventosEnCelda(dayIndex: number, hour: string) {
-    const dayDate = this.weekDates()[dayIndex];
-
-    return this.eventos().filter(event => {
-      const inicio = new Date(event.fechaInicio);
-      const fin = new Date(event.fechaFin);
-
-      const eventoEsEseDia =
-        inicio.toDateString() === dayDate.toDateString();
-
-      const eventoEsEsaHora =
-        inicio.getHours() === Number(hour.split(':')[0]);
-
-      return eventoEsEseDia && eventoEsEsaHora;
-    });
-  }
-
+  /** Calcula posición del evento en la grilla.
+   *  Si el evento NO cae en la semana visible → devuelve null.
+   */
   getEventPosition(evento: ListaAgendaResponse) {
     const week = this.weekDates();
+    if (!week.length) return null;
+
+    const inicio = new Date(evento.fechaInicio);
+    const fin = new Date(evento.fechaFin);
 
     const dayStartIndex = week.findIndex(d =>
-      d.toDateString() === evento.fechaInicio.toDateString()
+      d.toDateString() === inicio.toDateString()
     );
-
     const dayEndIndex = week.findIndex(d =>
-      d.toDateString() === evento.fechaFin.toDateString()
+      d.toDateString() === fin.toDateString()
     );
 
-    // Horas en formato 08:00 → 8
-    const hourStart = evento.fechaInicio.getHours();
-    const hourEnd = evento.fechaFin.getHours();
+    if (dayStartIndex === -1 || dayEndIndex === -1) return null;
+
+    const hourStart = inicio.getHours();
+    const hourEnd = fin.getHours();
 
     const rowStart = this.hours().findIndex(h => +h.split(':')[0] === hourStart);
     const rowEnd = this.hours().findIndex(h => +h.split(':')[0] === hourEnd);
 
+    if (rowStart === -1) return null;
+
+    const safeRowEnd = rowEnd === -1 ? rowStart + 1 : rowEnd;
+
     return {
-      col: dayStartIndex + 1,       // +1 porque col 0 es la columna de horas
-      colSpan: (dayEndIndex - dayStartIndex) + 1,
+      // col 1 = horas, col 2..8 = días
+      col: dayStartIndex + 2,
+      colSpan: Math.max(1, (dayEndIndex - dayStartIndex) + 1),
       row: rowStart,
-      rowSpan: (rowEnd - rowStart) + 1
+      rowSpan: Math.max(1, safeRowEnd - rowStart || 1),
     };
   }
+
+  private emitWeekChange() {
+    const week = this.weekDates();
+    if (!week.length) return;
+
+    // Clonamos por si acaso, para no exponer las mismas referencias mutables
+    const start = new Date(week[0]);
+    const end = new Date(week[6]);
+
+    this.weekChange.emit({ start, end });
+  }
+
 
 }

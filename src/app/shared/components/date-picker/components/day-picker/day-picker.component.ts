@@ -34,6 +34,11 @@ export class DayPickerComponent {
 
   weekDays = ['DO', 'LU', 'MA', 'MI', 'JU', 'VI', 'SA'];
 
+  // 👇 NUEVOS INPUTS PARA EL RANGO
+  rangeStart = input<Date | null>(null);
+  rangeEnd = input<Date | null>(null);
+
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['value']) {
       this.internalValue.set(this.value());
@@ -104,6 +109,36 @@ export class DayPickerComponent {
 
     return days;
   }
+
+  private sameDate(a: Date | null | undefined, b: Date | null | undefined): boolean {
+    if (!a || !b) return false;
+    return a.toDateString() === b.toDateString();
+  }
+
+  isInRange(date: Date): boolean {
+    const start = this.rangeStart();
+    const end = this.rangeEnd();
+    if (!start || !end) return false;
+
+    // Normalizar a medianoche para evitar problemas de horas
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    const s = new Date(start);
+    s.setHours(0, 0, 0, 0);
+    const e = new Date(end);
+    e.setHours(0, 0, 0, 0);
+
+    return d >= s && d <= e;
+  }
+
+  isRangeStart(date: Date): boolean {
+    return this.sameDate(date, this.rangeStart());
+  }
+
+  isRangeEnd(date: Date): boolean {
+    return this.sameDate(date, this.rangeEnd());
+  }
+
 
   toggleDay(dia: Day) {
     const selected = dia.date;

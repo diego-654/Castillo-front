@@ -139,6 +139,22 @@
             background-color: var(--primary);
           }
         }
+
+        &.range {
+          background: rgba(51, 125, 255, 0.15);
+          color: #1f2933;
+        }
+
+        &.range-start,
+        &.range-end {
+          background: #337dff;
+          color: #fff;
+          border-radius: 999px;
+        }
+
+        &.range-start.range-end {
+          border-radius: 999px; // cuando inicio = fin
+        }
       }
     }
   }

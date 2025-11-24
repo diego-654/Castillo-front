@@ -22,7 +22,7 @@ export class AgendaDatasourceImpl implements AgendaDatasource {
             id: 2,
             // Lunes 17 Nov — 15:00–16:00
             fechaInicio: new Date(2025, 10, 18, 15),
-            fechaFin: new Date(2025, 10, 19, 16),
+            fechaFin: new Date(2025, 10, 18, 19),
             nombre: 'Llamada con cliente',
             img: 'assets/icons/calendar/agenda-2.svg',
           },

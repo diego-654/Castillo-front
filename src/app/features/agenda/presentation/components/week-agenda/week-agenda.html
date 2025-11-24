@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- HEADER DÍAS -->
   <div class="agenda-header">
     <div class="hour-col"></div>
     @for (date of weekDates(); track $index) {
@@ -30,26 +30,40 @@
     }
   </div>
 
-  <!-- CUERPO -->
+  <!-- CUERPO: SOLO GRID, SIN WRAPPERS -->
   <div class="agenda-body">
-    @for (hour of hours(); track $index) {
-
-    <div class="agenda-row">
-      <div class="hour-col">{{ hour }}</div>
-
-      @for (date of weekDates(); track $index) {
-
-      <div class="agenda-cell">
-        <!-- 🔥 EVENTOS EN ESTA CELDA -->
-        @for (ev of eventosEnCelda($index, hour); track ev.id) {
-        <div class="agenda-event">
-          <img [src]="ev.img" />
-          <span>{{ ev.nombre }}</span>
-        </div>
-        }
+    <!-- Capa base: grilla de horas x días -->
+    <div class="agenda-grid">
+      @for (hour of hours(); track $index; let row = $index) {
+      <!-- Columna de horas -->
+      <div class="hour-col">
+        {{ hour }}
       </div>
-      }
+
+      <!-- 7 celdas (una por día) -->
+      @for (date of weekDates(); track $index; let col = $index) {
+      <div class="agenda-cell"></div>
+      } }
     </div>
-    }
+
+    <!-- Capa superior: SOLO eventos -->
+    <div class="agenda-events-layer">
+      @for (evento of eventos(); track evento.id) { @let pos = getEventPosition(evento); @if (pos) {
+      <div
+        class="agenda-event"
+        [style.gridColumn]="pos.col + ' / span ' + pos.colSpan"
+        [style.gridRow]="pos.row + 1 + ' / span ' + pos.rowSpan"
+      >
+        <div class="event-header">
+          <span class="event-title">{{ evento.nombre }}</span>
+        </div>
+        <div class="event-time">
+          {{ evento.fechaInicio | date : 'EEEE HH:mm' }}
+          –
+          {{ evento.fechaFin | date : 'EEEE HH:mm' }}
+        </div>
+      </div>
+      } }
+    </div>
   </div>
 </div>

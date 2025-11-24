@@ -32,7 +32,10 @@
           selected: internalValue()?.toDateString() === day.date.toDateString(),
           prev: day.prevOrNext === 'prev',
           next: day.prevOrNext === 'next',
-          today: day.isToday
+          today: day.isToday,
+          range: isInRange(day.date),
+          'range-start': isRangeStart(day.date),
+          'range-end': isRangeEnd(day.date)
         }"
       >
         {{ day.date.getDate() | twoDigit }}
