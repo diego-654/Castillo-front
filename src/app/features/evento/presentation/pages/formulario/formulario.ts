@@ -14,7 +14,7 @@ import { EventoRepository } from '@features/evento/domain/repositories/evento.re
 import { UtilService } from '@shared/components/services/util/util.service';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
 import { FormularioEventoRequest } from '@features/evento/domain/models/formulario-evento-request.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,6 +43,7 @@ export default class Formulario {
   eventoRepository = inject(EventoRepository);
   utilService = inject(UtilService);
   route = inject(ActivatedRoute);
+  router = inject(Router);
 
   // Membresía
   options = signal<Option[]>(optionsData);
@@ -176,7 +177,9 @@ export default class Formulario {
 
   }
 
-
+  cancelar() {
+    this.router.navigate(['/eventos/formulario']);
+  }
 
 }
 

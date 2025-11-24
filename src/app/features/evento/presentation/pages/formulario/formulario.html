@@ -8,7 +8,7 @@
     placeholder="Ingrese Nombre de la encuesta"
     label="Número de Encuesta"
     (valueChange)="changeNombreEncuesta($event)"
-    [value]="formulario()?.nombreEncuesta"
+    [value]="formulario()?.nombreEncuesta ?? ''"
   ></app-input>
   <app-date-picker
     (valueChange)="changeFechaInicio($event)"
@@ -94,6 +94,10 @@
     }
 
     <div class="accion">
+      @if ( editMode() ) {
+      <app-button size="large" type="secondary" text="Cancelar" (click)="cancelar()"></app-button>
+
+      }
       <app-button size="large" text="Guardar" (click)="guardarFormulario()"></app-button>
     </div>
   </div>
