@@ -57,4 +57,95 @@ export class EventoDatasourceImpl implements EventoDatasource {
     );
   }
 
+  obtenerFormulario(id: number): Observable<FormularioEventoRequest> {
+    return timer(200).pipe(
+      map(() => ({
+        id: 1,
+        nombreEncuesta: 'Encuesta 1',
+        fechaInicio: new Date(),
+        fechaFin: new Date(),
+        lista: [
+          {
+            typeFormulario: 'Información Personal',
+            campos: {
+              lista: [
+                {
+                  label: 'Nombres',
+                  type: 1,
+                  isRequired: true,
+                },
+                {
+                  label: 'Apellidos',
+                  type: 1,
+                  isRequired: true,
+                },
+                {
+                  label: 'Edad',
+                  type: 1,
+                  isRequired: true,
+                },
+                {
+                  label: 'Fecha de nacimiento',
+                  type: 2,
+                  isRequired: true,
+                },
+                {
+                  label: 'Ciudad',
+                  type: 1,
+                  isRequired: true,
+                },
+                {
+                  label: 'Fecha de finalizacion',
+                  type: 2,
+                  isRequired: true,
+                },
+              ],
+            },
+          },
+          {
+            typeFormulario: 'Información de contacto',
+            campos: {
+              lista: [
+                {
+                  label: 'Correo electrónico',
+                  type: 1,
+                  isRequired: true,
+                },
+                {
+                  label: 'Número de celular',
+                  type: 1,
+                  isRequired: true,
+                },
+              ],
+            },
+          },
+          {
+            typeFormulario: 'Interés en Membresía',
+            campos: {
+              lista: [
+                {
+                  label: '¿Estás interesad@ en una membresía?',
+                  type: 1,
+                  isRequired: true,
+                },
+              ],
+            },
+          },
+          {
+            campos: {
+              lista: [
+                {
+                  type: 1,
+                  label: 'Acepto que me contacten por Whatsapp y Correo Electronico',
+                  extras: 'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
+                  isRequired: true,
+                }
+              ]
+            }
+          }
+        ],
+      }))
+    );
+  }
+
 }

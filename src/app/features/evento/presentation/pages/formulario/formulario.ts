@@ -14,6 +14,10 @@ import { EventoRepository } from '@features/evento/domain/repositories/evento.re
 import { UtilService } from '@shared/components/services/util/util.service';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
 import { FormularioEventoRequest } from '@features/evento/domain/models/formulario-evento-request.model';
+import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -25,7 +29,10 @@ import { FormularioEventoRequest } from '@features/evento/domain/models/formular
     SelectComponent,
     OptionComponent,
     ButtonComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './formulario.html',
   styleUrl: './formulario.scss',
@@ -35,14 +42,42 @@ export default class Formulario {
   dialogService = inject(DialogService);
   eventoRepository = inject(EventoRepository);
   utilService = inject(UtilService);
+  route = inject(ActivatedRoute);
 
   // Membresía
   options = signal<Option[]>(optionsData);
   option = signal<boolean | null>(null);
 
-  formulario = signal<FormularioEventoRequest>(formularioData);
+  formulario = signal<FormularioEventoRequest | null>(null);
   typeInput = TipoInputType;
 
+  editMode = signal<boolean>(false);
+
+  ngOnInit() {
+    this.obtenerFormulario();
+  }
+
+  async obtenerFormulario() {
+    this.utilService.showLoader();
+    if (this.route.snapshot.paramMap.has('id') && this.route.snapshot.paramMap.get('id') != undefined) {
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+
+      const res = await firstValueFrom(
+        this.eventoRepository.obtenerFormulario(id)
+      );
+
+      this.formulario.set(res);
+      this.editMode.set(true);
+      this.utilService.dismissLoader();
+
+    } else {
+
+      this.formulario.set(formularioData);
+      this.editMode.set(false);
+      this.utilService.dismissLoader();
+    }
+
+  }
 
   openAgregarFormulario(indexGrupo: number) {
     const dialogRef = this.dialogService.open(AgregarFormulario, {
@@ -62,7 +97,7 @@ export default class Formulario {
     this.formulario.update((prev) => {
       const clone = structuredClone(prev);
 
-      clone.lista[indexGrupo].campos.lista.push({
+      clone?.lista[indexGrupo].campos.lista.push({
         label: nuevaPregunta.pregunta,
         isRequired: nuevaPregunta.isRequired,
         type: nuevaPregunta.tipo,
@@ -79,7 +114,9 @@ export default class Formulario {
   actualizarFormulario() {
     this.utilService.showLoader();
 
-    this.eventoRepository.guardarFormulario(this.formulario()).subscribe({
+    if (!this.formulario()) return;
+
+    this.eventoRepository.guardarFormulario(this.formulario()!).subscribe({
       next: () => {
         this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Formulario guardado');
@@ -92,25 +129,26 @@ export default class Formulario {
   }
 
   changeNombreEncuesta(nombre: string) {
+    if (!this.formulario()) return;
     this.formulario.update((prev) => {
-      prev.nombreEncuesta = nombre;
+      prev!.nombreEncuesta = nombre;
       return prev;
     });
   }
   changeFechaInicio(fecha: Date | null) {
     if (!fecha) return;
-
+    if (!this.formulario()) return;
     this.formulario.update(prev => ({
-      ...prev,
+      ...prev!,
       fechaInicio: fecha
     }));
   }
 
   changeFechaFin(fecha: Date | null) {
     if (!fecha) return;
-
+    if (!this.formulario()) return;
     this.formulario.update(prev => ({
-      ...prev,
+      ...prev!,
       fechaFin: fecha
     }));
   }
@@ -138,7 +176,7 @@ export default class Formulario {
 
   }
 
- 
+
 
 }
 

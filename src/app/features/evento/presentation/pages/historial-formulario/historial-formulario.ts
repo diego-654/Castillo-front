@@ -7,6 +7,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { PaginadoTablaComponent } from '@shared/components/paginado-tabla/paginado-tabla.component';
 import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historial-formulario',
@@ -19,6 +20,7 @@ export default class HistorialFormulario {
 
   data = signal<HistorialFormularioData[]>([]);
   readonly utilService = inject(UtilService);
+  router = inject(Router);
 
   //** Inject repository */
   readonly historialRepository = inject(EventoRepository);
@@ -62,16 +64,16 @@ export default class HistorialFormulario {
       })
   }
   async eliminarHistorial(row: HistorialFormularioData) {
-      this.historialRepository.eliminarHistorialFormulario(row.id).subscribe({
-        next: (response) => {
-          this.resetListar();
-        },
-        error: (error) => {
-          this.utilService.dismissLoader();
-        },
-      })
+    this.historialRepository.eliminarHistorialFormulario(row.id).subscribe({
+      next: (response) => {
+        this.resetListar();
+      },
+      error: (error) => {
+        this.utilService.dismissLoader();
+      },
+    })
   }
-    resetListar() {
+  resetListar() {
     this.page.set(1);
     this.listar();
   }
@@ -80,4 +82,15 @@ export default class HistorialFormulario {
     this.page.set(newPage);
     this.listar();
   }
+
+  irEditFormulario(id: number) {
+
+    if (!id) {
+      console.error("No hay ID para editar");
+      return;
+    }
+
+    this.router.navigate(['/eventos/formulario', id]);
+  }
+
 }

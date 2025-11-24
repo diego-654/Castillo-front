@@ -6,12 +6,20 @@ export const EVENTOS_ROUTES = {
   component: LayoutEvento,
   children: [
     {
+      path: 'formulario/:id',
+      loadComponent: () =>
+        import(
+          '@features/evento/presentation/pages/formulario/formulario'
+        ),
+    },
+    {
       path: 'formulario',
       loadComponent: () =>
         import(
           '@features/evento/presentation/pages/formulario/formulario'
         ),
     },
+
     {
       path: 'historial',
       loadComponent: () =>

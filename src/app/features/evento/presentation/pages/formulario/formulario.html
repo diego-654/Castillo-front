@@ -1,5 +1,5 @@
 <div class="container-title">
-  <div class="title">Nuevo Formulario</div>
+  <div class="title">{{ editMode() ? 'Editar' : 'Nuevo' }} Formulario</div>
 </div>
 
 <div class="datos-encuesta">
@@ -8,18 +8,21 @@
     placeholder="Ingrese Nombre de la encuesta"
     label="Número de Encuesta"
     (valueChange)="changeNombreEncuesta($event)"
+    [value]="formulario()?.nombreEncuesta"
   ></app-input>
   <app-date-picker
     (valueChange)="changeFechaInicio($event)"
     size="small"
     label="Fecha de Inicio"
     placeholder="dd/mm/aaa"
+    [(ngModel)]="formulario()!.fechaInicio"
   ></app-date-picker>
   <app-date-picker
     (valueChange)="changeFechaFin($event)"
     size="small"
     label="Fecha de Fin"
     placeholder="dd/mm/aaa"
+    [(ngModel)]="formulario()!.fechaFin"
   ></app-date-picker>
 </div>
 <div class="container">
@@ -31,8 +34,18 @@
   </div>
 
   <div class="content__formulario">
-    @for (item of formulario().lista; track $index) { @if (item.typeFormulario) {
-    <div class="formulario__title">{{ item.typeFormulario }}</div>
+    @for (item of formulario()?.lista; track $index) {
+    <!--  -->
+    @if (item.typeFormulario) {
+    <div class="formulario__title">
+      <div>{{ item.typeFormulario }}</div>
+      <app-button
+        size="small"
+        type="tertiary"
+        iconRight="assets/icons/edit.svg"
+        (click)="openAgregarFormulario($index)"
+      ></app-button>
+    </div>
     }
 
     <div class="formulario__inputs">

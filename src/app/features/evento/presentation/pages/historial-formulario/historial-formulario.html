@@ -6,8 +6,7 @@
         <tr>
           @for (column of columns(); track $index) {
           <th class="head2" [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
-
-              {{ column.label }}
+            {{ column.label }}
 
             <!-- -->
           </th>
@@ -30,6 +29,7 @@
               <app-button
                 size="small"
                 leftIcon="assets/icons/edit.svg"
+                (click)="irEditFormulario(row.id)"
                 type="tertiary"
               ></app-button>
               <app-button
