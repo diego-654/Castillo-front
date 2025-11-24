@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="tittle">Historial de formularios</div>
+  <div class="tittle">Historial de Encuestas</div>
   <div class="table-scroll-container resize" id="tableContainer">
     <table>
       <thead>
         <tr>
           @for (column of columns(); track $index) {
           <th class="head2" [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
-            <div class="cabecera-column">
+
               {{ column.label }}
-            </div>
+
             <!-- -->
           </th>
           }

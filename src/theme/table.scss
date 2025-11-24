@@ -109,19 +109,6 @@ table {
       user-select: none;
       text-align: center;
 
-      .cabecera-column {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 4px;
-
-        white-space: nowrap;
-        /* Evita que el texto se divida en varias líneas */
-        overflow: hidden;
-        /* Oculta el contenido que se desborda */
-        text-overflow: ellipsis;
-        /* Muestra "..." si el texto es demasiado largo */
-      }
     }
   }
 
@@ -139,6 +126,7 @@ table {
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
+        text-align: center;
         letter-spacing: 0%;
         color: #000000;
         box-shadow: none !important;

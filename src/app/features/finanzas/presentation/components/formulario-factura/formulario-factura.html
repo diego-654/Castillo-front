@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="modal-header">
+    <div class="title">Generar Nueva Factura</div>
+    <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  </div>
+
+  <div class="modal-body" [formGroup]="formulario">
+    <div class="form">
+      <div class="form form-1">
+        <app-input
+          formControlName="cliente"
+          label="Cliente"
+          placeholder="Ingrese Nombres del cliente"
+        ></app-input>
+      </div>
+      <div class="form form-1">
+        <app-input
+          formControlName="correo"
+          label="Correo Electrónico"
+          placeholder="Ingresa Correo Electrónico"
+        ></app-input>
+      </div>
+      <div class="form form-1">
+        <app-select
+          formControlName="mes"
+          label="Seleccione Mes"
+          placeholder="Seleccione una opción"
+        >
+          @for (mes of seleccioneMeses(); track $index) {
+          <app-option [value]="mes.value">
+            {{ mes.label }}
+          </app-option>
+          }
+        </app-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <app-button
+      class="btn-popup"
+      (click)="cancelar()"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      class="btn-popup"
+      text="Generar Factura"
+      type="primary"
+      size="small"
+      (click)="agregar()"
+    ></app-button>
+  </div>
+</div>

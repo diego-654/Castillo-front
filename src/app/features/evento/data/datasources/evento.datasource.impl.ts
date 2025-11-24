@@ -24,7 +24,7 @@ export class EventoDatasourceImpl implements EventoDatasource {
       map((): ListarHistorialFormularioResponse => {
         const lista: HistorialFormularioData[] = [];
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 10; i++) {
           lista.push({
             id: i,
             nombreEncuesta: 'Nombre ' + i,

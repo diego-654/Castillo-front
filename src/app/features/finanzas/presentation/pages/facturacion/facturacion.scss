@@ -19,7 +19,7 @@
   align-items: flex-start;
   width: 100%;
   app-search-input {
-    width: 300px;
+    width: 400px;
   }
   .accion {
     display: flex;
@@ -89,6 +89,8 @@
         }
         .action {
           display: flex;
+          align-items: center;
+          justify-content: center;
         }
       }
     }

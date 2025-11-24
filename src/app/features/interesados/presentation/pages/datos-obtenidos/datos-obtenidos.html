@@ -25,9 +25,9 @@
         <tr>
           @for (column of columns(); track $index) {
           <th [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
-            <div class="cabecera-column">
+
               {{ column.label }}
-            </div>
+
             <!-- -->
           </th>
           }

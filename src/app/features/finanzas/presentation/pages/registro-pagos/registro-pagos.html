@@ -1,1 +1,58 @@
-<p>registro-pagos works!</p>
+<div class="container">
+  <div class="tittle">Historial de pagos</div>
+  <div class="subtitle">Registro completo de todos los pagos recibidos</div>
+  <div class="item">
+    <app-search-input
+      placeholder="Buscar por nombre, teléfono o fecha"
+      [(value)]="searchInputCheck"
+    ></app-search-input>
+
+
+  </div>
+  <div class="table-scroll-container resize" id="tableContainer">
+    <table>
+      <thead>
+        <tr>
+          @for (column of columns(); track $index) {
+          <th class="head2" [class]="column.name" [ngStyle]="{ 'width.px': column.minWidth }">
+              {{ column.label }}
+            <!-- -->
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of data(); track $index; let index1 =$index){
+        <tr>
+          @for (column of columns(); track $index) {
+          <td [class]="column.name">
+            @switch (column.name) { @case ('nombre') {
+            {{ row.nombre }}
+            } @case ('metodo') {
+            {{ row.metodo }}
+            } @case ('membresia') {
+            {{ row.membresia }}
+            } @case ('fecha') {
+            {{ row.fecha }}
+            } @case ('acciones') {
+            <div class="action">
+              <app-button size="small" leftIcon="assets/icons/eye.svg" type="tertiary"></app-button>
+            </div>
+            } }
+          </td>
+
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="paginacion-container">
+    <paginado-tabla
+      [currentPage]="page()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    >
+    </paginado-tabla>
+  </div>
+</div>

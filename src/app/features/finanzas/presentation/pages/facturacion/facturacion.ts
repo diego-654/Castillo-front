@@ -7,10 +7,12 @@ import { FacturacionData } from '@features/finanzas/domain/models/listar-factura
 import { UtilService } from '@shared/components/services/util/util.service';
 import { FinanzasRepository } from '@features/finanzas/domain/repositories/finanzas.repository';
 import { SearchInputComponent } from '@shared/components/search-input/search-input.component';
+import { DialogService } from '@shared/components/plugins/dialog';
+import { FormularioFactura } from '../../components/formulario-factura/formulario-factura';
 
 @Component({
   selector: 'app-facturacion',
-  imports: [CommonModule, ButtonComponent, PaginadoTablaComponent,SearchInputComponent],
+  imports: [CommonModule, ButtonComponent, PaginadoTablaComponent, SearchInputComponent],
   templateUrl: './facturacion.html',
   styleUrl: './facturacion.scss',
 })
@@ -22,6 +24,7 @@ export default class Facturacion {
 
   //** Inject repository */
   readonly facturacionRepository = inject(FinanzasRepository);
+  dialogService = inject(DialogService);
 
   //** filtros */
   selectedItem = signal<FacturacionData | null>(null);
@@ -49,7 +52,8 @@ export default class Facturacion {
           paginaNro: this.page(),
           paginaTamanio: this.itemsPerPage(),
         },
-      }).subscribe({
+      })
+      .subscribe({
         next: (response) => {
           this.data.set(response.lista);
           this.totalItems.set(response.paginacion.total);
@@ -58,9 +62,18 @@ export default class Facturacion {
         error: (error) => {
           this.utilService.dismissLoader();
         },
-      })
+      });
   }
-    resetListar() {
+
+  formularioFactura(facturaId: number | null = null) {
+    this.dialogService.open(FormularioFactura, {
+      width: '560px',
+      maxWidth: '450px',
+      data: { facturaId },
+    });
+  }
+
+  resetListar() {
     this.page.set(1);
     this.listar();
   }
