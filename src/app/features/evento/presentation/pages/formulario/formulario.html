@@ -1,3 +1,27 @@
+<div class="container-title">
+  <div class="title">Nuevo Formulario</div>
+</div>
+
+<div class="datos-encuesta">
+  <app-input
+    size="small"
+    placeholder="Ingrese Nombre de la encuesta"
+    label="Número de Encuesta"
+    (valueChange)="changeNombreEncuesta($event)"
+  ></app-input>
+  <app-date-picker
+    (valueChange)="changeFechaInicio($event)"
+    size="small"
+    label="Fecha de Inicio"
+    placeholder="dd/mm/aaa"
+  ></app-date-picker>
+  <app-date-picker
+    (valueChange)="changeFechaFin($event)"
+    size="small"
+    label="Fecha de Fin"
+    placeholder="dd/mm/aaa"
+  ></app-date-picker>
+</div>
 <div class="container">
   <div class="header__formulario">
     <div class="header__formulario__icon">
@@ -7,59 +31,57 @@
   </div>
 
   <div class="content__formulario">
-    @for (item of formulario().lista; track $index) {
-    <div class="formulario_title_actions">
-      <div class="formulario__title">{{ item.typeFormulario }}</div>
-      <app-button
-        size="small"
-        type="tertiary"
-        iconRight="assets/icons/edit.svg"
-        (click)="openAgregarFormulario($index)"
-      ></app-button>
-    </div>
+    @for (item of formulario().lista; track $index) { @if (item.typeFormulario) {
+    <div class="formulario__title">{{ item.typeFormulario }}</div>
+    }
 
     <div class="formulario__inputs">
       @for (inputs of item.campos.lista; track $index) {
-      <div class="input-container">
-        <div class="formulario__inputs__title">{{ inputs.label }}</div>
-        @if (inputs.type == typeInput.TEXT) {
 
-        <!-- texto fijo -->
+      <div class="input-container">
+        @if ( inputs.type != typeInput.BOOLEAN || (inputs.type == typeInput.BOOLEAN && inputs.extras
+        == null)) {
+        <div class="formulario__inputs__title">{{ inputs.label }}</div>
+        } @if (inputs.type == typeInput.TEXT) {
         <app-input
           size="small"
-          [placeholder]="' Ingrese su ' + inputs.label"
           [readonly]="true"
+          [placeholder]="'Ingrese su ' + inputs.label"
         ></app-input>
-
-        }@else if(inputs.type == typeInput.NUMBER){
+        } @else if(inputs.type == typeInput.NUMBER) {
         <app-input-number
           size="small"
-          [placeholder]="' Ingrese su ' + inputs.label"
           [readonly]="true"
+          [placeholder]="'Ingrese su ' + inputs.label"
         ></app-input-number>
-        }@else if (inputs.type == typeInput.DATE) {
-        <app-date-picker size="small" placeholder="dd/mm/aaa" [readonly]="true"></app-date-picker>
+        } @else if(inputs.type == typeInput.DATE) {
+        <app-date-picker size="small" [readonly]="true" placeholder="dd/mm/aaa"></app-date-picker>
+        } @else if (inputs.type == typeInput.BOOLEAN && !inputs.extras) {
+        <app-select [readonly]="true" placeholder="Seleccionar" size="small">
+          @for (option of options(); track $index) {
+          <app-option [value]="option.value">{{ option.label }}</app-option>
+          }
+        </app-select>
+        } @else if (inputs.type == typeInput.BOOLEAN && inputs.extras) {
+        <div class="terminos-container">
+          <div class="terminos">
+            <app-checkbox [readonly]="true"></app-checkbox>
+            <span class="termino-text">{{ inputs.label }}</span>
+          </div>
+          <div class="termino-text2">
+            {{ inputs.extras }}
+          </div>
+        </div>
         }
       </div>
-      <!--  -->
+
       }
     </div>
-    <!--  -->
-    }
-    <!--  -->
-    <div class="formulario_title_actions">
-      <div class="formulario__title">Interés en Membresía</div>
-      <app-button size="small" type="tertiary" iconRight="assets/icons/edit.svg"></app-button>
-    </div>
 
-    <div class="formulario__inputs">
-      <app-select [readonly]="true" placeholder="Seleccionar" size="small">
-        @for (option of options(); track $index) {
-        <app-option [value]="option.value">
-          {{ option.label }}
-        </app-option>
-        }
-      </app-select>
+    }
+
+    <div class="accion">
+      <app-button size="large" text="Guardar" (click)="guardarFormulario()"></app-button>
     </div>
   </div>
 </div>

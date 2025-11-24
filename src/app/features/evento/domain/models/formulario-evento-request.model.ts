@@ -3,6 +3,9 @@
 export interface FormularioEventoRequest {
   id: number;
   lista: FormularioClienteRequestItem[];
+  nombreEncuesta?: string;
+  fechaInicio?: Date;
+  fechaFin?: Date;
 }
 
 export interface FormularioClienteRequestItem {
