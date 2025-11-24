@@ -29,6 +29,10 @@ import { FinanzasDatasource } from '@features/finanzas/domain/datasources/finanz
 import { FinanzasRepository } from '@features/finanzas/domain/repositories/finanzas.repository';
 import { registerLocaleData } from '@angular/common';
 import localeEsPe from '@angular/common/locales/es-PE';
+import { AgendaDatasourceImpl } from '@features/agenda/data/datasources/agenda.datasource.impl';
+import { AgendaRepositoryImpl } from '@features/agenda/data/repositories/agenda.repository.impl';
+import { AgendaDatasource } from '@features/agenda/domain/datasources/agenda.datasource';
+import { AgendaRepository } from '@features/agenda/domain/repositories/agenda.repository';
 
 registerLocaleData(localeEsPe);
 
@@ -53,6 +57,8 @@ export const appConfig: ApplicationConfig = {
     {provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp},
     {provide: FinanzasRepository, useClass: FinanzasRepositoryImpl},
     {provide: FinanzasDatasource, useClass: FinanzasDatasourceImpl},
+    {provide: AgendaRepository, useClass: AgendaRepositoryImpl},
+    {provide: AgendaDatasource, useClass: AgendaDatasourceImpl},
   ]
 };
 

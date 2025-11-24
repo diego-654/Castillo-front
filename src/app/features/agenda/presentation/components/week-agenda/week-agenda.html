@@ -1,0 +1,55 @@
+<div class="agenda-container">
+  <div class="header-rango">
+    <div class="rango">{{ weekRange }}</div>
+
+    <div class="buttons">
+      <app-button
+        type="tertiary"
+        (click)="semanaAnterior()"
+        leftIcon="assets/icons/calendar/arrow-2.svg"
+      >
+      </app-button>
+
+      <app-button
+        type="tertiary"
+        (click)="semanaSiguiente()"
+        leftIcon="assets/icons/calendar/arrow-1.svg"
+      >
+      </app-button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="agenda-header">
+    <div class="hour-col"></div>
+    @for (date of weekDates(); track $index) {
+    <div class="day-name">
+      {{ dayNames()[$index] }}
+      <div class="day-number">{{ date.getDate() }}</div>
+    </div>
+    }
+  </div>
+
+  <!-- CUERPO -->
+  <div class="agenda-body">
+    @for (hour of hours(); track $index) {
+
+    <div class="agenda-row">
+      <div class="hour-col">{{ hour }}</div>
+
+      @for (date of weekDates(); track $index) {
+
+      <div class="agenda-cell">
+        <!-- 🔥 EVENTOS EN ESTA CELDA -->
+        @for (ev of eventosEnCelda($index, hour); track ev.id) {
+        <div class="agenda-event">
+          <img [src]="ev.img" />
+          <span>{{ ev.nombre }}</span>
+        </div>
+        }
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
