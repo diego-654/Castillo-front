@@ -1,5 +1,3 @@
-
-
 export interface ListarBeneficiosResponse {
   beneficios: Beneficios[];
   datosBeneficioMembresia: DatosBeneficioMembresia[];
@@ -7,6 +5,7 @@ export interface ListarBeneficiosResponse {
 
 export interface Beneficios {
   id: number;
+  idBeneficioGeneral: number;   // 👈 NUEVO: relación con DatosBeneficioMembresia.id
   nombreBeneficio: string;
   membresia: Membresia[];
 }
@@ -17,8 +16,8 @@ export interface Membresia {
 }
 
 export interface DatosBeneficioMembresia {
-  id: number;
-  nombreBeneficio: string;
+  id: number;                    // 👈 este id ahora es “id del bloque general”
+  nombreBeneficio: string;       // ej: "Beneficios", "Beneficios 2"
   tipoBeneficio: string;
   datosMembresia: DatosMembresia[];
 }

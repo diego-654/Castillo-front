@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ListarBeneficiosResponse } from '@features/mantenimiento/domain/models/listar-beneficios-response.model';
+import { Beneficios, ListarBeneficiosResponse } from '@features/mantenimiento/domain/models/listar-beneficios-response.model';
 import { MantenimientoRepository } from '@features/mantenimiento/domain/repositories/mantenimiento.repository';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { UtilService } from '@shared/components/services/util/util.service';
@@ -31,20 +31,28 @@ export default class MembresiasMantenimiento {
   }
 
 
-  // Ajusta el tipo según tu modelo real
-  beneficiosPorMembresia(idMembresia: number) {
+  beneficiosPorMembresiaYGrupo(idMembresia: number, idGrupo: number) {
     const data = this.benficiosLista();
     if (!data) return [];
 
     return data.beneficios.filter(b =>
-      b.membresia?.some(m => m.id === idMembresia)
+      b.idBeneficioGeneral === idGrupo &&           // 👈 mismo bloque
+      b.membresia?.some(m => m.id === idMembresia) // 👈 misma membresía
     );
   }
 
 
-  frecuenciaBeneficio(beneficio: any, idMembresia: number): string | null {
+
+  frecuenciaBeneficio(beneficio: Beneficios, idMembresia: number): string | null {
     const m = beneficio.membresia?.find((x: any) => x.id === idMembresia);
     return m?.nombreMembresia ?? null;
+  }
+
+
+  beneficiosPorGrupo(idGrupo: number) {
+    const data = this.benficiosLista();
+    if (!data) return [];
+    return data.beneficios.filter(b => b.idBeneficioGeneral === idGrupo);
   }
 
 }
