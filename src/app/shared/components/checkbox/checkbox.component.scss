@@ -43,7 +43,7 @@
 
     &.disabled,
     &.readonly {
-      border: var(--primary);
+      border: 1px solid var(--primary);
       background: var(--form-background-color-disabled);
       cursor: not-allowed;
 

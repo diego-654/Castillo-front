@@ -19,8 +19,10 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
               idBeneficioGeneral: 1, // 👉 pertenece a “Beneficios”
               nombreBeneficio: 'Ingreso Libre (titular + beneficiarios)',
               membresia: [
-                { id: 1, nombreMembresia: '1 vez al mes' },   // Medieval
-                { id: 2, nombreMembresia: '1 vez al mes' },   // Real
+                { id: 1, nombreMembresia: '1 vez al mes', valor: true },   // Medieval
+                { id: 2, nombreMembresia: '1 vez al mes', valor: true },   // Real
+                { id: 3, nombreMembresia: '1 vez al mes', valor: true },   // Medieval
+                { id: 4, nombreMembresia: '1 vez al mes', valor: true },   // Real
               ],
             },
             {
@@ -28,7 +30,7 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
               idBeneficioGeneral: 1, // 👉 también al bloque 1
               nombreBeneficio: 'Ingreso libre para invitados',
               membresia: [
-                { id: 1, nombreMembresia: '1 vez al mes' },   // Medieval
+                { id: 1, nombreMembresia: '1 vez al mes', valor: true },   // Medieval
               ],
             },
 
@@ -38,7 +40,23 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
               idBeneficioGeneral: 2, // 👉 pertenece a “Beneficios 2”
               nombreBeneficio: 'Descuento en tiendas',
               membresia: [
-                { id: 1, nombreMembresia: '10% de descuento' }, // Medieval
+                { id: 1, nombreMembresia: '10% de descuento', valor: true }, // Medieval
+              ],
+            },
+            {
+              id: 4,
+              idBeneficioGeneral: 1, // 👉 también al bloque 2
+              nombreBeneficio: 'Ingreso Libre (titular + beneficiarios)',
+              membresia: [
+                { id: 1, nombreMembresia: '10% de descuento', valor: true }, // Medieval
+              ],
+            },
+            {
+              id: 5,
+              idBeneficioGeneral: 1, // 👉 también al bloque 2
+              nombreBeneficio: 'Piscina(Titular + beneficiarios)',
+              membresia: [
+                { id: 1, nombreMembresia: '10% de descuento', valor: true }, // Medieval
               ],
             },
           ],
@@ -51,6 +69,8 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
               datosMembresia: [
                 { id: 1, nombreMembresia: 'Medieval', tipoMembresia: 'Membresía' },
                 { id: 2, nombreMembresia: 'Real', tipoMembresia: 'Membresía' },
+                { id: 3, nombreMembresia: 'Medieval', tipoMembresia: 'Membresía' },
+                { id: 4, nombreMembresia: 'Real', tipoMembresia: 'Membresía' },
               ],
             },
             {

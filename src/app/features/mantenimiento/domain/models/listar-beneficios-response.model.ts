@@ -13,6 +13,7 @@ export interface Beneficios {
 export interface Membresia {
   id: number;
   nombreMembresia: string;
+  valor: boolean;
 }
 
 export interface DatosBeneficioMembresia {
