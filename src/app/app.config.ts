@@ -37,6 +37,10 @@ import { MantenimientoRepository } from '@features/mantenimiento/domain/reposito
 import { MantenimientoRepositoryImpl } from '@features/mantenimiento/data/repositories/mantenimiento.repository.impl';
 import { MantenimientoDatasourceImpl } from '@features/mantenimiento/data/datasources/mantenimiento.datasource.impl';
 import { MantenimientoDatasource } from '@features/mantenimiento/domain/datasources/mantenimiento.datasource';
+import { ReportesDataSourceImpl } from '@features/reportes/data/datasources/reportes.datasource.impl';
+import { ReportesRepositoryImpl } from '@features/reportes/data/repositories/reportes.repository.impl';
+import { ReportesDataSource } from '@features/reportes/domain/datasources/reportes.datasources';
+import { ReportesRepository } from '@features/reportes/domain/repositories/reportes.repository';
 
 registerLocaleData(localeEsPe);
 
@@ -65,6 +69,8 @@ export const appConfig: ApplicationConfig = {
     {provide: AgendaDatasource, useClass: AgendaDatasourceImpl},
     {provide: MantenimientoRepository, useClass: MantenimientoRepositoryImpl},
     {provide: MantenimientoDatasource, useClass: MantenimientoDatasourceImpl},
+    {provide: ReportesRepository, useClass: ReportesRepositoryImpl},
+    {provide: ReportesDataSource, useClass: ReportesDataSourceImpl},
   ]
 };
 

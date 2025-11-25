@@ -1,0 +1,37 @@
+.container {
+  padding-top: 110px;
+
+  .header {
+    padding: 32px 24px 0 24px;
+    background-color: var(--backgroud-outlet-color);
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0px;
+    left: var(--sidebar-width);
+    height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .title {
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 120%;
+      color: #6A3717;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 120%;
+      color: #000000;
+    }
+
+  }
+}
+
+.router-outlet {
+  padding: 24px;
+}
