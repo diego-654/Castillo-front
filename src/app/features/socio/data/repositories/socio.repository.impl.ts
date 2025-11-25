@@ -1,24 +1,22 @@
-
-
-import { Injectable } from "@angular/core";
-import { SocioDatasource } from "@features/socio/domain/datasources/socio.datasource";
-import { CrearMiembroRequest } from "@features/socio/domain/models/crear-miembro.request.model";
-import { ListaMiembrosActivosRequest } from "@features/socio/domain/models/lista-miembros-activos-request.model";
-import { ListaMiembrosActivosResponse } from "@features/socio/domain/models/lista-miembros-activos-response.model";
-import { ListarMembresiasResponse } from "@features/socio/domain/models/listar-membresias-response.model";
-import { ObtenerDatosMembresiaResponse } from "@features/socio/domain/models/obtener-datos-membresia.response";
-import { ObtenerDatosMiembroResponse } from "@features/socio/domain/models/obtener-datos-miembro.response.model";
-import { ObtenerDatosPagosResponse } from "@features/socio/domain/models/obtener-datos-pagos.respone";
-import { SocioRepository } from "@features/socio/domain/repositories/socio.repository";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { SocioDatasource } from '@features/socio/domain/datasources/socio.datasource';
+import { CrearMiembroRequest } from '@features/socio/domain/models/crear-miembro.request.model';
+import { ListaMiembrosActivosRequest } from '@features/socio/domain/models/lista-miembros-activos-request.model';
+import { ListaMiembrosActivosResponse } from '@features/socio/domain/models/lista-miembros-activos-response.model';
+import { ListarMembresiasResponse } from '@features/socio/domain/models/listar-membresias-response.model';
+import { ObtenerDatosMembresiaResponse } from '@features/socio/domain/models/obtener-datos-membresia.response';
+import { ObtenerDatosMiembroResponse } from '@features/socio/domain/models/obtener-datos-miembro.response.model';
+import { ObtenerDatosPagosResponse } from '@features/socio/domain/models/obtener-datos-pagos.respone';
+import { SocioRepository } from '@features/socio/domain/repositories/socio.repository';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SocioRepositoryImpl implements SocioRepository {
+  constructor(private dataSource: SocioDatasource) {}
 
-  constructor(private dataSource: SocioDatasource) {
-  }
-
-  listaMiembrosActivos(request: ListaMiembrosActivosRequest): Observable<ListaMiembrosActivosResponse> {
+  listaMiembrosActivos(
+    request: ListaMiembrosActivosRequest
+  ): Observable<ListaMiembrosActivosResponse> {
     return this.dataSource.listaMiembrosActivos(request);
   }
 
@@ -42,4 +40,11 @@ export class SocioRepositoryImpl implements SocioRepository {
     return this.dataSource.obtenerDatosPagos(request);
   }
 
+  suspenderMembresia(request: number): Observable<void> {
+    return this.dataSource.suspenderMembresia(request);
+  }
+
+  renovarMembresia(request: number): Observable<void> {
+    return this.dataSource.renovarMembresia(request);
+  }
 }

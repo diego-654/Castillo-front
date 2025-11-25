@@ -14,7 +14,6 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './detalle-socio-general.scss',
 })
 export default class DetalleSocioGeneral {
-
   utilservice = inject(UtilService);
   socioRepository = inject(SocioRepository);
   route = inject(ActivatedRoute);
@@ -23,23 +22,20 @@ export default class DetalleSocioGeneral {
   socioId = signal<number>(0);
 
   ngOnInit() {
-    this.obtenerIdSocio();
-  }
+    let parent = this.route;
+    while (parent && parent.snapshot.paramMap.get('id') == null) {
+      parent = parent.parent!;
+    }
 
-  async obtenerIdSocio() {
-    this.utilservice.showLoader();
-    const id = Number(this.route.snapshot.paramMap.get('id') ?? 0);
+    const id = Number(parent?.snapshot.paramMap.get('id') ?? 0);
     this.socioId.set(id);
     this.obtenerDatosMiembro();
   }
 
   async obtenerDatosMiembro() {
-    const res = await firstValueFrom(
-      this.socioRepository.obtenerDatosMiembro(this.socioId())
-    );
+    this.utilservice.showLoader();
+    const res = await firstValueFrom(this.socioRepository.obtenerDatosMiembro(this.socioId()));
     this.socioDetalle.set(res);
     this.utilservice.dismissLoader();
   }
-
-
 }

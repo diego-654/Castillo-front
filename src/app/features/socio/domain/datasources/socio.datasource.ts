@@ -18,5 +18,6 @@ export abstract class SocioDatasource {
   abstract obtenerDatosMiembro(request: number): Observable<ObtenerDatosMiembroResponse>;
   abstract obtenerDatosMembresia(request: number): Observable<ObtenerDatosMembresiaResponse>;
   abstract obtenerDatosPagos(request: number): Observable<ObtenerDatosPagosResponse>;
-
+  abstract suspenderMembresia(request: number): Observable<void>;
+  abstract renovarMembresia(request: number): Observable<void>;
 }
