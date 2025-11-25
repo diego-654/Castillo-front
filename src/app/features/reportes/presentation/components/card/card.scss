@@ -1,0 +1,29 @@
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  max-width: 350px;
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+
+
+  cursor: pointer;
+
+  .label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400px;
+    gap: 10px;
+    font-size: 20px;
+  }
+
+  .icon {
+    width: 60px; // Ajusta a tu gusto
+    height: 60px;
+    object-fit: contain;
+    align-items: center;
+  }
+}

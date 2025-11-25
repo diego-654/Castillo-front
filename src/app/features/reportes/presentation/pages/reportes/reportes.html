@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="container__cards">
+    @for (item of listaReportesDisponibles(); track $index) {
+    <app-card [reportDisponibles]="item"></app-card>
+    }
+  </div>
+</div>
