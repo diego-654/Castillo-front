@@ -2,6 +2,8 @@
 
 import { Injectable } from "@angular/core";
 import { SocioDatasource } from "@features/socio/domain/datasources/socio.datasource";
+import { CrearBeneficiarioRequest } from "@features/socio/domain/models/crear-benficiario-request.model";
+import { CrearInvitadoRequest } from "@features/socio/domain/models/crear-invitado-request.model";
 import { CrearMiembroRequest } from "@features/socio/domain/models/crear-miembro.request.model";
 import { ListaMiembrosActivosRequest } from "@features/socio/domain/models/lista-miembros-activos-request.model";
 import { ListaMiembrosActivos, ListaMiembrosActivosResponse } from "@features/socio/domain/models/lista-miembros-activos-response.model";
@@ -172,6 +174,24 @@ export class SocioDatasourceImpl implements SocioDatasource {
           },
         ],
       }))
+    );
+  }
+
+  crearBeneficiario(request: CrearBeneficiarioRequest): Observable<void> {
+    return timer(200).pipe(
+      map((): void => {
+        console.log('crear beneficiario');
+        console.log(request);
+      })
+    );
+  }
+
+  crearInvitado(request: CrearInvitadoRequest): Observable<void> {
+    return timer(200).pipe(
+      map((): void => {
+        console.log('crear invitado');
+        console.log(request);
+      })
     );
   }
 }

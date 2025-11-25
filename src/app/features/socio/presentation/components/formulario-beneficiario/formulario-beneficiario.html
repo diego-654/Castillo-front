@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="modal-header">
+    <div class="title">Añadir Beneficiario</div>
+    <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  </div>
+
+  <div class="modal-body" [formGroup]="formulario">
+    <div class="form">
+      <div class="form form-2">
+        <app-input
+          formControlName="dni"
+          label="DNI"
+          placeholder="Ingrese su numero de DNI"
+        ></app-input>
+        <app-button text="Buscar"></app-button>
+      </div>
+      <div class="form form-1">
+        <app-input
+          [readonly]="true"
+          formControlName="nombreApellido"
+          label="Nombres y Apellidos"
+        ></app-input>
+      </div>
+      <div class="form form-1">
+        <app-input
+          formControlName="parentesco"
+          label="Parentesco"
+          placeholder="Ingrese su paretesco"
+        ></app-input>
+      </div>
+      <div class="form form-1"></div>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <app-button
+      class="btn-popup"
+      (click)="cancelar()"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      class="btn-popup"
+      text="Agregar"
+      type="primary"
+      size="small"
+      (click)="agregar()"
+    ></app-button>
+  </div>
+</div>

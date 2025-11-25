@@ -6,6 +6,8 @@ import { ListarMembresiasResponse } from "../models/listar-membresias-response.m
 import { ObtenerDatosMiembroResponse } from "../models/obtener-datos-miembro.response.model";
 import { ObtenerDatosMembresiaResponse } from "../models/obtener-datos-membresia.response";
 import { ObtenerDatosPagosResponse } from "../models/obtener-datos-pagos.respone";
+import { CrearBeneficiarioRequest } from "../models/crear-benficiario-request.model";
+import { CrearInvitadoRequest } from "../models/crear-invitado-request.model";
 
 
 
@@ -17,4 +19,7 @@ export abstract class SocioRepository {
   abstract obtenerDatosMiembro(request: number): Observable<ObtenerDatosMiembroResponse>;
   abstract obtenerDatosMembresia(request: number): Observable<ObtenerDatosMembresiaResponse>;
   abstract obtenerDatosPagos(request: number): Observable<ObtenerDatosPagosResponse>;
+
+  abstract crearBeneficiario(request: CrearBeneficiarioRequest): Observable<void>;
+  abstract crearInvitado(request: CrearInvitadoRequest): Observable<void>;
 }

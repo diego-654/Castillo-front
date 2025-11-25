@@ -39,9 +39,9 @@
             } @case ('acciones') {
             <div class="action">
               <app-button
-                (click)="formularioAliado(row.id)"
                 size="small"
-                leftIcon="assets/icons/eye.svg"
+                leftIcon="assets/icons/edit.svg"
+                (click)="IrDetalleUsuario(row.id)"
                 type="tertiary"
               ></app-button>
               <app-button
