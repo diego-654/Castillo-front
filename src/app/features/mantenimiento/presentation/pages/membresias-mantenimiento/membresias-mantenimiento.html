@@ -45,6 +45,7 @@
                 color="#6A3717"
                 path="assets/icons/edit.svg"
                 class="icon-edit"
+                (click)="EditarMembresia(grupo.id, membresia.id)"
               ></app-svg-icon>
             </div>
           </div>
@@ -58,15 +59,25 @@
           @let cfg = configBeneficioPorMembresia(beneficio, membresia.id);
 
           <div class="nombre">
-            <app-checkbox [readonly]="true" [value]="cfg?.valor ?? false"></app-checkbox>
+            <app-checkbox
+              [readonly]="!isEditingMembresia(grupo.id, membresia.id)"
+              [value]="cfg?.valor ?? false"
+              (valueChange)="onCheckboxChange(grupo.id, membresia.id, beneficio.id, $event)"
+            ></app-checkbox>
 
             <span class="frecuencia">
               {{ cfg?.nombreMembresia }}
             </span>
           </div>
           }
-          <app-checkbox label="Deshabilitar todo"></app-checkbox>
-          <app-button text="Guardar"></app-button>
+          <!-- Botón solo visible cuando esta membresía está en edición -->
+          @if (isEditingMembresia(grupo.id, membresia.id)) {
+          <app-button
+            size="small"
+            text="Guardar"
+            (click)="guardarMembresia(grupo.id, membresia.id)"
+          ></app-button>
+          }
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MantenimientoDatasource } from '@features/mantenimiento/domain/datasources/mantenimiento.datasource';
+import { ActualizarBeneficiosMembresiaRequest } from '@features/mantenimiento/domain/models/actualizar-beneficio-membresia-request.model';
 import { CrearAliadoRequest } from '@features/mantenimiento/domain/models/crear-aliado-request.model';
 import { CrearConcesionarioRequest } from '@features/mantenimiento/domain/models/crear-concesionario-request.model';
 import { ListarAliadoRequest } from '@features/mantenimiento/domain/models/listar-aliado-request.model';
@@ -170,4 +171,15 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
       })
     );
   }
+
+  actualizarBeneficiosMembresia(request: ActualizarBeneficiosMembresiaRequest): Observable<void> {
+    return timer(200).pipe(
+      map((): void => {
+        console.log('actualizar beneficios membresia');
+        console.log(request);
+
+      })
+    );
+  }
+
 }
