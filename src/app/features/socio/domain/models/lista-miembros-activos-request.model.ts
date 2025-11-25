@@ -1,5 +1,3 @@
-
-
 export interface ListaMiembrosActivosRequest {
   buscador: string;
   eventoId: number | null;

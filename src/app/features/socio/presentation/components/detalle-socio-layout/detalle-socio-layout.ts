@@ -8,7 +8,7 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-detalle-socio-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, SvgIconComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './detalle-socio-layout.html',
   styleUrl: './detalle-socio-layout.scss',
 })

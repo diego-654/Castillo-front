@@ -5,7 +5,7 @@ import { ListaMiembrosActivos } from '@features/socio/domain/models/lista-miembr
 
 @Component({
   selector: 'app-card-miembros-activos',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './card-miembros-activos.html',
   styleUrl: './card-miembros-activos.scss',
 })
