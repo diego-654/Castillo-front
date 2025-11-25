@@ -16,11 +16,11 @@ import { Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class SocioRepositoryImpl implements SocioRepository {
+  constructor(private dataSource: SocioDatasource) {}
 
-  constructor(private dataSource: SocioDatasource) {
-  }
-
-  listaMiembrosActivos(request: ListaMiembrosActivosRequest): Observable<ListaMiembrosActivosResponse> {
+  listaMiembrosActivos(
+    request: ListaMiembrosActivosRequest
+  ): Observable<ListaMiembrosActivosResponse> {
     return this.dataSource.listaMiembrosActivos(request);
   }
 
@@ -52,4 +52,11 @@ export class SocioRepositoryImpl implements SocioRepository {
     return this.dataSource.crearInvitado(request);
   }
 
+  suspenderMembresia(request: number): Observable<void> {
+    return this.dataSource.suspenderMembresia(request);
+  }
+
+  renovarMembresia(request: number): Observable<void> {
+    return this.dataSource.renovarMembresia(request);
+  }
 }

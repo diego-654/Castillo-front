@@ -23,4 +23,6 @@ export abstract class SocioDatasource {
 
   abstract crearBeneficiario(request: CrearBeneficiarioRequest): Observable<void>;
   abstract crearInvitado(request: CrearInvitadoRequest): Observable<void>;
+  abstract suspenderMembresia(request: number): Observable<void>;
+  abstract renovarMembresia(request: number): Observable<void>;
 }

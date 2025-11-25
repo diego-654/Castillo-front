@@ -1,0 +1,19 @@
+<div class="container">
+  <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  <div class="tittle">Renovar</div>
+
+  <div class="subtitle">¿Deseas renovar la membresía de este socio?</div>
+  <div class="subtitle2"> La vigencia será actualizada y el socio mantendrá acceso a todos los beneficios</div>
+  <div class="buttons">
+    <app-button
+      (click)="cancelar()"
+      class="btn-popup"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      (click)="aceptar()"
+    class="btn-popup" text="Aceptar" type="primary" size="small"></app-button>
+  </div>
+</div>

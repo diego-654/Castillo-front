@@ -1,0 +1,18 @@
+<div class="container">
+  <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  <div class="tittle">Suspender</div>
+
+  <div class="subtitle">¿Estás seguro de que deseas suspender la cuenta de este socio?</div>
+  <div class="buttons">
+    <app-button
+      (click)="cancelar()"
+      class="btn-popup"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      (click)="aceptar()"
+    class="btn-popup" text="Aceptar" type="primary" size="small"></app-button>
+  </div>
+</div>
