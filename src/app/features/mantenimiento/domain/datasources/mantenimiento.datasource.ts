@@ -10,6 +10,7 @@ import { CrearConcesionarioRequest } from "../models/crear-concesionario-request
 import { ListarConcesionarioRequest } from "../models/listar-concesionario-request.model";
 import { ListarConcesionarioResponse } from "../models/listar-concesionario-response.model";
 import { ActualizarBeneficiosMembresiaRequest } from "../models/actualizar-beneficio-membresia-request.model";
+import { CrearNuevaMembresiaRequest } from "../models/crear-membresia-request.model";
 
 export abstract class MantenimientoDatasource {
 
@@ -20,5 +21,6 @@ export abstract class MantenimientoDatasource {
   abstract listarConcesionarios(request: ListarConcesionarioRequest): Observable<ListarConcesionarioResponse>;
   abstract crearConcesionario(request: CrearConcesionarioRequest): Observable<void>;
   abstract actualizarBeneficiosMembresia(request: ActualizarBeneficiosMembresiaRequest): Observable<void>;
+  abstract crearNuevaMembresia(request: CrearNuevaMembresiaRequest): Observable<void>;
 
 }

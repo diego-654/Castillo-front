@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActualizarBeneficiosMembresiaRequest } from '@features/mantenimiento/domain/models/actualizar-beneficio-membresia-request.model';
+import { CrearNuevaMembresiaRequest } from '@features/mantenimiento/domain/models/crear-membresia-request.model';
 import { Beneficios, ListarBeneficiosResponse } from '@features/mantenimiento/domain/models/listar-beneficios-response.model';
 import { MantenimientoRepository } from '@features/mantenimiento/domain/repositories/mantenimiento.repository';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -21,6 +22,10 @@ export default class MembresiasMantenimiento {
 
   // 👇 nueva: id de la membresía que se está editando
   editingTarget = signal<EditingTarget>(null);
+
+  //funcion crear nueva membresia
+  nuevasMembresiasIds = signal<number[]>([]);
+
 
   ngOnInit() {
     this.cargarBeneficios();
@@ -122,23 +127,117 @@ export default class MembresiasMantenimiento {
       })
       .filter(Boolean) as { idBeneficio: number; valor: boolean; frecuencia: string }[];
 
-    const request: ActualizarBeneficiosMembresiaRequest = {
-      idBeneficioGeneral: idGrupo,
-      idMembresia,
-      beneficios: payloadBeneficios,
+    const esNueva = this.nuevasMembresiasIds().includes(idMembresia);
+
+    if (esNueva) {
+      const grupoInfo = data.datosBeneficioMembresia.find(g => g.id === idGrupo);
+      const membInfo = grupoInfo?.datosMembresia.find(m => m.id === idMembresia);
+
+      const request: CrearNuevaMembresiaRequest = {
+        idBeneficioGeneral: idGrupo,
+        nombreMembresia: membInfo?.nombreMembresia ?? 'Esta es una nueva membresia',
+        tipoMembresia: membInfo?.tipoMembresia ?? 'Membresía',
+        beneficios: payloadBeneficios,
+      };
+
+      console.log('REQUEST CREAR', request);
+
+      this.mantenimientoRepository.crearNuevaMembresia(request).subscribe({
+        next: () => {
+          this.utilService.dismissLoader();
+          // la sacamos de la lista de nuevas
+          this.nuevasMembresiasIds.update(list =>
+            list.filter(id => id !== idMembresia)
+          );
+          this.editingTarget.set(null);
+        },
+        error: () => {
+          this.utilService.dismissLoader();
+        },
+      });
+
+    } else {
+      const request: ActualizarBeneficiosMembresiaRequest = {
+        idBeneficioGeneral: idGrupo,
+        idMembresia,
+        beneficios: payloadBeneficios,
+      };
+
+      console.log('REQUEST ACTUALIZAR', request);
+
+      this.mantenimientoRepository.actualizarBeneficiosMembresia(request).subscribe({
+        next: () => {
+          this.utilService.dismissLoader();
+          this.editingTarget.set(null);
+        },
+        error: () => {
+          this.utilService.dismissLoader();
+        },
+      });
+    }
+  }
+
+
+  crearNuevaMembresia(grupoId: number) {
+    const data = this.benficiosLista();
+    if (!data) return;
+
+    const grupo = data.datosBeneficioMembresia.find(g => g.id === grupoId);
+    if (!grupo) return;
+
+    // nuevo id de membresía = max(id existentes) + 1
+    const allMembresiaIds = data.datosBeneficioMembresia
+      .flatMap(g => g.datosMembresia.map(m => m.id));
+
+    const maxId = allMembresiaIds.length ? Math.max(...allMembresiaIds) : 0;
+    const newId = maxId + 1;
+
+    const nuevaMembresiaNombre = 'Esta es una nueva membresia';
+    const nuevaFrecuencia = '1 vez al mes';
+
+    const updated: ListarBeneficiosResponse = {
+      ...data,
+      // 1) agregar membresía al grupo (al inicio)
+      datosBeneficioMembresia: data.datosBeneficioMembresia.map(g => {
+        if (g.id !== grupoId) return g;
+        return {
+          ...g,
+          datosMembresia: [
+            {
+              id: newId,
+              nombreMembresia: nuevaMembresiaNombre,
+              tipoMembresia: 'Membresía',
+            },
+            ...g.datosMembresia,
+          ],
+        };
+      }),
+      // 2) agregar regla de membresía a cada beneficio del grupo
+      beneficios: data.beneficios.map(b => {
+        if (b.idBeneficioGeneral !== grupoId) return b;
+        return {
+          ...b,
+          membresia: [
+            {
+              id: newId,
+              nombreMembresia: nuevaFrecuencia,
+              valor: false,
+            },
+            ...b.membresia,
+          ],
+        };
+      }),
     };
 
-    this.mantenimientoRepository.actualizarBeneficiosMembresia(request).subscribe({
-      next: () => {
-        this.utilService.dismissLoader();
-        this.editingTarget.set(null);   // 👈 salgo de modo edición
-      },
-      error: () => {
-        this.utilService.dismissLoader();
-        this.editingTarget.set(null);   // opcional salir igual o no
-      },
-    });
+    this.benficiosLista.set(updated);
+
+    // marcar como membresía nueva
+    this.nuevasMembresiasIds.update(list => [...list, newId]);
+
+    // activar modo edición automáticamente
+    this.editingTarget.set({ grupoId, membresiaId: newId });
   }
+
 
 }
 

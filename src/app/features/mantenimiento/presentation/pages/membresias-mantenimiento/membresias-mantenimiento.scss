@@ -19,9 +19,13 @@
       padding: 10px;
 
       &:first-child,
-      &:nth-child(1) {
+      &:nth-child(1):not(.card-nueva) {
         // cualquiera de los dos funciona
         min-width: 360px;
+      }
+
+      &.card-nueva {
+        min-width: 228px;
       }
 
       .header {
@@ -89,11 +93,7 @@
 
       .card {
 
-        &:first-child,
-        &:nth-child(1) {
-          // cualquiera de los dos funciona
-          min-width: auto;
-        }
+        min-width: 228px;
 
         .nombre {
           display: flex;

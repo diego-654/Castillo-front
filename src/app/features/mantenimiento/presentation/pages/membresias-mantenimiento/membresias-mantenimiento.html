@@ -1,14 +1,19 @@
 <div class="container">
-  <div class="acciones">
-    <app-button leftIcon="assets/icons/plus.svg" text="Nuevo Beneficio"></app-button>
-  </div>
-
   @for (grupo of benficiosLista()?.datosBeneficioMembresia; track grupo.id) {
+  <div class="acciones">
+    <app-button
+      leftIcon="assets/icons/plus.svg"
+      text="Nuevo Beneficio"
+      (click)="crearNuevaMembresia(grupo.id)"
+    ></app-button>
+  </div>
   <div class="beneficios-container">
-    <!-- Opcional: card general del grupo (Parque Temático, etc.) -->
+    <!-- ACCIONES POR GRUPO -->
+
+    <!-- CARD GENERAL DEL GRUPO (Parque Temático, etc.) -->
     <div class="card">
       <div class="header">
-        <app-svg-icon color="#6A3717" path="assets/icons/castillo.svg" class="icon"> </app-svg-icon>
+        <app-svg-icon color="#6A3717" path="assets/icons/castillo.svg" class="icon"></app-svg-icon>
 
         <div class="name">
           <div class="nombre">{{ grupo.nombreBeneficio }}</div>
@@ -25,11 +30,11 @@
       </div>
     </div>
 
-    <!-- Ahora sí: UNA CARD POR MEMBRESÍA (Medieval, Real, etc.) -->
+    <!-- CARDS POR MEMBRESÍA -->
     <div class="container-membresias">
       @for (membresia of grupo.datosMembresia; track membresia.id) {
 
-      <div class="card">
+      <div class="card" [class.card-nueva]="nuevasMembresiasIds().includes(membresia.id)">
         <div class="header">
           <app-svg-icon
             color="#6A3717"
@@ -38,7 +43,10 @@
           ></app-svg-icon>
 
           <div class="name">
-            <div class="nombre">{{ membresia.nombreMembresia }}</div>
+            <div class="nombre">
+              {{ membresia.nombreMembresia }}
+            </div>
+
             <div class="tipo">
               <span>{{ membresia.tipoMembresia }}</span>
               <app-svg-icon
@@ -54,9 +62,7 @@
         <div class="body">
           <!-- SOLO beneficios de ESTE grupo + ESTA membresía -->
           @for (beneficio of beneficiosPorMembresiaYGrupo(membresia.id, grupo.id); track
-          beneficio.id) {
-          <!--  -->
-          @let cfg = configBeneficioPorMembresia(beneficio, membresia.id);
+          beneficio.id) { @let cfg = configBeneficioPorMembresia(beneficio, membresia.id);
 
           <div class="nombre">
             <app-checkbox
@@ -70,7 +76,8 @@
             </span>
           </div>
           }
-          <!-- Botón solo visible cuando esta membresía está en edición -->
+
+          <!-- Botón solo visible cuando ESTA membresía está en edición -->
           @if (isEditingMembresia(grupo.id, membresia.id)) {
           <app-button
             size="small"
@@ -83,7 +90,7 @@
 
       }
     </div>
-    <!--  -->
   </div>
+
   }
 </div>
