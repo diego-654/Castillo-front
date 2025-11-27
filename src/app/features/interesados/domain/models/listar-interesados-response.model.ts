@@ -1,14 +1,9 @@
 export interface ListarInteresadosResponse {
   paginacion: {
     paginaNro: number;
-    paginaTamanio: number;
-    total: number;
     paginasTotal: number;
   };
-  orden:{
-    ordenCampo: string;
-    ordenDireccion: 'DESC' | 'ASC';
-  };
+
   lista: InteresadoData[];
 }
 

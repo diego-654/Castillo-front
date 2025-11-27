@@ -1,20 +1,18 @@
-import { ObtenerFormularioRespuestasResponse } from '@features/recoleccion-datos/domain/models/obtener-formulario-respuestas-response.molde';
+import { ObtenerFormularioRespuestasResponse } from "@features/recoleccion-datos/domain/models/obtener-formulario-respuestas-response.molde";
+import { Datum, ObtenerFormularioRespuestasResponseDto } from "../dto/obtener-formulario-respuestas-response.dto";
 
-import {
-  Datum,
-  JPregunta,
-  Lista,
-  ObtenerFormularioRespuestasResponseDto
-} from '../dto/obtener-formulario-respuestas-response.dto';
-import { FormularioClienteResponse, FormularioClienteResponseInputs, TipoInput, TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
+
+
 
 export class ObtenerFormularioRespuestasResponseMapper {
 
   static toModel(
     response: ObtenerFormularioRespuestasResponseDto,
-    id: number
-  ): FormularioClienteResponse {
-    if (!response.data || response.data.length === 0) {
+    id: number,
+  ): ObtenerFormularioRespuestasResponse {
+
+    if (!response.data) {
+
       return {
         id: 0,
         lista: []
@@ -32,31 +30,19 @@ export class ObtenerFormularioRespuestasResponseMapper {
 
     return {
       id: dto.id,
-      lista: dto.jPreguntas.map((pregunta) =>
-        this.mapPregunta(pregunta)
-      ),
+      lista: dto.jRespuestas.map((respuesta) => ({
+        typeFormulario: respuesta.typeFormulario,
+        campos: {
+          lista: respuesta.campos.lista.map((campo) => ({
+            label: campo.label,
+            extras: campo.extras,
+            isRequired: campo.isRequired,
+            type: campo.type,
+            respuesta: campo.respuesta,
+          })),
+        },
+      })),
     };
   }
 
-  private static mapPregunta(pregunta: JPregunta): FormularioClienteResponseInputs {
-    return {
-      typeFormulario: pregunta.typeFormulario,
-      campos: {
-        // 👇 otra arrow function
-        lista: pregunta.campos.lista.map((campo) =>
-          this.mapCampo(campo)
-        ),
-      },
-    };
-  }
-
-  private static mapCampo(campo: Lista): TipoInput {
-    return {
-      label: campo.label,
-      extras: campo.extras,
-      isRequired: campo.isRequired,
-      // casteamos el number del backend al enum del front (si aplica)
-      type: campo.type as TipoInputType,
-    };
-  }
 }

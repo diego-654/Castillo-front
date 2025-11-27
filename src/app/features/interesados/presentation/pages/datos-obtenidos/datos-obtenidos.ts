@@ -59,25 +59,32 @@ export default class DatosObtenidos {
       }).subscribe({
         next: (response) => {
           this.data.set(response.lista);
-          this.totalItems.set(response.paginacion.total);
           this.totalPages.set(response.paginacion.paginasTotal);
+          this.utilService.openSnackBar('Datos cargados', 'success');
           this.utilService.dismissLoader();
         },
         error: (error) => {
+          this.utilService.openSnackBar('Error al cargar datos', 'error');
           this.utilService.dismissLoader();
         },
       })
   }
   async eliminarDatoObtenido(row: InteresadoData) {
     this.utilService.showLoader();
-    this.interesadosRepository.eliminarInteresado(row.id).subscribe({
-      next: (response) => {
-        this.resetListar();
-        this.utilService.dismissLoader();
-      },
-      error: (error) => {
-        this.utilService.dismissLoader();
-      },
+    this.utilService.confirmarEliminar((result) => {
+      if (result) {
+        this.interesadosRepository.eliminarInteresado(row.id).subscribe({
+          next: (response) => {
+            this.resetListar();
+            this.utilService.openSnackBar('Dato eliminado', 'success');
+            this.utilService.dismissLoader();
+          },
+          error: (error) => {
+            this.utilService.openSnackBar('Error al eliminar dato', 'error');
+            this.utilService.dismissLoader();
+          },
+        })
+      }
     })
   }
 

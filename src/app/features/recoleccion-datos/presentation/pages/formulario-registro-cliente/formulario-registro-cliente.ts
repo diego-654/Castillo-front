@@ -198,18 +198,18 @@ export default class FormularioRegistroCliente {
 
     // 🟡 MODO EDICIÓN → actualizar respuestas existentes
     if (this.editMode()) {
-      // this.recoleccionDatosRepository.editarFormulario(baseRequest).subscribe({
-      //   next: () => {
-      //     this.utilService.dismissLoader();
-      //     this.utilService.openSnackBar('Formulario actualizado', 'success');
-      //     // si quieres: this.router.navigate(['/recoleccion-datos']);
-      //   },
-      //   error: (error) => {
-      //     this.utilService.dismissLoader();
-      //     this.utilService.openSnackBar('Error al actualizar formulario', 'error');
-      //     console.error(error);
-      //   },
-      // });
+      this.recoleccionDatosRepository.editarFormularioCliente(baseRequest).subscribe({
+        next: () => {
+          this.utilService.dismissLoader();
+          this.utilService.openSnackBar('Formulario actualizado', 'success');
+          // si quieres: this.router.navigate(['/recoleccion-datos']);
+        },
+        error: (error) => {
+          this.utilService.dismissLoader();
+          this.utilService.openSnackBar('Error al actualizar formulario', 'error');
+          console.error(error);
+        },
+      });
 
       console.log('JSON EDITAR', baseRequest);
       return;

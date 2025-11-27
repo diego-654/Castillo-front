@@ -9,9 +9,13 @@ import { map, Observable, timer } from "rxjs";
 import { ObtenerFormulariosResponseDto } from "../dto/obtener-formularios.response.dto";
 import { ObtenerFormulariosResponseMapper } from "../mapper/obtener-formularios-response.mapper";
 import { GuardarRespuestasRequestMapper } from "../mapper/guardar-respuestas-request.mapper";
+import { ObtenerFormularioClienteResponseDto } from "../dto/obtener-formulario-cliente-response.dto";
+import { ObtenerFormularioClienteResponseMapper } from "../mapper/obtener-formulario-cliente-response.mapper";
+import { ObtenerFormularioResponseDto } from "@features/evento/data/dto/obtener-formulario-response.dto";
 import { ObtenerFormularioRespuestasResponseDto } from "../dto/obtener-formulario-respuestas-response.dto";
 import { ObtenerFormularioRespuestasResponseMapper } from "../mapper/obtener-formulario-respuestas-response.mapper";
-import { ObtenerFormularioResponseDto } from "@features/evento/data/dto/obtener-formulario-response.dto";
+import { EditarFormularioClienteRequest } from "@features/recoleccion-datos/domain/models/editar-formulario-cliente-request.model";
+import { EditarRespuestasRequestMapper } from "../mapper/editar-respuestas-request.mapper";
 
 
 @Injectable({ providedIn: 'root' })
@@ -22,7 +26,7 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
   getFormularioCliente(request: number): Observable<FormularioClienteResponse> {
 
     return this.apiService.get<ObtenerFormularioResponseDto>('evento/trabajar-evento/0').pipe(
-      map((response) => ObtenerFormularioRespuestasResponseMapper.toModel(response, request))
+      map((response) => ObtenerFormularioClienteResponseMapper.toModel(response, request))
     );
 
   }
@@ -41,102 +45,17 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
   }
 
   obtenerFormularioRespuestas(id: number): Observable<ObtenerFormularioRespuestasResponse> {
-    return timer(200).pipe(
-      map(() => ({
-        id: 1,
-        lista: [
-          {
-            typeFormulario: 'Información Personal',
-            campos: {
-              lista: [
-                {
-                  label: 'Nombres',
-                  type: TipoInputType.TEXT,
-                  isRequired: true,
-                  respuesta: 'Juan Perez',
-                },
-                {
-                  label: 'Apellidos',
-                  type: TipoInputType.TEXT,
-                  isRequired: true,
-                  respuesta: 'Perez',
-                },
-                {
-                  label: 'Edad',
-                  type: TipoInputType.NUMBER,
-                  isRequired: true,
-                  respuesta: '30',
-                },
-                {
-                  label: 'Fecha de nacimiento',
-                  type: TipoInputType.DATE,
-                  isRequired: true,
-                  respuesta: new Date(),
-                },
-                {
-                  label: 'Ciudad',
-                  type: TipoInputType.TEXT,
-                  isRequired: true,
-                  respuesta: 'Madrid',
-                },
-                {
-                  label: 'Fecha de finalizacion',
-                  type: TipoInputType.DATE,
-                  isRequired: true,
-                  respuesta: new Date(),
-                },
-              ],
-            },
-          },
-          {
-            typeFormulario: 'Información de contacto',
-            campos: {
-              lista: [
-                {
-                  label: 'Correo electrónico',
-                  type: TipoInputType.TEXT,
-                  isRequired: true,
-                  respuesta: 'juanperez@gmail.com',
-                },
-                {
-                  label: 'Número de celular',
-                  type: TipoInputType.NUMBER,
-                  isRequired: true,
-                  respuesta: '123456789',
-                },
-              ],
-            },
-          },
-          {
-            typeFormulario: 'Interés en Membresía',
-            campos: {
-              lista: [
-                {
-                  label: '¿Estás interesad@ en una membresía?',
-                  type: TipoInputType.BOOLEAN,
-                  isRequired: true,
-                  respuesta: 1,
-                },
-              ],
-            },
-          },
-          {
-            campos: {
-              lista: [
-                {
-                  type: TipoInputType.BOOLEAN,
-                  label: 'Acepto que me contacten por Whatsapp y Correo Electronico',
-                  extras: 'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
-                  isRequired: true,
-                  respuesta: 'true',
-                }
-              ]
-            }
-          }
-        ],
-      }))
-    );
 
+    return this.apiService.get<ObtenerFormularioRespuestasResponseDto>(`evento/trabajar-respuesta-evento/${id}`).pipe(
+      map((response) => ObtenerFormularioRespuestasResponseMapper.toModel(response, id))
+    );
+  }
+
+  editarFormularioCliente(request: EditarFormularioClienteRequest): Observable<void> {
+
+    const body = EditarRespuestasRequestMapper.toDto(request);
+
+    return this.apiService.put<void>(`evento/trabajar-respuesta-evento/${request.id}`, body);
   }
 
 }

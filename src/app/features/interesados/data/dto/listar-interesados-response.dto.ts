@@ -1,4 +1,4 @@
-export interface ObtenerFormularioRespuestasResponseDto {
+export interface ListarInteresadosResponseDto {
   readonly estado: boolean;
   readonly icono: string;
   readonly message: string;
