@@ -7,7 +7,7 @@ import { ObtenerFormularioRespuestasResponse } from "../models/obtener-formulari
 
 export abstract class RecoleccionDatosRepository {
 
-  abstract getFormularioCliente(): Observable<FormularioClienteResponse>;
+  abstract getFormularioCliente(request: number): Observable<FormularioClienteResponse>;
   abstract getEventoFormulario(): Observable<EventoFormularioResponse>;
   abstract guardarFormulario(formulario: FormularioClienteRequest): Observable<void>;
   abstract obtenerFormularioRespuestas(id: number): Observable<ObtenerFormularioRespuestasResponse>;

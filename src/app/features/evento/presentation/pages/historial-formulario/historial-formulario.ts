@@ -58,10 +58,8 @@ export default class HistorialFormulario {
       next: (response) => {
         this.data.set(response.lista);
         // this.totalItems.set(response.paginacion.total);
-        console.log(response);
-
         console.log(this.data());
-
+        this.utilService.openSnackBar('Historial cargado', 'success');
         this.utilService.dismissLoader();
       },
       error: (error) => {

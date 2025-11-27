@@ -10,7 +10,6 @@ import {
   JPregunta,
   Lista,
 } from '../dto/obtener-formulario-response.dto';
-import { formatDateApi } from '@core/functions/format-date';
 import { parseDate } from '@core/functions/parse-date';
 
 export class ObtenerFormularioResponseMapper {
@@ -24,7 +23,7 @@ export class ObtenerFormularioResponseMapper {
         lista: [],
         nombreEncuesta: '',
         fechaInicio: null,
-        fechaFin: null,
+        fechaFin: null
       };
     }
 

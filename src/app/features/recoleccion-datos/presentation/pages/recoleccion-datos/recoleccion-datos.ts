@@ -31,8 +31,10 @@ export default class RecoleccionDatos {
         this.recoleccionDatosRepository.getEventoFormulario()
       );
       this.eventosFormulario.set(res.listaEventos);
+      this.utilService.openSnackBar('Eventos cargados', 'success');
       this.utilService.dismissLoader();
     } catch (error) {
+      this.utilService.openSnackBar('Error al cargar eventos', 'error');
       this.utilService.dismissLoader();
     }
 

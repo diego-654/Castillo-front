@@ -14,8 +14,8 @@ export class RecoleccionDatosRepositoryImpl implements RecoleccionDatosRepositor
   constructor(private dataSource: RecoleccionDatosDatasource) {
   }
 
-  getFormularioCliente(): Observable<FormularioClienteResponse> {
-    return this.dataSource.getFormularioCliente();
+  getFormularioCliente(request: number): Observable<FormularioClienteResponse> {
+    return this.dataSource.getFormularioCliente(request);
   }
 
   getEventoFormulario(): Observable<EventoFormularioResponse> {

@@ -51,30 +51,34 @@ export default class FormularioRegistroCliente {
 
   editMode = signal<boolean>(false);
 
+  //
+  formularioId = signal<number>(0);
+
 
   ngOnInit() {
     this.evaluarModo();
   }
 
   evaluarModo() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get('id') ?? 0);
     const path = this.route.snapshot.routeConfig?.path ?? '';
 
-    // path será 'formulario/editar/:id' o 'formulario/:id'
     const esEditar = path === 'formulario/editar/:id';
 
     console.log('path actual:', path, 'esEditar:', esEditar, 'id:', id);
 
+    // 👇 guardamos el id SIEMPRE que exista
+    if (id) {
+      this.formularioId.set(id);
+    }
+
     if (esEditar && id) {
-      // 👉 modo edición: cargar respuestas ya guardadas
       this.editMode.set(true);
       this.obtenerFormularioRespuestas(id);
     } else if (id) {
-      // 👉 modo “ver/llenar” formulario del evento
       this.editMode.set(false);
       this.obtenerFormularioCliente();
     } else {
-      // (por si algún día tienes un formulario sin id)
       this.editMode.set(false);
       this.obtenerFormularioCliente();
     }
@@ -100,15 +104,16 @@ export default class FormularioRegistroCliente {
       this.utilService.showLoader();
 
       const res = await firstValueFrom(
-        this.recoleccionDatosRepository.getFormularioCliente()
+        this.recoleccionDatosRepository.getFormularioCliente(this.formularioId())
       );
-
+      this.utilService.openSnackBar('Formulario cargado', 'success');
       this.formulario.set(res);
       this.crearFormulario(res);
       this.editMode.set(false);
 
       this.utilService.dismissLoader();
     } catch (error) {
+      this.utilService.openSnackBar('Error al cargar formulario', 'error');
       this.utilService.dismissLoader();
       console.error(error);
     }
@@ -175,8 +180,8 @@ export default class FormularioRegistroCliente {
 
     this.utilService.showLoader();
 
-    const request: FormularioClienteRequest = {
-      id: this.formulario()?.id ?? 0,
+    const baseRequest: FormularioClienteRequest = {
+      id: this.formularioId(), // siempre el id de ruta (evento o respuesta)
       lista: this.formulario()?.lista.map((seccion) => ({
         typeFormulario: seccion.typeFormulario,
         campos: {
@@ -185,25 +190,70 @@ export default class FormularioRegistroCliente {
             extras: campo.extras,
             isRequired: campo.isRequired,
             type: campo.type,
-            respuesta: this.form.value[this.formatoNombre(campo.label)] ?? null
-          }))
-        }
-      })) ?? []
+            respuesta: this.form.value[this.formatoNombre(campo.label)] ?? null,
+          })),
+        },
+      })) ?? [],
     };
 
-    this.recoleccionDatosRepository.guardarFormulario(request).subscribe({
+    // 🟡 MODO EDICIÓN → actualizar respuestas existentes
+    if (this.editMode()) {
+      // this.recoleccionDatosRepository.editarFormulario(baseRequest).subscribe({
+      //   next: () => {
+      //     this.utilService.dismissLoader();
+      //     this.utilService.openSnackBar('Formulario actualizado', 'success');
+      //     // si quieres: this.router.navigate(['/recoleccion-datos']);
+      //   },
+      //   error: (error) => {
+      //     this.utilService.dismissLoader();
+      //     this.utilService.openSnackBar('Error al actualizar formulario', 'error');
+      //     console.error(error);
+      //   },
+      // });
+
+      console.log('JSON EDITAR', baseRequest);
+      return;
+    }
+
+    // 🟢 MODO NUEVO → guardar respuestas por primera vez
+    this.recoleccionDatosRepository.guardarFormulario(baseRequest).subscribe({
       next: () => {
+        this.limpiarFormulario();
         this.utilService.dismissLoader();
-        // this.dialogService.showSnackBar('Formulario guardado');
+        this.utilService.openSnackBar('Formulario guardado', 'success');
+        // si quieres: this.router.navigate(['/recoleccion-datos']);
       },
       error: (error) => {
         this.utilService.dismissLoader();
-        // this.dialogService.showSnackBar('Error al guardar formulario');
-      }
+        this.utilService.openSnackBar('Error al guardar formulario', 'error');
+        console.error(error);
+      },
     });
 
-    console.log('JSON FINAL', request);
+    console.log('JSON CREAR', baseRequest);
   }
+
+  limpiarFormulario() {
+    // Limpia los valores de los controles, pero mantiene la estructura
+    if (this.form) {
+      this.form.reset();
+    }
+
+    // Si quieres, resetea también la opción de membresía
+    this.option.set(null);
+
+    // Si NO estás en modo edición, normalmente tiene sentido
+    // volver a cargar el formulario vacío desde el backend
+    if (!this.editMode()) {
+      // recarga la estructura del formulario del evento
+      this.obtenerFormularioCliente();
+    } else {
+      // En modo edición, puedes dejar el form vacío
+      // o volver a cargar las respuestas actuales del backend:
+      // this.obtenerFormularioRespuestas(this.formularioId());
+    }
+  }
+
 
   cancelar() {
     this.router.navigate(['/recoleccion-datos']);

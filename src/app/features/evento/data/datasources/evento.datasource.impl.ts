@@ -11,7 +11,7 @@ import { CrearEventoRequestMapper } from "../mappers/crear-evento-request.mapper
 import { ListarEventosResponseMapper } from "../mappers/listar-eventos-response.mapper";
 import { ListarEventosResponseDto } from "../dto/listar-eventos-response.dto";
 import { ObtenerFormularioResponseDto } from "../dto/obtener-formulario-response.dto";
-import { ObtenerFormularioResponseMapper } from "../mappers/obtener-formulario-response.dto";
+import { ObtenerFormularioResponseMapper } from "../mappers/obtener-formulario-response.mapper";
 import { EditarFormularioRequest } from "@features/evento/domain/models/editar-formulario-request.model";
 import { EditarFormularioRequestMapper } from "../mappers/editar-formulario-request.mapper";
 
