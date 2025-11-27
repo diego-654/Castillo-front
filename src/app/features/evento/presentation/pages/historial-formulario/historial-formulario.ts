@@ -47,31 +47,45 @@ export default class HistorialFormulario {
     this.utilService.showLoader();
 
     this.historialRepository
-      .listarHistorialFormulario({
-        paginacion: {
-          paginaNro: this.page(),
-          paginaTamanio: this.itemsPerPage(),
-        },
-      }).subscribe({
-        next: (response) => {
-          this.data.set(response.lista);
-          this.totalItems.set(response.paginacion.total);
-          this.utilService.dismissLoader();
-        },
-        error: (error) => {
-          this.utilService.dismissLoader();
-        },
-      })
-  }
-  async eliminarHistorial(row: HistorialFormularioData) {
-    this.historialRepository.eliminarHistorialFormulario(row.id).subscribe({
+      .listarHistorialFormulario2(
+      //   {
+      //   paginacion: {
+      //     paginaNro: this.page(),
+      //     paginaTamanio: this.itemsPerPage(),
+      //   },
+      // }
+    ).subscribe({
       next: (response) => {
-        this.resetListar();
+        this.data.set(response.lista);
+        // this.totalItems.set(response.paginacion.total);
+        console.log(response);
+
+        console.log(this.data());
+
+        this.utilService.dismissLoader();
       },
       error: (error) => {
         this.utilService.dismissLoader();
       },
     })
+  }
+  async eliminarHistorial(row: HistorialFormularioData) {
+    this.utilService.confirmarEliminar((result) => {
+      if (result) {
+        this.historialRepository.eliminarHistorialFormulario(row.id).subscribe({
+          next: (response) => {
+            this.utilService.openSnackBar('Historial eliminado', 'success');
+            this.resetListar();
+
+          },
+          error: (error) => {
+            this.utilService.dismissLoader();
+            this.utilService.openSnackBar('Error al eliminar historial', 'error');
+          },
+        })
+      }
+    })
+
   }
   resetListar() {
     this.page.set(1);

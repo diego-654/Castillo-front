@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditarFormularioRequest } from '@features/evento/domain/models/editar-formulario-request.model';
 
 @Component({
   selector: 'app-formulario',
@@ -54,13 +55,24 @@ export default class Formulario {
 
   editMode = signal<boolean>(false);
 
+  idFormulario = signal<number>(0);
+
   ngOnInit() {
+    let parent = this.route;
+    while (parent && parent.snapshot.paramMap.get('id') == null) {
+      parent = parent.parent!;
+    }
+
+    const id = Number(parent?.snapshot.paramMap.get('id') ?? 0);
+    this.idFormulario.set(id);
+    console.log(this.idFormulario());
+
     this.obtenerFormulario();
   }
 
   async obtenerFormulario() {
     this.utilService.showLoader();
-    if (this.route.snapshot.paramMap.has('id') && this.route.snapshot.paramMap.get('id') != undefined) {
+    if (this.idFormulario()) {
       const id = Number(this.route.snapshot.paramMap.get('id'));
 
       const res = await firstValueFrom(
@@ -155,29 +167,94 @@ export default class Formulario {
   }
 
   guardarFormulario() {
+    const form = this.formulario();
+    if (!form) return;
 
-    const FormularioEventoRequest: FormularioEventoRequest = {
-      id: this.formulario()?.id ?? 0,
-      nombreEncuesta: this.formulario()?.nombreEncuesta ?? '',
-      fechaInicio: this.formulario()?.fechaInicio,
-      fechaFin: this.formulario()?.fechaFin,
-      lista: this.formulario()?.lista.map((seccion) => ({
-        typeFormulario: seccion.typeFormulario,
-
-        campos: {
-          lista: seccion.campos.lista.map((campo) => ({
-            label: campo.label,
-            extras: campo.extras,
-            isRequired: campo.isRequired,
-            type: campo.type,
-          }))
-        }
-      })) ?? []
+    if (!form.fechaInicio || !form.fechaFin) {
+      console.log('Debes completar los campos de fecha');
+      // this.utilService.openSnackBar('Debes completar los campos de fecha', 'warning');
+      return;
     }
 
-    console.log(FormularioEventoRequest);
+    this.utilService.showLoader();
 
+    // Payload base común para crear/editar
+    const payloadBase: FormularioEventoRequest = {
+      nombreEncuesta: form.nombreEncuesta,
+      fechaInicio: form.fechaInicio,
+      fechaFin: form.fechaFin,
+      lista:
+        form.lista.map((seccion) => ({
+          typeFormulario: seccion.typeFormulario,
+          campos: {
+            lista: seccion.campos.lista.map((campo) => ({
+              label: campo.label,
+              extras: campo.extras,
+              isRequired: campo.isRequired,
+              type: campo.type,
+            })),
+          },
+        })) ?? [],
+    };
 
+    // 🔁 Si estamos en modo edición → EDITAR
+    if (this.editMode()) {
+      const requestEditar: EditarFormularioRequest = {
+        id: this.idFormulario(),
+        ...payloadBase,
+      };
+
+      this.eventoRepository.editarFormulario(requestEditar).subscribe({
+        next: () => {
+          this.utilService.dismissLoader();
+          this.utilService.openSnackBar('Formulario actualizado', 'success');
+          // Si quieres, recargar datos o navegar:
+          // this.obtenerFormulario();
+          this.eventoRepository.obtenerFormulario(this.idFormulario()).subscribe({
+            next: (response) => {
+              this.formulario.set(response);
+            },
+            error: (error) => {
+              this.utilService.dismissLoader();
+              this.utilService.openSnackBar('Error al obtener formulario', 'error');
+              console.error(error);
+            },
+          });
+          // this.router.navigate(['/eventos/lista']);
+        },
+        error: (error) => {
+          this.utilService.dismissLoader();
+          this.utilService.openSnackBar('Error al actualizar formulario', 'error');
+          console.error(error);
+        },
+      });
+
+      return;
+    }
+
+    // 🆕 Si NO es modo edición → CREAR
+    this.eventoRepository.guardarFormulario(payloadBase).subscribe({
+      next: () => {
+        this.resetFormulario();
+        this.utilService.dismissLoader();
+        this.utilService.openSnackBar('Formulario guardado', 'success');
+      },
+      error: (error) => {
+        this.utilService.dismissLoader();
+        this.utilService.openSnackBar('Error al guardar formulario', 'error');
+        console.error(error);
+      },
+    });
+  }
+
+  resetFormulario() {
+    this.formulario.update((prev) => ({
+      ...prev!,
+      nombreEncuesta: '',
+      fechaInicio: null,
+      fechaFin: null,
+      lista: formularioData.lista,
+    }));
   }
 
   cancelar() {

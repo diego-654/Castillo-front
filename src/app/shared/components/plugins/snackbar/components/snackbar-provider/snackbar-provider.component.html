@@ -1,0 +1,9 @@
+<div class="snackbars-container">
+  @for (snackbar of snackbarService.snackbars(); track $index) {
+
+  <app-snackbar
+    [snackbar]="snackbar"
+    (close)="snackbarService.close(snackbar.id)"
+  ></app-snackbar>
+  }
+</div>

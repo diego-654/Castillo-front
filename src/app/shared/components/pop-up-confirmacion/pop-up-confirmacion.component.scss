@@ -1,0 +1,37 @@
+.dialog-container {
+  text-align: center;
+  padding: 24px 16px 16px 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -2%;
+    text-align: center;
+    color: var(--Brand-100, #1a1919);
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -2%;
+    text-align: center;
+    color: black;
+  }
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+
+  app-button {
+    flex: 1;
+    --width: 100%;
+  }
+}

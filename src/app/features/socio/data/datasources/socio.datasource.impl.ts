@@ -194,4 +194,21 @@ export class SocioDatasourceImpl implements SocioDatasource {
       })
     );
   }
+
+  suspenderMembresia(request: number): Observable<void> {
+    return timer(200).pipe(
+      map(() => {
+        console.log("suspender membresia", request);
+      })
+    );
+  }
+
+  renovarMembresia(request: number): Observable<void> {
+    return timer(200).pipe(
+      map(() => {
+        console.log("renovar membresia", request);
+      })
+    );
+  }
+
 }

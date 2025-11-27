@@ -3,18 +3,20 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 // import { PopUpConfirmacionComponent } from '@shared/components';
 import { LoaderService } from '../../plugins/loader';
+import { SnackbarService } from '@shared/components/plugins/snackbar';
+import { PopUpConfirmacionComponent } from '@shared/components/pop-up-confirmacion/pop-up-confirmacion.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilService {
-  // private _snackBarService = inject(SnackbarService);
+  private _snackBarService = inject(SnackbarService);
   private _loaderService = inject(LoaderService);
   private _dialog = inject(MatDialog);
 
-  // openSnackBar(message: string, type: 'success' | 'error' | 'info' = 'info') {
-  //   this._snackBarService.show(message, type);
-  // }
+  openSnackBar(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this._snackBarService.show(message, type);
+  }
 
   showLoader() {
     this._loaderService.showLoader();
@@ -25,27 +27,27 @@ export class UtilService {
   }
 
 
-  // confirmarEliminar(callback: (result: any) => void) {
-  //   const dialogRef = this._dialog.open(PopUpConfirmacionComponent, {
-  //     width: '477px',
-  //     maxWidth: '100%',
-  //     maxHeight: '100%',
-  //     autoFocus: false,
-  //     restoreFocus: false,
+  confirmarEliminar(callback: (result: any) => void) {
+    const dialogRef = this._dialog.open(PopUpConfirmacionComponent, {
+      width: '477px',
+      maxWidth: '100%',
+      maxHeight: '100%',
+      autoFocus: false,
+      restoreFocus: false,
 
-  //     data: {
-  //       title: 'Eliminar registro',
-  //       subTitle:
-  //         '¿Estas seguro que deseas eliminar el registro seleccionado? No se podrá recuperar dicha información.',
-  //     },
-  //   });
+      data: {
+        title: 'Eliminar registro',
+        subTitle:
+          '¿Estas seguro que deseas eliminar el registro seleccionado? No se podrá recuperar dicha información.',
+      },
+    });
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       callback(result);
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        callback(result);
+      }
+    });
+  }
 
 
 

@@ -8,6 +8,7 @@ import { FormularioEventoRequest } from "@features/evento/domain/models/formular
 import { ListarHistorialFormularioRequest } from "@features/evento/domain/models/listar-historial-formulario-request.model";
 import { ListarHistorialFormularioResponse } from "@features/evento/domain/models/listar-historial-formulario-response.model";
 import { ObtenerFormularioResponse } from "@features/evento/domain/models/obtener-formulario.response.model";
+import { EditarFormularioRequest } from "@features/evento/domain/models/editar-formulario-request.model";
 
 @Injectable({ providedIn: 'root' })
 export class EventoRepositoryImpl implements EventoRepository {
@@ -28,4 +29,13 @@ export class EventoRepositoryImpl implements EventoRepository {
   obtenerFormulario(id: number): Observable<ObtenerFormularioResponse> {
     return this.dataSource.obtenerFormulario(id);
   }
+
+  listarHistorialFormulario2(): Observable<ListarHistorialFormularioResponse> {
+    return this.dataSource.listarHistorialFormulario2();
+  }
+
+  editarFormulario(request: EditarFormularioRequest): Observable<void> {
+    return this.dataSource.editarFormulario(request);
+  }
+
 }

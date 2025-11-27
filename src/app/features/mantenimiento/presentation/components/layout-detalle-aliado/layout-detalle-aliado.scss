@@ -1,0 +1,84 @@
+.container {
+  padding-top: 40px;
+
+  .header {
+    padding: 32px 24px 0 24px;
+    background-color: var(--backgroud-outlet-color);
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0px;
+    left: var(--sidebar-width);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    height: 100vh;
+    overflow: auto;
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      svg {
+        cursor: pointer;
+
+      }
+
+      .circle {
+        width: 70px;
+        height: 70px;
+        background-color: #6A3717;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: linear-gradient(311.72deg, #4D91CB -6.42%, #00A979 100%);
+
+
+        span {
+          font-weight: 500;
+          font-size: 25px;
+          line-height: 120%;
+          letter-spacing: 0%;
+          color: #ffffff;
+        }
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .name {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 120%;
+          color: #000000;
+        }
+
+        .state {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 120%;
+          color: #ffffff;
+          background-color: #000000;
+          border-radius: 20px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+        }
+      }
+    }
+
+  }
+}
+
+.router-outlet {
+  padding: 24px;
+}

@@ -41,6 +41,8 @@ import { ReportesDataSourceImpl } from '@features/reportes/data/datasources/repo
 import { ReportesRepositoryImpl } from '@features/reportes/data/repositories/reportes.repository.impl';
 import { ReportesDataSource } from '@features/reportes/domain/datasources/reportes.datasources';
 import { ReportesRepository } from '@features/reportes/domain/repositories/reportes.repository';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorInterceptor } from '@core/interceptor/error/error.interceptor';
 
 registerLocaleData(localeEsPe);
 
@@ -52,25 +54,28 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(
+      withInterceptors([errorInterceptor])
+    ),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
 
-    {provide: RecoleccionDatosRepository, useClass: RecoleccionDatosRepositoryImpl},
-    {provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl},
-    {provide: EventoRepository, useClass: EventoRepositoryImpl},
-    {provide: EventoDatasource, useClass: EventoDatasourceImpl},
-    {provide: SocioRepository, useClass: SocioRepositoryImpl},
-    {provide: SocioDatasource, useClass: SocioDatasourceImpl},
-    {provide: InteresadosRepository, useClass: InteresadosRepositoryImpl},
-    {provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp},
-    {provide: FinanzasRepository, useClass: FinanzasRepositoryImpl},
-    {provide: FinanzasDatasource, useClass: FinanzasDatasourceImpl},
-    {provide: AgendaRepository, useClass: AgendaRepositoryImpl},
-    {provide: AgendaDatasource, useClass: AgendaDatasourceImpl},
-    {provide: MantenimientoRepository, useClass: MantenimientoRepositoryImpl},
-    {provide: MantenimientoDatasource, useClass: MantenimientoDatasourceImpl},
-    {provide: ReportesRepository, useClass: ReportesRepositoryImpl},
-    {provide: ReportesDataSource, useClass: ReportesDataSourceImpl},
+    { provide: RecoleccionDatosRepository, useClass: RecoleccionDatosRepositoryImpl },
+    { provide: RecoleccionDatosDatasource, useClass: RecoleccionDatosDatasourceImpl },
+    { provide: EventoRepository, useClass: EventoRepositoryImpl },
+    { provide: EventoDatasource, useClass: EventoDatasourceImpl },
+    { provide: SocioRepository, useClass: SocioRepositoryImpl },
+    { provide: SocioDatasource, useClass: SocioDatasourceImpl },
+    { provide: InteresadosRepository, useClass: InteresadosRepositoryImpl },
+    { provide: InteresadosDataSource, useClass: InteresadosDataSourcesImp },
+    { provide: FinanzasRepository, useClass: FinanzasRepositoryImpl },
+    { provide: FinanzasDatasource, useClass: FinanzasDatasourceImpl },
+    { provide: AgendaRepository, useClass: AgendaRepositoryImpl },
+    { provide: AgendaDatasource, useClass: AgendaDatasourceImpl },
+    { provide: MantenimientoRepository, useClass: MantenimientoRepositoryImpl },
+    { provide: MantenimientoDatasource, useClass: MantenimientoDatasourceImpl },
+    { provide: ReportesRepository, useClass: ReportesRepositoryImpl },
+    { provide: ReportesDataSource, useClass: ReportesDataSourceImpl },
   ]
 };
 

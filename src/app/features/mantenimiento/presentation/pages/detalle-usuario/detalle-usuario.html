@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="card info-personal">
+    <div class="header">
+      <div class="title">Información Personal</div>
+    </div>
+    <div class="body">
+      <div class="dato">
+        <div class="label">Nombre Completo</div>
+        <div class="value">{{ detalleUsuario()?.nombre }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">RUC</div>
+        <div class="value">{{ detalleUsuario()?.ruc }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Fecha de de Icorporación</div>
+        <div class="value">{{ detalleUsuario()?.fechaIcorporacion }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Fecha de Caducidad</div>
+        <div class="value">{{ detalleUsuario()?.fechaCaducidad }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Socio Representante</div>
+        <div class="value">{{ detalleUsuario()?.socioRepresentante }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="card credenciales">
+    <div class="header">
+      <div class="title">Credenciales</div>
+    </div>
+    <div class="body">
+      <div class="dato">
+        <div class="label">Usuario</div>
+        <app-input placeholder="Ej: Jromero"></app-input>
+      </div>
+      <div class="dato">
+        <div class="label">Contraseña</div>
+        <app-input placeholder="Escriba su contraseña" [modePassword]="true"></app-input>
+      </div>
+      <div class="dato">
+        <app-button size="small" text="Guardar" type="primary"></app-button>
+      </div>
+    </div>
+  </div>
+  <div class="card info-contacto">
+    <div class="header">
+      <div class="title">
+        Información de Contacto ({{ detalleUsuario()?.listContacto?.length }} / 2)
+      </div>
+    </div>
+    <div class="body">
+      @for (item of detalleUsuario()?.listContacto; track $index) {
+      <div class="dato">
+        <div class="label">Representante</div>
+        <div class="value">{{ item.socioNombre }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Correo Electrónico</div>
+        <div class="value">{{ item.correo }}</div>
+      </div>
+      <div class="dato">
+        <div class="label">Télefono</div>
+        <div class="value">{{ item.telefono }}</div>
+      </div>
+
+      <div class="dato">
+        <div class="label">Dirección</div>
+        <div class="value">{{ item.direccion }}</div>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="card lista-beneficios">
+    <div class="header">
+      <div class="title">Lista de Beneficios</div>
+      <div class="action">
+        <app-button
+          size="small"
+          text="Añadir Beneficio"
+          leftIcon="assets/icons/plus-circle.svg"
+        ></app-button>
+      </div>
+    </div>
+    <div class="body">
+      @for (lista of detalleUsuario()?.listaBeneficios; track $index) {
+      <div class="nombre">
+        {{ lista.nombre }}
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Beneficio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of lista.beneficios; track $index) {
+          <tr>
+            <td>{{ item.nombre }}</td>
+            <td>
+              <app-button
+                size="small"
+                leftIcon="assets/icons/edit.svg"
+                type="tertiary"
+              ></app-button>
+              <app-button
+                size="small"
+                leftIcon="assets/icons/trash.svg"
+                type="tertiary"
+              ></app-button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+      }
+    </div>
+  </div>
+</div>

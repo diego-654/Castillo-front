@@ -10,6 +10,7 @@ import { Column } from '../../data/aliados-data';
 import { AliadoData } from '@features/mantenimiento/domain/models/listar-aliado-response.model';
 import { AliadosColumns } from '../../data/aliados-data';
 import { DialogService } from '@shared/components/plugins/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aliados-mantenimiento',
@@ -26,6 +27,7 @@ export default class AliadosMantenimiento {
   readonly aliadoRepository = inject(MantenimientoRepository);
   dialogService = inject(DialogService);
   utilService = inject(UtilService);
+  router = inject(Router);
 
   //** filtros */
   selectedItem = signal<AliadoData | null>(null);
@@ -58,7 +60,7 @@ export default class AliadosMantenimiento {
       .subscribe({
         next: (response) => {
           this.data.set(response.lista);
-          this.totalItems.set(response.paginacion.total);
+          this.totalItems.set(response.paginacion.paginasTotal);
           this.utilService.dismissLoader();
         },
         error: (error) => {
@@ -82,6 +84,10 @@ export default class AliadosMantenimiento {
   onPageChange(newPage: number) {
     this.page.set(newPage);
     this.listar();
+  }
+
+  IrDetalleUsuario(id: number) {
+    this.router.navigate(['/mantenimiento', 'detalle', id]);
   }
 
 

@@ -1,0 +1,23 @@
+<div class="dialog-container">
+  <h2>{{ title }}</h2>
+  <p>
+    {{ subTitle }}
+  </p>
+</div>
+
+<mat-dialog-actions>
+  <div class="buttons">
+    <app-button
+      text="Cancelar"
+      (click)="cancelar()"
+      type="secondary"
+      size="large"
+    ></app-button>
+    <app-button
+      text="Aceptar"
+      (click)="aceptar()"
+      type="primary"
+      size="large"
+    ></app-button>
+  </div>
+</mat-dialog-actions>

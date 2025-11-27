@@ -32,7 +32,7 @@ export const SIDEBAR_ITEMS: MenuItem[] = [
   },
   {
     label: 'Mantenimiento',
-    url: '/mantenimiento',
+    url: '/mantenimiento/membresias',
   },
   {
     label: 'Reportes',

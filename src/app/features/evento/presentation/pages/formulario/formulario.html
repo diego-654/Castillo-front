@@ -98,7 +98,11 @@
       <app-button size="large" type="secondary" text="Cancelar" (click)="cancelar()"></app-button>
 
       }
-      <app-button size="large" text="Guardar" (click)="guardarFormulario()"></app-button>
+      <app-button
+        size="large"
+        [text]="editMode() ? 'Editar formulario' : 'Guardar formulario'"
+        (click)="guardarFormulario()"
+      ></app-button>
     </div>
   </div>
 </div>

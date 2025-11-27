@@ -2,7 +2,9 @@ import { FormularioEventoRequest, TipoInputType } from "@features/evento/domain/
 
 
 export const formularioData: FormularioEventoRequest = {
-  id: 1,
+  nombreEncuesta: '',
+  fechaInicio: null,
+  fechaFin: null,
   lista: [
     {
       typeFormulario: 'Información Personal',

@@ -1,0 +1,48 @@
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  min-width: 400px;
+  padding: 0px 12px;
+  border-radius: 4px;
+
+  min-height: 48px;
+
+  font-size: 16px;
+  font-weight: 400;
+  color: #4d4b4b;
+
+  animation: slideIn 0.15s ease-out;
+
+  &.success {
+    background-color: #d1fadf;
+  }
+
+  &.error {
+    background-color: #fee4e2;
+  }
+
+  &.info {
+    background-color: #e0f2fe;
+  }
+
+  .close {
+    margin-left: auto;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+  }
+}

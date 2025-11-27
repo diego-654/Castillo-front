@@ -1,11 +1,10 @@
 
 
 export interface FormularioEventoRequest {
-  id: number;
   lista: FormularioClienteRequestItem[];
-  nombreEncuesta?: string;
-  fechaInicio?: Date;
-  fechaFin?: Date;
+  nombreEncuesta: string;
+  fechaInicio: Date | null;
+  fechaFin: Date | null;
 }
 
 export interface FormularioClienteRequestItem {
@@ -18,7 +17,7 @@ export interface FormularioClienteRequestItem {
 export interface FormularioClienteRequestCampo {
   label: string;
   extras?: string;
-  isRequired?: boolean;
+  isRequired: boolean;
   type: TipoInputType;
 }
 

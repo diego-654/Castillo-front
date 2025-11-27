@@ -29,15 +29,19 @@ export class DetalleSocioLayout {
   ]);
 
   ngOnInit() {
-    this.obtenerIdSocio();
+    let parent = this.route;
+    while (parent && parent.snapshot.paramMap.get('id') == null) {
+      parent = parent.parent!;
+    }
 
-  }
-
-  async obtenerIdSocio() {
-    const id = Number(this.route.snapshot.paramMap.get('id') ?? 0);
+    const id = Number(parent?.snapshot.paramMap.get('id') ?? 0);
     this.socioId.set(id);
+    console.log(this.socioId());
+
     this.obtenerDatosMiembro();
   }
+
+
 
   async obtenerDatosMiembro() {
     const res = await firstValueFrom(
