@@ -31,13 +31,11 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
 
   }
 
-
   getEventoFormulario(): Observable<EventoFormularioResponse> {
     return this.apiService.get<ObtenerFormulariosResponseDto>('evento/trabajar-evento/0').pipe(
       map((response) => ObtenerFormulariosResponseMapper.toModel(response))
     );
   }
-
 
   guardarFormulario(formulario: FormularioClienteRequest): Observable<void> {
     const body = GuardarRespuestasRequestMapper.toDto(formulario);

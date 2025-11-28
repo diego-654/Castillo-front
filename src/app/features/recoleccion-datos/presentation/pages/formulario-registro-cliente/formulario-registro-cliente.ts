@@ -119,6 +119,10 @@ export default class FormularioRegistroCliente {
     }
   }
 
+  toggleVisibility(input: any) {
+  input.visible = !input.visible;
+}
+
   aplicarOption(option: Option) {
     this.option.set(option.value);
   }

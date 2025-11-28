@@ -6,7 +6,7 @@
   <app-input
     size="small"
     placeholder="Ingrese Nombre de la encuesta"
-    label="Número de Encuesta"
+    label="Nombre de Encuesta"
     (valueChange)="changeNombreEncuesta($event)"
     [value]="formulario()?.nombreEncuesta ?? ''"
   ></app-input>
@@ -86,6 +86,9 @@
           </div>
         </div>
         }
+        <div class="delete-icon" (click)="eliminarCampo()">
+          <app-svg-icon path="assets/icons/trash.svg" class="icon"></app-svg-icon>
+        </div>
       </div>
 
       }
