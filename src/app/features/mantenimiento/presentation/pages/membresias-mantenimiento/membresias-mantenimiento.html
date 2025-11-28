@@ -65,25 +65,52 @@
           beneficio.id) { @let cfg = configBeneficioPorMembresia(beneficio, membresia.id);
 
           <div class="nombre">
-            <app-checkbox
-              [readonly]="!isEditingMembresia(grupo.id, membresia.id)"
-              [value]="cfg?.valor ?? false"
-              (valueChange)="onCheckboxChange(grupo.id, membresia.id, beneficio.id, $event)"
-            ></app-checkbox>
-
+            @if (isEditingMembresia(grupo.id, membresia.id)) {
+            <!-- MODO EDICIÓN: input editable -->
+            <app-input
+              size="small"
+              placeholder="Ingrese"
+              [value]="cfg?.nombreMembresia ?? ''"
+              (valueChange)="onFrecuenciaChange(grupo.id, membresia.id, beneficio.id, $event)"
+            ></app-input>
+            } @else {
+            <!-- MODO SOLO LECTURA: texto o '-' -->
             <span class="frecuencia">
-              {{ cfg?.nombreMembresia }}
+              {{
+                cfg?.nombreMembresia && cfg?.nombreMembresia?.trim() !== ''
+                  ? cfg?.nombreMembresia
+                  : '-'
+              }}
             </span>
+            }
           </div>
           }
 
           <!-- Botón solo visible cuando ESTA membresía está en edición -->
           @if (isEditingMembresia(grupo.id, membresia.id)) {
-          <app-button
-            size="small"
-            text="Guardar"
-            (click)="guardarMembresia(grupo.id, membresia.id)"
-          ></app-button>
+          <div class="buttons">
+            <!-- eliminar -->
+            <button class="eliminar-btn" (click)="eliminarMembresia(grupo.id, membresia.id)">
+              Eliminar
+            </button>
+
+            @if (isEditingMembresia(grupo.id, membresia.id)) {
+            <div class="buttons">
+              <app-button
+                size="small"
+                text="Cancelar"
+                type="secondary"
+                (click)="cancelarGuardarMembresia()"
+              ></app-button>
+
+              <app-button
+                size="small"
+                text="Guardar"
+                (click)="guardarMembresia(grupo.id, membresia.id)"
+              ></app-button>
+            </div>
+            }
+          </div>
           }
         </div>
       </div>

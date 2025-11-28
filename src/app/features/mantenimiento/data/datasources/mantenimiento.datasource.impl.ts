@@ -11,9 +11,14 @@ import { AliadoData, ListarAliadoResponse } from '@features/mantenimiento/domain
 import { ListarBeneficiosResponse } from '@features/mantenimiento/domain/models/listar-beneficios-response.model';
 import { ListarConcesionarioRequest } from '@features/mantenimiento/domain/models/listar-concesionario-request.model';
 import { ListarConcesionarioResponse, ConcesionarioData } from '@features/mantenimiento/domain/models/listar-concesionario-response.model';
-import { map, Observable, timer } from 'rxjs';
+import { forkJoin, map, Observable, timer } from 'rxjs';
 import { ListarBeneficiosResponseDto } from '../dto/listar-beneficios-response.dto';
 import { ListarBeneficiosResponseMapper } from '../mapper/listar-beneficios-response.mapper';
+import { CrearNuevaMembresiaRequestMapper } from '../mapper/crear-nueva-membresia.mapper';
+import { ListarMembresiasResponseDto } from '../dto/listar-membresias-response.dto';
+import { ListarMembresiasResponseMapper } from '../mapper/listar-membresias-response.mapper';
+import { EditarMembresiaRequestMapper } from '../mapper/editar-membresia-request.mapper';
+import { EditarMembresiaRequest } from '@features/mantenimiento/domain/models/editar-membresia-request.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -22,11 +27,21 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
   apiService = inject(ApiService);
 
   listarBeneficios(): Observable<ListarBeneficiosResponse> {
-    return this.apiService.get<ListarBeneficiosResponseDto>('membresia/trabajar-beneficio/0').pipe(
-      map((response) => ListarBeneficiosResponseMapper.toModel(response))
+    return forkJoin({
+      beneficios: this.apiService.get<ListarBeneficiosResponseDto>(
+        'membresia/trabajar-beneficio/0'
+      ),
+      membresias: this.apiService.get<ListarMembresiasResponseDto>(
+        'membresia/trabajar-membresia/0' // endpoint de tu JSON de arriba
+      ),
+    }).pipe(
+      map(({ beneficios, membresias }) => {
+        const base = ListarBeneficiosResponseMapper.toModel(beneficios);
+        return ListarMembresiasResponseMapper.toModel(base, membresias);
+      })
     );
-
   }
+
   listarAliados(request: ListarAliadoRequest): Observable<ListarAliadoResponse> {
     return timer(200).pipe(
       map((): ListarAliadoResponse => {
@@ -113,12 +128,21 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
   }
 
   crearNuevaMembresia(request: CrearNuevaMembresiaRequest): Observable<void> {
-    return timer(200).pipe(
-      map((): void => {
-        console.log('crear nueva membresia');
-        console.log(request);
-      })
-    );
+    const body = CrearNuevaMembresiaRequestMapper.toDto(request);
+
+    return this.apiService.post<void>('membresia/trabajar-membresia/0', body)
+  }
+
+  editarMembresia(request: EditarMembresiaRequest): Observable<void> {
+    const body = EditarMembresiaRequestMapper.toDto(request);
+
+    return this.apiService.put<void>(`membresia/trabajar-membresia/${request.id}`, body)
+  }
+
+  eliminarMembresia(id: number): Observable<void> {
+
+    return this.apiService.delete<void>(`membresia/trabajar-membresia/${id}`);
+
   }
 
   obtenerDetalleAliado(request: number): Observable<DetalleAliadoResponse> {

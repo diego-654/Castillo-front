@@ -12,6 +12,7 @@ import { ListarConcesionarioResponse } from "../models/listar-concesionario-resp
 import { ActualizarBeneficiosMembresiaRequest } from "../models/actualizar-beneficio-membresia-request.model";
 import { CrearNuevaMembresiaRequest } from "../models/crear-membresia-request.model";
 import { DetalleAliadoResponse } from "../models/detalle-aliado-response.model";
+import { EditarMembresiaRequest } from "../models/editar-membresia-request.model";
 
 export abstract class MantenimientoDatasource {
 
@@ -23,6 +24,8 @@ export abstract class MantenimientoDatasource {
   abstract crearConcesionario(request: CrearConcesionarioRequest): Observable<void>;
   abstract actualizarBeneficiosMembresia(request: ActualizarBeneficiosMembresiaRequest): Observable<void>;
   abstract crearNuevaMembresia(request: CrearNuevaMembresiaRequest): Observable<void>;
+  abstract editarMembresia(request: EditarMembresiaRequest): Observable<void>;
+  abstract eliminarMembresia(id: number): Observable<void>;
 
   abstract obtenerDetalleAliado(request: number): Observable<DetalleAliadoResponse>;
 }

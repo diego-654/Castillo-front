@@ -4,7 +4,6 @@ export interface CrearNuevaMembresiaRequest {
   tipoMembresia: string;      // "Membresía"
   beneficios: {
     idBeneficio: number;      // Ingreso libre, Piscina, etc.
-    valor: boolean;           // checkbox
     frecuencia: string;       // "1 vez al mes" por defecto
   }[];
 }

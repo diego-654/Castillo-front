@@ -53,6 +53,7 @@
           .tipo {
             display: flex;
             gap: 5px;
+            justify-content: space-between;
 
             .icon-edit {
               width: 20px;
@@ -80,6 +81,12 @@
 
           padding: 5px 5px 5px 0px;
           border-bottom: 1px solid #6A3717;
+          min-height: 44px;
+
+          app-input {
+            width: 100%;
+          }
+
         }
 
       }
@@ -121,6 +128,27 @@
 
     }
 
+  }
+
+}
+
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .eliminar-btn {
+    background-color: #991C26;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    height: 33px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
   }
 
 }

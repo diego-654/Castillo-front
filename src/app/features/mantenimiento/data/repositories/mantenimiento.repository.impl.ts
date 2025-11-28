@@ -5,6 +5,7 @@ import { CrearAliadoRequest } from '@features/mantenimiento/domain/models/crear-
 import { CrearConcesionarioRequest } from '@features/mantenimiento/domain/models/crear-concesionario-request.model';
 import { CrearNuevaMembresiaRequest } from '@features/mantenimiento/domain/models/crear-membresia-request.model';
 import { DetalleAliadoResponse } from '@features/mantenimiento/domain/models/detalle-aliado-response.model';
+import { EditarMembresiaRequest } from '@features/mantenimiento/domain/models/editar-membresia-request.model';
 import { ListarAliadoRequest } from '@features/mantenimiento/domain/models/listar-aliado-request.model';
 import { ListarAliadoResponse } from '@features/mantenimiento/domain/models/listar-aliado-response.model';
 import { ListarBeneficiosResponse } from '@features/mantenimiento/domain/models/listar-beneficios-response.model';
@@ -41,6 +42,14 @@ export class MantenimientoRepositoryImpl implements MantenimientoRepository {
   }
   crearNuevaMembresia(request: CrearNuevaMembresiaRequest): Observable<void> {
     return this.dataSource.crearNuevaMembresia(request);
+  }
+
+  editarMembresia(request: EditarMembresiaRequest): Observable<void> {
+    return this.dataSource.editarMembresia(request);
+  }
+
+  eliminarMembresia(id: number): Observable<void> {
+    return this.dataSource.eliminarMembresia(id);
   }
 
   obtenerDetalleAliado(request: number): Observable<DetalleAliadoResponse> {
