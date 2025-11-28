@@ -9,7 +9,10 @@ import { formularioData } from '../../data/formulario-data';
 import { TipoInputType } from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
 import { optionsData } from '@features/recoleccion-datos/presentation/pages/formulario-registro-cliente/formulario-registro-cliente';
 import { DialogService } from '@shared/components/plugins/dialog';
-import { AgregarFormulario, Pregunta } from '../../components/agregar-formulario/agregar-formulario';
+import {
+  AgregarFormulario,
+  Pregunta,
+} from '../../components/agregar-formulario/agregar-formulario';
 import { EventoRepository } from '@features/evento/domain/repositories/evento.repository';
 import { UtilService } from '@shared/components/services/util/util.service';
 import { CheckboxComponent } from '@shared/components/checkbox/checkbox.component';
@@ -33,13 +36,12 @@ import { EditarFormularioRequest } from '@features/evento/domain/models/editar-f
     CheckboxComponent,
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './formulario.html',
   styleUrl: './formulario.scss',
 })
 export default class Formulario {
-
   dialogService = inject(DialogService);
   eventoRepository = inject(EventoRepository);
   utilService = inject(UtilService);
@@ -75,21 +77,16 @@ export default class Formulario {
     if (this.idFormulario()) {
       const id = Number(this.route.snapshot.paramMap.get('id'));
 
-      const res = await firstValueFrom(
-        this.eventoRepository.obtenerFormulario(id)
-      );
+      const res = await firstValueFrom(this.eventoRepository.obtenerFormulario(id));
 
       this.formulario.set(res);
       this.editMode.set(true);
       this.utilService.dismissLoader();
-
     } else {
-
       this.formulario.set(formularioData);
       this.editMode.set(false);
       this.utilService.dismissLoader();
     }
-
   }
 
   openAgregarFormulario(indexGrupo: number) {
@@ -104,7 +101,6 @@ export default class Formulario {
       }
     });
   }
-
 
   agregarPregunta(indexGrupo: number, nuevaPregunta: Pregunta) {
     this.formulario.update((prev) => {
@@ -123,6 +119,16 @@ export default class Formulario {
 
     this.actualizarFormulario();
   }
+  eliminarCampo() {
+    this.formulario.update((prev) => {
+      const clone = structuredClone(prev);
+
+
+      return clone;
+    });
+
+    this.actualizarFormulario();
+  }
 
   actualizarFormulario() {
     this.utilService.showLoader();
@@ -137,7 +143,7 @@ export default class Formulario {
       error: (error) => {
         this.utilService.dismissLoader();
         // this.dialogService.showSnackBar('Error al guardar formulario');
-      }
+      },
     });
   }
 
@@ -151,18 +157,18 @@ export default class Formulario {
   changeFechaInicio(fecha: Date | null) {
     if (!fecha) return;
     if (!this.formulario()) return;
-    this.formulario.update(prev => ({
+    this.formulario.update((prev) => ({
       ...prev!,
-      fechaInicio: fecha
+      fechaInicio: fecha,
     }));
   }
 
   changeFechaFin(fecha: Date | null) {
     if (!fecha) return;
     if (!this.formulario()) return;
-    this.formulario.update(prev => ({
+    this.formulario.update((prev) => ({
       ...prev!,
-      fechaFin: fecha
+      fechaFin: fecha,
     }));
   }
 
@@ -260,10 +266,7 @@ export default class Formulario {
   cancelar() {
     this.router.navigate(['/eventos/formulario']);
   }
-
 }
-
-
 
 export interface Option {
   value: boolean | null;

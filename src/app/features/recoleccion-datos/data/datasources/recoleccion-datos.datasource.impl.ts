@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { RecoleccionDatosDatasource } from "@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources";
-import { EventoFormularioResponse } from "@features/recoleccion-datos/domain/models/evento-formulario-response.model";
-import { FormularioClienteRequest } from "@features/recoleccion-datos/domain/models/formulario-cliente-request.model";
-import { FormularioClienteResponse, TipoInputType } from "@features/recoleccion-datos/domain/models/formulario-cliente-response.model";
-import { ObtenerFormularioRespuestasResponse } from "@features/recoleccion-datos/domain/models/obtener-formulario-respuestas-response.molde";
-import { map, Observable, timer } from "rxjs";
-
+import { Injectable } from '@angular/core';
+import { RecoleccionDatosDatasource } from '@features/recoleccion-datos/domain/datasources/recoleccion-datos.datasources';
+import { EventoFormularioResponse } from '@features/recoleccion-datos/domain/models/evento-formulario-response.model';
+import { FormularioClienteRequest } from '@features/recoleccion-datos/domain/models/formulario-cliente-request.model';
+import {
+  FormularioClienteResponse,
+  TipoInputType,
+} from '@features/recoleccion-datos/domain/models/formulario-cliente-response.model';
+import { ObtenerFormularioRespuestasResponse } from '@features/recoleccion-datos/domain/models/obtener-formulario-respuestas-response.molde';
+import { map, Observable, timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasource {
-
-
   getFormularioCliente(): Observable<FormularioClienteResponse> {
     return timer(200).pipe(
       map(() => ({
@@ -24,31 +24,37 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                   label: 'Nombres',
                   type: TipoInputType.TEXT,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Apellidos',
                   type: TipoInputType.TEXT,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Edad',
                   type: TipoInputType.NUMBER,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Fecha de nacimiento',
                   type: TipoInputType.DATE,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Ciudad',
                   type: TipoInputType.TEXT,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Fecha de finalizacion',
                   type: TipoInputType.DATE,
                   isRequired: true,
+                  modePassword: true,
                 },
               ],
             },
@@ -61,11 +67,13 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                   label: 'Correo electrónico',
                   type: TipoInputType.TEXT,
                   isRequired: true,
+                  modePassword: true,
                 },
                 {
                   label: 'Número de celular',
                   type: TipoInputType.NUMBER,
                   isRequired: true,
+                  modePassword: true,
                 },
               ],
             },
@@ -88,17 +96,17 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                 {
                   type: TipoInputType.BOOLEAN,
                   label: 'Acepto que me contacten por Whatsapp y Correo Electronico',
-                  extras: 'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
+                  extras:
+                    'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
                   isRequired: true,
-                }
-              ]
-            }
-          }
+                },
+              ],
+            },
+          },
         ],
       }))
     );
   }
-
 
   getEventoFormulario(): Observable<EventoFormularioResponse> {
     return timer(200).pipe(
@@ -116,16 +124,23 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
             id: 3,
             nombre: 'Feria Hotel R & R 2025-Noviembre',
           },
+          {
+            id: 2,
+            nombre: 'Feria Costa Verde 2025 -Noviembre',
+          },
+          {
+            id: 3,
+            nombre: 'Feria Hotel R & R 2025-Noviembre',
+          },
         ],
       }))
     );
   }
 
-
   guardarFormulario(formulario: FormularioClienteRequest): Observable<void> {
     return timer(200).pipe(
       map(() => {
-        console.log("guardar formulario", formulario);
+        console.log('guardar formulario', formulario);
       })
     );
   }
@@ -144,36 +159,42 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                   type: TipoInputType.TEXT,
                   isRequired: true,
                   respuesta: 'Juan Perez',
+                  modePassword: true,
                 },
                 {
                   label: 'Apellidos',
                   type: TipoInputType.TEXT,
                   isRequired: true,
                   respuesta: 'Perez',
+                  modePassword: true,
                 },
                 {
                   label: 'Edad',
                   type: TipoInputType.NUMBER,
                   isRequired: true,
                   respuesta: '30',
+                  modePassword: true,
                 },
                 {
                   label: 'Fecha de nacimiento',
                   type: TipoInputType.DATE,
                   isRequired: true,
                   respuesta: new Date(),
+                  modePassword: true,
                 },
                 {
                   label: 'Ciudad',
                   type: TipoInputType.TEXT,
                   isRequired: true,
                   respuesta: 'Madrid',
+                  modePassword: true,
                 },
                 {
                   label: 'Fecha de finalizacion',
                   type: TipoInputType.DATE,
                   isRequired: true,
                   respuesta: new Date(),
+                  modePassword: true,
                 },
               ],
             },
@@ -187,12 +208,14 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                   type: TipoInputType.TEXT,
                   isRequired: true,
                   respuesta: 'juanperez@gmail.com',
+                  modePassword: true,
                 },
                 {
                   label: 'Número de celular',
                   type: TipoInputType.NUMBER,
                   isRequired: true,
                   respuesta: '123456789',
+                  modePassword: true,
                 },
               ],
             },
@@ -216,16 +239,16 @@ export class RecoleccionDatosDatasourceImpl implements RecoleccionDatosDatasourc
                 {
                   type: TipoInputType.BOOLEAN,
                   label: 'Acepto que me contacten por Whatsapp y Correo Electronico',
-                  extras: 'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
+                  extras:
+                    'Acepto términos y condiciones por la empresa Castillo de Chancay con la finalidad de recibir información, promociones, contenido educativo y beneficios relacionados con sus servicios, y autorizo el uso de mis datos de acuerdo a la Declaración de privacidad.',
                   isRequired: true,
                   respuesta: 'true',
-                }
-              ]
-            }
-          }
+                },
+              ],
+            },
+          },
         ],
       }))
     );
   }
-
 }
