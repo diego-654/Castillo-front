@@ -32,12 +32,18 @@ export default class MembresiasMantenimiento {
   }
 
   async cargarBeneficios() {
-    this.utilService.showLoader();
-    const res = await firstValueFrom(
-      this.mantenimientoRepository.listarBeneficios()
-    );
-    this.benficiosLista.set(res);
-    this.utilService.dismissLoader();
+    try {
+      this.utilService.showLoader();
+      const res = await firstValueFrom(
+        this.mantenimientoRepository.listarBeneficios()
+      );
+      this.benficiosLista.set(res);
+      this.utilService.dismissLoader();
+    } catch (error) {
+      this.utilService.openSnackBar('Error al cargar beneficios', 'error');
+      this.utilService.dismissLoader();
+
+    }
   }
 
   beneficiosPorGrupo(idGrupo: number) {
