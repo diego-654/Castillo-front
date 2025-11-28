@@ -67,7 +67,6 @@ export default class FormularioRegistroCliente {
 
     console.log('path actual:', path, 'esEditar:', esEditar, 'id:', id);
 
-    // 👇 guardamos el id SIEMPRE que exista
     if (id) {
       this.formularioId.set(id);
     }

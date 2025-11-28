@@ -122,7 +122,7 @@ export default class Formulario {
     this.actualizarFormulario();
   }
 
-  
+
 
   actualizarFormulario() {
     this.utilService.showLoader();
@@ -170,9 +170,9 @@ export default class Formulario {
     const form = this.formulario();
     if (!form) return;
 
-    if (!form.fechaInicio || !form.fechaFin) {
+    if (!form.fechaInicio || !form.fechaFin || !form.nombreEncuesta) {
       console.log('Debes completar los campos de fecha');
-      this.utilService.openSnackBar('Debes completar los campos de fecha', 'error');
+      this.utilService.openSnackBar('Debes completar los campos', 'error');
       return;
     }
 

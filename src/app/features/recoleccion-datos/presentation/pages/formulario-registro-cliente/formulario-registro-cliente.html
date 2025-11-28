@@ -11,13 +11,16 @@
   @if (formulario() && form ) {
   <ng-container>
     <div class="content__formulario" [formGroup]="form">
-      @for (item of formulario()?.lista; track $index) { @if (item.typeFormulario) {
+      @for (item of formulario()?.lista; track $index) {
+      <!--  -->
+      @if (item.typeFormulario) {
       <div class="formulario__title">{{ item.typeFormulario }}</div>
       }
 
       <div class="formulario__inputs">
         @for (inputs of item.campos.lista; track $index) {
-
+        <!--  -->
+        @if (inputs.isVisible) {
         <div class="input-container">
           @if ( inputs.type != typeInput.BOOLEAN || (inputs.type == typeInput.BOOLEAN &&
           inputs.extras == null)) {
@@ -62,8 +65,7 @@
           </div>
           }
         </div>
-
-        }
+        } }
       </div>
 
       }
