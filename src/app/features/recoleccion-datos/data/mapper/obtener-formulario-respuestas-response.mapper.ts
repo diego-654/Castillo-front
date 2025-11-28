@@ -37,6 +37,8 @@ export class ObtenerFormularioRespuestasResponseMapper {
             label: campo.label,
             extras: campo.extras,
             isRequired: campo.isRequired,
+            isVisible: campo.isVisible,
+            isCampoNuevo: campo.isCampoNuevo,
             type: campo.type,
             respuesta: campo.respuesta,
           })),

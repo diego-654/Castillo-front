@@ -31,12 +31,16 @@ export class CrearEventoRequestMapper {
   ): {
     label: string;
     isRequired: boolean;
+    isCampoNuevo: boolean;
+    isVisible: boolean;
     type: number;
     extras?: string;
   } {
     return {
       label: campo.label,
-      isRequired: campo.isRequired ?? false,
+      isRequired: campo.isRequired,
+      isCampoNuevo: campo.isCampoNuevo,
+      isVisible: campo.isVisible,
       type: campo.type, // enum numérico → encaja con "number"
       extras: campo.extras,
     };

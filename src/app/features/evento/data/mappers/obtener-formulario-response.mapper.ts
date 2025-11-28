@@ -66,6 +66,8 @@ export class ObtenerFormularioResponseMapper {
       label: campo.label,
       extras: campo.extras,
       isRequired: campo.isRequired,
+      isVisible: campo.isVisible,
+      isCampoNuevo: campo.isCampoNuevo,
       // casteamos el number del backend al enum del front (si aplica)
       type: campo.type as TipoInputType,
     };

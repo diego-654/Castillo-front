@@ -29,12 +29,16 @@ export class EditarFormularioRequestMapper {
   ): {
     label: string;
     isRequired: boolean;
+    isCampoNuevo: boolean;
+    isVisible: boolean;
     type: number;
     extras?: string;
   } {
     return {
       label: campo.label,
       isRequired: campo.isRequired,
+      isVisible: campo.isVisible,
+      isCampoNuevo: campo.isCampoNuevo,
       type: campo.type, // enum numérico → encaja con "number"
       extras: campo.extras,
     };

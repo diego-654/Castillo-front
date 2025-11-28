@@ -34,7 +34,7 @@
   </div>
 
   <div class="content__formulario">
-    @for (item of formulario()?.lista; track $index) {
+    @for (item of formulario()?.lista; track $index; let i = $index) {
     <!--  -->
     @if (item.typeFormulario) {
     <div class="formulario__title">
@@ -49,12 +49,33 @@
     }
 
     <div class="formulario__inputs">
-      @for (inputs of item.campos.lista; track $index) {
+      @for (inputs of item.campos.lista; track $index; let j = $index) {
 
       <div class="input-container">
         @if ( inputs.type != typeInput.BOOLEAN || (inputs.type == typeInput.BOOLEAN && inputs.extras
         == null)) {
-        <div class="formulario__inputs__title">{{ inputs.label }}</div>
+        <div class="formulario__inputs__title">
+          <span>{{ inputs.label }}</span>
+          <div class="icon" (click)="toggleCampoVisible(i, j)">
+            @if (!inputs.isCampoNuevo) {
+            <app-svg-icon
+              [path]="
+                inputs.isVisible === false
+                  ? 'assets/icons/visibility_off.svg'
+                  : 'assets/icons/visibility_on.svg'
+              "
+              class="icon"
+            ></app-svg-icon>
+            } @else {
+            <!-- Borrar campo -->
+            <app-svg-icon
+              [path]="'assets/icons/trash.svg'"
+              class="icon"
+              (click)="eliminarCampo(i, j)"
+            ></app-svg-icon>
+            }
+          </div>
+        </div>
         } @if (inputs.type == typeInput.TEXT) {
         <app-input
           size="small"
@@ -86,9 +107,6 @@
           </div>
         </div>
         }
-        <div class="delete-icon" (click)="eliminarCampo()">
-          <app-svg-icon path="assets/icons/trash.svg" class="icon"></app-svg-icon>
-        </div>
       </div>
 
       }

@@ -19,6 +19,8 @@ export interface Campos {
 export interface CamposLista {
   readonly label: string;
   readonly isRequired: boolean;
+  readonly isCampoNuevo: boolean;
+  readonly isVisible: boolean;
   readonly type: number;
   readonly extras?: string;
 }

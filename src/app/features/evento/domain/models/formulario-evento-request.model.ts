@@ -18,6 +18,8 @@ export interface FormularioClienteRequestCampo {
   label: string;
   extras?: string;
   isRequired: boolean;
+  isVisible: boolean;
+  isCampoNuevo: boolean;
   type: TipoInputType;
 }
 

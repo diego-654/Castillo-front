@@ -28,5 +28,7 @@ export interface Lista {
   readonly type: number;
   readonly label: string;
   readonly isRequired: boolean;
+  readonly isCampoNuevo: boolean;
+  readonly isVisible: boolean;
   readonly extras?: string;
 }

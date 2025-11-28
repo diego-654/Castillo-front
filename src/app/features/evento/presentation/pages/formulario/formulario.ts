@@ -109,6 +109,8 @@ export default class Formulario {
       clone?.lista[indexGrupo].campos.lista.push({
         label: nuevaPregunta.pregunta,
         isRequired: nuevaPregunta.isRequired,
+        isVisible: nuevaPregunta.isVisible,
+        isCampoNuevo: true,
         type: nuevaPregunta.tipo,
       });
 
@@ -119,16 +121,8 @@ export default class Formulario {
 
     this.actualizarFormulario();
   }
-  eliminarCampo() {
-    this.formulario.update((prev) => {
-      const clone = structuredClone(prev);
 
-
-      return clone;
-    });
-
-    this.actualizarFormulario();
-  }
+  
 
   actualizarFormulario() {
     this.utilService.showLoader();
@@ -178,7 +172,7 @@ export default class Formulario {
 
     if (!form.fechaInicio || !form.fechaFin) {
       console.log('Debes completar los campos de fecha');
-      // this.utilService.openSnackBar('Debes completar los campos de fecha', 'warning');
+      this.utilService.openSnackBar('Debes completar los campos de fecha', 'error');
       return;
     }
 
@@ -197,6 +191,8 @@ export default class Formulario {
               label: campo.label,
               extras: campo.extras,
               isRequired: campo.isRequired,
+              isVisible: campo.isVisible,
+              isCampoNuevo: campo.isCampoNuevo,
               type: campo.type,
             })),
           },
@@ -253,6 +249,36 @@ export default class Formulario {
     });
   }
 
+
+  toggleCampoVisible(indexGrupo: number, indexCampo: number) {
+    this.formulario.update((prev) => {
+      if (!prev) return prev;
+
+      const clone = structuredClone(prev);
+
+      const campo = clone.lista[indexGrupo].campos.lista[indexCampo];
+      // si viene undefined, lo tratamos como true por defecto
+      campo.isVisible = campo.isVisible === false ? true : false;
+
+      return clone;
+    });
+
+
+  }
+
+  eliminarCampo(indexGrupo: number, indexCampo: number) {
+    this.formulario.update((prev) => {
+      if (!prev) return prev;
+
+      const clone = structuredClone(prev);
+
+      clone.lista[indexGrupo].campos.lista.splice(indexCampo, 1);
+
+      return clone;
+    });
+
+  }
+
   resetFormulario() {
     this.formulario.update((prev) => ({
       ...prev!,
@@ -262,6 +288,8 @@ export default class Formulario {
       lista: formularioData.lista,
     }));
   }
+
+
 
   cancelar() {
     this.router.navigate(['/eventos/formulario']);

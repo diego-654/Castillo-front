@@ -17,6 +17,8 @@ export interface FormularioClienteRequestCampo {
   label: string;
   extras?: string;
   isRequired: boolean;
+  isCampoNuevo: boolean;
+  isVisible: boolean;
   type: TipoInputType;
   respuesta: string | number | boolean | Date | null;
 }

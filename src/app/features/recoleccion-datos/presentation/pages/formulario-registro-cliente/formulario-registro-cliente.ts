@@ -193,6 +193,8 @@ export default class FormularioRegistroCliente {
             label: campo.label,
             extras: campo.extras,
             isRequired: campo.isRequired,
+            isVisible: campo.isVisible,
+            isCampoNuevo: campo.isCampoNuevo,
             type: campo.type,
             respuesta: this.form.value[this.formatoNombre(campo.label)] ?? null,
           })),

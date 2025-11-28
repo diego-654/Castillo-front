@@ -47,6 +47,7 @@ export class AgregarFormulario {
     this.isRequired.set(isRequired);
   }
 
+
   cancelar() {
     this.dialogRef.close();
   }
@@ -62,6 +63,8 @@ export class AgregarFormulario {
     this.dialogRef.close({
       pregunta: raw.pregunta,
       isRequired: this.isRequired(),
+      isVisible: true,
+      isCampoNuevo: true,
       tipo: this.tipo(),
     });
   }
@@ -76,6 +79,8 @@ export type PopupAgregarFormulario = DialogRef<
 export interface Pregunta {
   pregunta: string;
   isRequired: boolean;
+  isVisible: boolean;
+  isCampoNuevo: boolean;
   tipo: TipoInputType;
 }
 

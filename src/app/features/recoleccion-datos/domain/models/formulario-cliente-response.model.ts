@@ -18,6 +18,8 @@ export interface TipoInput {
   readonly label: string;
   readonly extras?: string;
   readonly isRequired: boolean;
+  readonly isVisible: boolean;
+  readonly isCampoNuevo: boolean;
   readonly type: TipoInputType;
 }
 

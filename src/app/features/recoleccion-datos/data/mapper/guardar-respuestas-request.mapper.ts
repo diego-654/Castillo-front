@@ -15,6 +15,8 @@ export class GuardarRespuestasRequestMapper {
             label: campo.label,
             extras: campo.extras,
             isRequired: campo.isRequired,
+            isCampoNuevo: campo.isCampoNuevo,
+            isVisible: campo.isVisible,
             type: campo.type,
             respuesta: campo.respuesta,
           })),
