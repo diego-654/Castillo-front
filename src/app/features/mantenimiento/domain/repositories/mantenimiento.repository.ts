@@ -25,4 +25,5 @@ export abstract class MantenimientoRepository {
   abstract eliminarMembresia(id: number): Observable<void>;
 
   abstract obtenerDetalleAliado(request: number): Observable<DetalleAliadoResponse>;
+
 }

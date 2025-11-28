@@ -43,6 +43,10 @@ import { ReportesDataSource } from '@features/reportes/domain/datasources/report
 import { ReportesRepository } from '@features/reportes/domain/repositories/reportes.repository';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorInterceptor } from '@core/interceptor/error/error.interceptor';
+import { SunatDatasourceImpl } from '@features/sunat/data/datasources/sunat.datasource.impl';
+import { SunatRepositoryImpl } from '@features/sunat/data/repositories/sunat.repository.impl';
+import { SunatDatasource } from '@features/sunat/domain/datasources/sunat.datasource';
+import { SunatRepository } from '@features/sunat/domain/repositories/sunat.repository';
 
 registerLocaleData(localeEsPe);
 
@@ -76,6 +80,8 @@ export const appConfig: ApplicationConfig = {
     { provide: MantenimientoDatasource, useClass: MantenimientoDatasourceImpl },
     { provide: ReportesRepository, useClass: ReportesRepositoryImpl },
     { provide: ReportesDataSource, useClass: ReportesDataSourceImpl },
+    { provide: SunatRepository, useClass: SunatRepositoryImpl },
+    { provide: SunatDatasource, useClass: SunatDatasourceImpl },
   ]
 };
 

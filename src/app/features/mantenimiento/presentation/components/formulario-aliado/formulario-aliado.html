@@ -1,1 +1,66 @@
-<p>formulario-aliado works!</p>
+<div class="container">
+  <div class="modal-header">
+    <div class="title">Nuevo miembro</div>
+    <app-svg-icon path="assets/icons/close.svg" class="icon" (click)="cancelar()"></app-svg-icon>
+  </div>
+
+  <div class="modal-body" [formGroup]="formulario">
+    <div class="form">
+      <div class="form form-1">
+        <app-input-number
+          formControlName="ruc"
+          label="RUC"
+          placeholder="Ingrese su numero de RUC"
+        ></app-input-number>
+        <app-button text="Buscar" (click)="BuscarRuc()"></app-button>
+      </div>
+      <app-input
+        [readonly]="true"
+        formControlName="nombreEmpresa"
+        label="Nombre de la empresa"
+      ></app-input>
+      <app-date-picker
+        formControlName="fechaIncorporacion"
+        placeholder="dd/mm/aaaa"
+        label="Fecha de Incorporacion"
+      ></app-date-picker>
+      <app-input
+        formControlName="representante"
+        label="Representante"
+        placeholder="Nombres y Apellidos completos"
+      ></app-input>
+      <app-input
+        formControlName="celular"
+        label="Número de celular"
+        placeholder="ejm.987654321"
+      ></app-input>
+      <app-input
+        formControlName="correo"
+        label="Correo electrónico"
+        placeholder="ejm@gmail.com"
+      ></app-input>
+      <app-input
+        formControlName="direccion"
+        label="Dirección"
+        placeholder="Ejm: Av. Calle #123"
+      ></app-input>
+    </div>
+  </div>
+
+  <div class="acciones">
+    <app-button
+      class="btn-popup"
+      (click)="cancelar()"
+      text="Cancelar"
+      type="secondary"
+      size="small"
+    ></app-button>
+    <app-button
+      class="btn-popup"
+      text="Agregar"
+      type="primary"
+      size="small"
+      (click)="agregar()"
+    ></app-button>
+  </div>
+</div>

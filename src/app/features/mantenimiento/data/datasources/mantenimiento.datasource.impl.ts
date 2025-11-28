@@ -19,6 +19,7 @@ import { ListarMembresiasResponseDto } from '../dto/listar-membresias-response.d
 import { ListarMembresiasResponseMapper } from '../mapper/listar-membresias-response.mapper';
 import { EditarMembresiaRequestMapper } from '../mapper/editar-membresia-request.mapper';
 import { EditarMembresiaRequest } from '@features/mantenimiento/domain/models/editar-membresia-request.model';
+import { CrearAliadoRequestMapper } from '../mapper/crear-aliado-request.mapper';
 
 
 @Injectable({ providedIn: 'root' })
@@ -69,11 +70,9 @@ export class MantenimientoDatasourceImpl implements MantenimientoDatasource {
   }
 
   crearAliado(request: CrearAliadoRequest): Observable<void> {
-    return timer(200).pipe(
-      map((): void => {
-        console.log('crear aliado');
-      })
-    );
+    const body = CrearAliadoRequestMapper.toDto(request);
+
+    return this.apiService.post<void>('aliado/trabajar-aliado/0', body)
   }
 
   listarConcesionarios(

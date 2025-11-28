@@ -1,6 +1,11 @@
+
+
 export interface CrearAliadoRequest {
-  nombre: string;
-  tipo: string;
+  ruc: string;
   nombreEmpresa: string;
-  fecha: Date;
+  fechaIncorporacion: Date;
+  representante: string;
+  celular: string;
+  correo: string;
+  direccion: string;
 }
